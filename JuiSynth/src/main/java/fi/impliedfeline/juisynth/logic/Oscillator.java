@@ -10,27 +10,27 @@ package fi.impliedfeline.juisynth.logic;
  * @author juicyp
  */
 public class Oscillator implements SignalSource {
-    
+
     public enum Waveform {
         SIN, SQU, SAW, TRI, NOI
     }
-    
+
     private SignalSource signalSource = null;
-    
+
     private Waveform waveform = Waveform.SIN;
-    
+
     private boolean bypass = false;
-    
+
     private boolean fm = false;
     private double fmDepth = 0.0;
-    
+
     private boolean am = false;
     private double amDepth = 0.0;
-    
+
     private boolean sync = false;
     private boolean inverse = false;
     private boolean inverseOnSync = false;
-    
+
     public Oscillator() {
     }
 
@@ -82,14 +82,15 @@ public class Oscillator implements SignalSource {
 
     @Override
     public void setSample(SignalStatus signal) {
-        
-        if (signalSource != null)
-            signalSource.setSample(signal);       
-        
+
+        if (signalSource != null) {
+            signalSource.setSample(signal);
+        }
+
         if (bypass) {
             return;
         }
-        
+
     }
-    
+
 }
