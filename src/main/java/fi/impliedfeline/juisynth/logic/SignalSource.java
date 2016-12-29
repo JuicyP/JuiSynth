@@ -11,5 +11,5 @@ package fi.impliedfeline.juisynth.logic;
  */
 public interface SignalSource {
     
-    public void getSample(SignalStatus signal);
+    public void setSample(SignalStatus signal);
 }

@@ -15,24 +15,69 @@ public class Oscillator implements SignalSource {
         SIN, SQU, SAW, TRI, NOI
     }
     
-    private SignalSource signalSource;
+    private SignalSource signalSource = null;
     
-    private Waveform waveform;
+    private Waveform waveform = Waveform.SIN;
     
-    private boolean bypass;
+    private boolean bypass = false;
     
-    private boolean fm;
-    private double fmDepth;
+    private boolean fm = false;
+    private double fmDepth = 0.0;
     
-    private boolean am;
-    private double amDepth;
+    private boolean am = false;
+    private double amDepth = 0.0;
     
-    private boolean sync;
-    private boolean inverse;
-    private boolean inverseOnSync;
+    private boolean sync = false;
+    private boolean inverse = false;
+    private boolean inverseOnSync = false;
     
     public Oscillator() {
-        this.
+    }
+
+    public void setSignalSource(SignalSource signalSource) {
+        this.signalSource = signalSource;
+    }
+
+    public void setWaveform(Waveform waveform) {
+        this.waveform = waveform;
+    }
+
+    public void setBypass(boolean bypass) {
+        this.bypass = bypass;
+    }
+
+    public void setFm(boolean fm) {
+        this.fm = fm;
+    }
+
+    public void setFmDepth(double fmDepth) {
+        if (fmDepth < -1 || fmDepth > 1) {
+            return;
+        }
+        this.fmDepth = fmDepth;
+    }
+
+    public void setAm(boolean am) {
+        this.am = am;
+    }
+
+    public void setAmDepth(double amDepth) {
+        if (amDepth < -1 || amDepth > 1) {
+            return;
+        }
+        this.amDepth = amDepth;
+    }
+
+    public void setSync(boolean sync) {
+        this.sync = sync;
+    }
+
+    public void setInverse(boolean inverse) {
+        this.inverse = inverse;
+    }
+
+    public void setInverseOnSync(boolean inverseOnSync) {
+        this.inverseOnSync = inverseOnSync;
     }
 
     @Override
@@ -40,6 +85,10 @@ public class Oscillator implements SignalSource {
         
         if (signalSource != null)
             signalSource.setSample(signal);       
+        
+        if (bypass) {
+            return;
+        }
         
     }
     

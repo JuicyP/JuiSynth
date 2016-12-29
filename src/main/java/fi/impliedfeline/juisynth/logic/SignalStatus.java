@@ -15,18 +15,14 @@ public class SignalStatus {
     private int bufferIndex;
     
     private double frequency;
-    private double amplitude;
+    private double amplitude = 0;
     
-    private boolean completePeriod;
+    private boolean completePeriod = false;
     
     public SignalStatus(int sampleRate, int bufferIndex, double frequency) {
         this.sampleRate = sampleRate;
         this.bufferIndex = bufferIndex;
         this.frequency = frequency;
-        
-        // Default values
-        this.amplitude = 0;
-        this.completePeriod = false;
     }
     
     public int getSampleRate() {
@@ -37,6 +33,10 @@ public class SignalStatus {
         return bufferIndex;
     }
     
+    public double getFrequency() {
+        return frequency;
+    }
+    
     public void setFrequency(double frequency) {
         if (frequency < 0) {
             return;
@@ -44,8 +44,8 @@ public class SignalStatus {
         this.frequency = frequency;
     }
     
-    public double getFrequency() {
-        return frequency;
+    public double getAmplitude() {
+        return amplitude;
     }
     
     public void setAmplitude(double amplitude) {
@@ -53,10 +53,6 @@ public class SignalStatus {
             return;
         }
         this.amplitude = amplitude;
-    }
-    
-    public double getAmplitude() {
-        return amplitude;
     }
     
     public boolean getCompletePeriod() {
