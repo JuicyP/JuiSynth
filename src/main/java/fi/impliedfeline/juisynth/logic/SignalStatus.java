@@ -29,6 +29,14 @@ public class SignalStatus {
         this.completePeriod = false;
     }
     
+    public int getSampleRate() {
+        return sampleRate;
+    }
+    
+    public int getBufferIndex() {
+        return bufferIndex;
+    }
+    
     public void setFrequency(double frequency) {
         if (frequency < 0) {
             return;
@@ -36,11 +44,19 @@ public class SignalStatus {
         this.frequency = frequency;
     }
     
+    public double getFrequency() {
+        return frequency;
+    }
+    
     public void setAmplitude(double amplitude) {
         if (amplitude < -1 || amplitude > 1) {
             return;
         }
         this.amplitude = amplitude;
+    }
+    
+    public double getAmplitude() {
+        return amplitude;
     }
     
     public boolean getCompletePeriod() {
