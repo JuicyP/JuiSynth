@@ -16,3 +16,6 @@ Laajennuksena käyttöliittymä voisi tarjota editorin, jossa käyttäjä voi mo
   - Käyttäjä voi syöttää nuotin tai taajuuden
 - Suodattimen sulkutila-, resonanssi- sekä taajuuskaista-parametrien säätö
 - Vahvistimen voimakkuuden säätö
+
+## Luokkakaavio
+![Luokkakaavio](juisynth.png)
