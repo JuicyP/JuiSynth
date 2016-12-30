@@ -82,6 +82,8 @@ public class JuiSynth {
 
         for (int i = 0; i < samplesPerBuffer; i++) {
 
+            // Maybe just use same SignalStatus instance for successive sample fetches?
+            // Less memory garbage
             SignalStatus signal = new SignalStatus(sampleRate, i, frequency);
             oscillator.generateSample(signal);
 

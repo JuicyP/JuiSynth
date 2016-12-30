@@ -20,6 +20,7 @@ public class Oscillator implements SignalSource {
     private SignalSource signalSource = null;
 
     private Waveform waveform = Waveform.SIN;
+    // To be implemented. Adjusts frequency used on calculations by cents.
     private int tuning = 0;
 
     private boolean bypass = false;
@@ -33,7 +34,7 @@ public class Oscillator implements SignalSource {
     private boolean sync = false;
     private boolean invert = false;
     private boolean invertOnSync = false;
-    
+
     private Random noiseGenerator = new Random();
 
     public Oscillator() {
@@ -112,7 +113,7 @@ public class Oscillator implements SignalSource {
         if (am) {
             applyAM(amplitude, signal);
         }
-        
+
         signal.setAmplitude(amplitude);
 
     }
@@ -123,7 +124,7 @@ public class Oscillator implements SignalSource {
         double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
         boolean inverse = invert;
 
-        if (sync && signal.getCompletePeriod()) {
+        if (sync && signal.getAndUpdateCompletePeriod()) {
             x = 0;
             if (invertOnSync) {
                 inverse = !inverse;
@@ -137,24 +138,17 @@ public class Oscillator implements SignalSource {
         }
 
         if (signal.getBufferIndex() % samplesInPeriod == 0) {
-            signal.setCompletePeriod();
+            signal.setCompletePeriodTrue();
         }
 
         return y;
     }
-    
-    private void applyFM(double amplitude, SignalStatus signal) {
-        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * fmDepth));
-    }
-    
-    private void applyAM(double amplitude, SignalStatus signal) {
-        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
-    }
-    
+
+    // Encapsulate into own class?
     private double calculateFunctionY(double x) {
-        
+
         double y;
-        
+
         switch (waveform) {
 
             default:
@@ -181,8 +175,16 @@ public class Oscillator implements SignalSource {
             case NOI:
                 y = 2 * noiseGenerator.nextDouble() - 1;
         }
-        
+
         return y;
+    }
+
+    private void applyFM(double amplitude, SignalStatus signal) {
+        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * fmDepth));
+    }
+
+    private void applyAM(double amplitude, SignalStatus signal) {
+        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
     }
 
 }

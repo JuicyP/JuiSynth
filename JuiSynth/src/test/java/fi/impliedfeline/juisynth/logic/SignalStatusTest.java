@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class SignalStatusTest {
     
-    private SignalStatus signal;
+    private SignalStatus s;
     private int sampleRate;
     private int bufferIndex;
     private double frequency;
@@ -29,86 +29,86 @@ public class SignalStatusTest {
         sampleRate = 44100;
         bufferIndex = 0;
         frequency = 440;
-        signal = new SignalStatus(sampleRate, bufferIndex, frequency);
+        s = new SignalStatus(sampleRate, bufferIndex, frequency);
     }
     
     @Test
     public void constructorValuesSet() {
-        assertEquals(0, signal.getAmplitude(), 0.1);
-        assertEquals(false, signal.getCompletePeriod());
-        assertEquals(sampleRate, signal.getSampleRate());
-        assertEquals(bufferIndex, signal.getBufferIndex());
-        assertEquals(frequency, signal.getFrequency(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(false, s.getAndUpdateCompletePeriod());
+        assertEquals(sampleRate, s.getSampleRate());
+        assertEquals(bufferIndex, s.getBufferIndex());
+        assertEquals(frequency, s.getFrequency(), 0.1);
     }
     
     @Test
     public void setFrequencyPositiveSets() {
         frequency = 880;
-        signal.setFrequency(frequency);
-        assertEquals(frequency, signal.getFrequency(), 0.1);
+        s.setFrequency(frequency);
+        assertEquals(frequency, s.getFrequency(), 0.1);
     }
     
     @Test
     public void setFrequencyNegativeFails() {
         double frequency = -1;
-        signal.setFrequency(frequency);
-        assertEquals(this.frequency, signal.getFrequency(), 0.1);
+        s.setFrequency(frequency);
+        assertEquals(this.frequency, s.getFrequency(), 0.1);
     }
     
     @Test
     public void setFrequencyZeroSets() {
         double frequency = 0;
-        signal.setFrequency(frequency);
-        assertEquals(frequency, signal.getFrequency(), 0.1);
+        s.setFrequency(frequency);
+        assertEquals(frequency, s.getFrequency(), 0.1);
     }
     
     @Test
     public void setAmplitudeOneSets() {
         double amplitude = 1;
-        signal.setAmplitude(amplitude);
-        assertEquals(amplitude, signal.getAmplitude(), 0.1);
+        s.setAmplitude(amplitude);
+        assertEquals(amplitude, s.getAmplitude(), 0.1);
     }
     
     @Test
     public void setAmplitudeNegativeOneSets() {
         double amplitude = -1;
-        signal.setAmplitude(amplitude);
-        assertEquals(amplitude, signal.getAmplitude(), 0.1);
+        s.setAmplitude(amplitude);
+        assertEquals(amplitude, s.getAmplitude(), 0.1);
     }
     
     @Test
     public void setAmplitudeZeroSets() {
         double amplitude = 0;
-        signal.setAmplitude(1);
-        signal.setAmplitude(amplitude);
-        assertEquals(amplitude, signal.getAmplitude(), 0.1);
+        s.setAmplitude(1);
+        s.setAmplitude(amplitude);
+        assertEquals(amplitude, s.getAmplitude(), 0.1);
     }
     
     @Test
     public void setAmplitudeLargerThanOneFails() {
         double amplitude = 1.1;
-        signal.setAmplitude(amplitude);
-        assertEquals(0, signal.getAmplitude(), 0.1);
+        s.setAmplitude(amplitude);
+        assertEquals(0, s.getAmplitude(), 0.1);
     }
     
     @Test
     public void setAmplitudeLessThanNegativeOneFails() {
         double amplitude = -1.1;
-        signal.setAmplitude(amplitude);
-        assertEquals(0, signal.getAmplitude(), 0.1);
+        s.setAmplitude(amplitude);
+        assertEquals(0, s.getAmplitude(), 0.1);
     }
     
     @Test
     public void setCompletePeriodSets() {
-        signal.setCompletePeriod();
-        assertTrue(signal.getCompletePeriod());
+        s.setCompletePeriodTrue();
+        assertTrue(s.getAndUpdateCompletePeriod());
     }
     
     @Test
     public void successiveGetCompletePeriodReturnsFalse() {
-        signal.setCompletePeriod();
-        signal.getCompletePeriod();
-        assertFalse(signal.getCompletePeriod());
+        s.setCompletePeriodTrue();
+        s.getAndUpdateCompletePeriod();
+        assertFalse(s.getAndUpdateCompletePeriod());
     }
     
     

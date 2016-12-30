@@ -11,6 +11,7 @@ package fi.impliedfeline.juisynth.logic;
  */
 public class SignalStatus {
     
+    // Encapsulate sampleRate into singleton?
     private int sampleRate;
     private int bufferIndex;
     
@@ -55,7 +56,7 @@ public class SignalStatus {
         this.amplitude = amplitude;
     }
     
-    public boolean getCompletePeriod() {
+    public boolean getAndUpdateCompletePeriod() {
         if (completePeriod) {
             completePeriod = false;
             return true;
@@ -64,7 +65,7 @@ public class SignalStatus {
         return false;
     }
     
-    public void setCompletePeriod() {
+    public void setCompletePeriodTrue() {
         this.completePeriod = true;
     }
     
