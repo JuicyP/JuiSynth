@@ -5,6 +5,8 @@
  */
 package fi.impliedfeline.juisynth.logic;
 
+import java.util.Random;
+
 /**
  *
  * @author juicyp
@@ -18,6 +20,7 @@ public class Oscillator implements SignalSource {
     private SignalSource signalSource = null;
 
     private Waveform waveform = Waveform.SIN;
+    private int tuning = 0;
 
     private boolean bypass = false;
 
@@ -28,8 +31,8 @@ public class Oscillator implements SignalSource {
     private double amDepth = 0.0;
 
     private boolean sync = false;
-    private boolean inverse = false;
-    private boolean inverseOnSync = false;
+    private boolean invert = false;
+    private boolean invertOnSync = false;
 
     public Oscillator() {
     }
@@ -40,6 +43,10 @@ public class Oscillator implements SignalSource {
 
     public void setWaveform(Waveform waveform) {
         this.waveform = waveform;
+    }
+
+    public void setTuning(int tuning) {
+        this.tuning = tuning;
     }
 
     public void setBypass(boolean bypass) {
@@ -72,25 +79,77 @@ public class Oscillator implements SignalSource {
         this.sync = sync;
     }
 
-    public void setInverse(boolean inverse) {
-        this.inverse = inverse;
+    public void setInverse(boolean invert) {
+        this.invert = invert;
     }
 
     public void setInverseOnSync(boolean inverseOnSync) {
-        this.inverseOnSync = inverseOnSync;
+        this.invertOnSync = inverseOnSync;
     }
 
     @Override
-    public void setSample(SignalStatus signal) {
-
-        if (signalSource != null) {
-            signalSource.setSample(signal);
-        }
+    public void generateSample(SignalStatus signal) {
 
         if (bypass) {
+            signalSource.generateSample(signal);
             return;
         }
 
+    }
+
+    private void generateWaveY(SignalStatus signal) {
+
+        int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
+        double x = (signal.getBufferIndex() & samplesInPeriod) / (double) samplesInPeriod;
+
+        if (sync && signal.getCompletePeriod()) {
+            x = 0;
+            if (invertOnSync) {
+                invert = !invert;
+            }
+        }
+
+        double y;
+
+        // TODO: Refactor into separate method
+        switch (waveform) {
+
+            default:
+            case SIN:
+                y = Math.sin(2.0 * Math.PI * x);
+                break;
+
+            case SQU:
+                if (signal.getBufferIndex() < (samplesInPeriod / 2)) {
+                    y = 1.0;
+                } else {
+                    y = -1.0;
+                }
+                break;
+
+            case SAW:
+                y = 2.0 * (x - Math.floor(x + 0.5));
+                break;
+
+            case TRI:
+                y = 2 * Math.abs(2.0 * (x - Math.floor(x + 0.5))) - 1;
+                break;
+                
+            // TODO: Noise generator field, don't instantiate new object on each
+            // sample fetch.
+            case NOI:
+                y = 2 * new Random().nextDouble() - 1;
+        }
+
+        if (invert) {
+            y = -y;
+        }
+
+        signal.setAmplitude(y);
+
+        if (signal.getBufferIndex() % samplesInPeriod == 0) {
+            signal.setCompletePeriod();
+        }
     }
 
 }
