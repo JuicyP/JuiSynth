@@ -18,7 +18,10 @@ import java.util.Arrays;
  * @author juicyp
  */
 public class JuiSynth {
-
+    
+    public static int bufferIndex = 0;
+    public static int octave = 12;
+    
     public static void main(String[] args) {
 
         // BEWARE! Software is LOUD
@@ -36,7 +39,7 @@ public class JuiSynth {
 
         // Larger buffer less suspectible to system running slow
         // Working on a laptop from the last decade
-        int bufferSize = 10000;
+        int bufferSize = (int) Math.pow(2, 16);
         // 16-bit samples so two indices of a byte array represent a single sample.
         // Thus, amount of samples per buffer is half the size of the array.
         int samplesPerBuffer = bufferSize / 2;
@@ -52,12 +55,13 @@ public class JuiSynth {
             // Fetching system time on each iteration too slow,
             // distorted signal. Reducing a number on each iteration instead,
             // writing the amount of buffers on variable
-            int bufferCount = 10;
+            int bufferCount = 12;
 
             while (bufferCount > 0) {
                 generateWaveIntoBuffer(sampleBuffer, sampleRate, 440, samplesPerBuffer);
                 audioline.write(sampleBuffer, 0, bufferSize);
-                bufferCount -= 1;
+                bufferCount--;
+                octave--;
             }
 
         } catch (LineUnavailableException e) {
@@ -74,17 +78,24 @@ public class JuiSynth {
     // and put into buffer.
     public static void generateWaveIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
-        Oscillator oscillator = new Oscillator();
-        oscillator.setWaveform(Oscillator.Waveform.NOI);
-        oscillator.setAdd(true);
+        Oscillator carrier = new Oscillator();
+        carrier.setWaveform(Oscillator.Waveform.SIN);
+        carrier.setAdd(true);
+        Oscillator modulator = new Oscillator();
+        modulator.setWaveform(Oscillator.Waveform.SQU);
+        modulator.setFm(true);
+        modulator.setFmDepth(0.8);
+        modulator.setSignalSource(carrier);
+        modulator.setTuning(-1200 * octave);
         int index = 0;
 
         for (int i = 0; i < samplesPerBuffer; i++) {
+            bufferIndex++;
 
             // Maybe just use same SignalStatus instance for successive sample fetches?
             // Less memory garbage
-            SignalStatus signal = new SignalStatus(sampleRate, i, frequency);
-            oscillator.generateSample(signal);
+            SignalStatus signal = new SignalStatus(sampleRate, bufferIndex, frequency);
+            modulator.generateSample(signal);
 
             double ds = signal.getAmplitude() * Short.MAX_VALUE;
             short ss = (short) Math.round(ds);

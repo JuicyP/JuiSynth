@@ -11,6 +11,8 @@ import java.util.Random;
  *
  * @author juicyp
  */
+
+// Featuritis?
 public class Oscillator implements SignalSource {
 
     public enum Waveform {
@@ -21,7 +23,8 @@ public class Oscillator implements SignalSource {
 
     private Waveform waveform = Waveform.SIN;
     // To be implemented. Adjusts frequency used on calculations by cents.
-    private int tuning = 0;
+    private long tuning = 0;
+    private boolean fixed = false;
 
     private boolean bypass = false;
     private boolean add = false;
@@ -48,9 +51,17 @@ public class Oscillator implements SignalSource {
     public void setWaveform(Waveform waveform) {
         this.waveform = waveform;
     }
+    
+    public long getTuning() {
+        return tuning;
+    }
 
-    public void setTuning(int tuning) {
+    public void setTuning(long tuning) {
         this.tuning = tuning;
+    }
+    
+    public void setFixes(boolean fixed) {
+        this.fixed = fixed;
     }
 
     public void setBypass(boolean bypass) {
@@ -124,14 +135,25 @@ public class Oscillator implements SignalSource {
                 signal.setAmplitude(signal.getAmplitude() * amplitude);
             } else {
                 signal.setAmplitude(amplitude);
+                
             }
         }
 
     }
 
     private double generateWaveAmplitude(SignalStatus signal) {
+        
+        double frequency = signal.getFrequency();
+        
+        if (fixed) {
+            frequency = 440;
+        }
+        
+        // Equal temperant tuning has 12 semitones in an octave,
+        // one semitone = 100 cents.
+        frequency *= Math.pow(2.0, (tuning/(double)1200));
 
-        int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
+        long samplesInPeriod = (long) (signal.getSampleRate() / frequency);
         double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
         boolean inverse = invert;
 
