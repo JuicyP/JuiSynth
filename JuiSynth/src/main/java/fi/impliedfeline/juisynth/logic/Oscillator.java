@@ -24,6 +24,7 @@ public class Oscillator implements SignalSource {
     private int tuning = 0;
 
     private boolean bypass = false;
+    private boolean add = false;
 
     private boolean fm = false;
     private double fmDepth = 0.0;
@@ -54,6 +55,10 @@ public class Oscillator implements SignalSource {
 
     public void setBypass(boolean bypass) {
         this.bypass = bypass;
+    }
+    
+    public void setAdd(boolean add) {
+        this.add = add;
     }
 
     public void setFm(boolean fm) {
@@ -114,7 +119,13 @@ public class Oscillator implements SignalSource {
             applyAM(amplitude, signal);
         }
 
-        signal.setAmplitude(amplitude);
+        if (add) {
+            if (signalSource != null) {
+                signal.setAmplitude(signal.getAmplitude() * amplitude);
+            } else {
+                signal.setAmplitude(amplitude);
+            }
+        }
 
     }
 

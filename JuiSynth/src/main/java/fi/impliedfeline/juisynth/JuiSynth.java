@@ -78,6 +78,7 @@ public class JuiSynth {
 
         Oscillator oscillator = new Oscillator();
         oscillator.setWaveform(Oscillator.Waveform.TRI);
+        oscillator.setAdd(true);
         int index = 0;
 
         for (int i = 0; i < samplesPerBuffer; i++) {
