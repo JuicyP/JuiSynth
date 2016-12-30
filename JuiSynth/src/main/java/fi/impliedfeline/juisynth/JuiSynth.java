@@ -5,6 +5,7 @@
  */
 package fi.impliedfeline.juisynth;
 
+import fi.impliedfeline.juisynth.logic.*;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
@@ -22,7 +23,7 @@ public class JuiSynth {
 
         // Prototype modeled after Dr. Dobb's synth articles 
         // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
-        // TODO: Refactor everything
+        // Testing
         int sampleRate = 44100; // 44.1kHz is a sample rate with fairly high fidelity
 
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
@@ -31,6 +32,7 @@ public class JuiSynth {
         AudioFormat format = new AudioFormat(sampleRate, 16, 1, true, true);
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
         SourceDataLine audioline = null;
+
 
         int bufferSize = 1000;
         // 16-bit samples so two indices of a byte array represent a single sample.
@@ -69,18 +71,15 @@ public class JuiSynth {
     // and put into buffer.
     public static void generateSineIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
-        long sampleIndex = 0;
-        long samplesInPeriod = (long) (sampleRate / frequency);
-
+        SignalSource oscillator = new Oscillator();
         int index = 0;
 
         for (int i = 0; i < samplesPerBuffer; i++) {
 
-            double x = sampleIndex / (double) samplesInPeriod;
-            double value = Math.sin(2.0 * Math.PI * x);
-            sampleIndex = (sampleIndex + 1) % samplesInPeriod;
+            SignalStatus signal = new SignalStatus(sampleRate, i, frequency);
+            oscillator.generateSample(signal);
 
-            double ds = value * Short.MAX_VALUE;
+            double ds = signal.getAmplitude() * Short.MAX_VALUE;
             short ss = (short) Math.round(ds);
             // Big endian, shift first eight bits and add as first part of sample
             sampleBuffer[index++] = (byte) (ss >> 8);

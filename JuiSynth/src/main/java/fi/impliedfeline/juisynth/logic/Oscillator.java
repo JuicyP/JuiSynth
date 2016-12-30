@@ -110,13 +110,15 @@ public class Oscillator implements SignalSource {
         if (am) {
             applyAM(amplitude, signal);
         }
+        
+        signal.setAmplitude(amplitude);
 
     }
 
     private double generateWaveY(SignalStatus signal) {
 
-        int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
-        double x = (signal.getBufferIndex() & samplesInPeriod) / (double) samplesInPeriod;
+        long samplesInPeriod = (long) (signal.getSampleRate() / signal.getFrequency());
+        double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
         boolean inverse = invert;
 
         if (sync && signal.getCompletePeriod()) {
