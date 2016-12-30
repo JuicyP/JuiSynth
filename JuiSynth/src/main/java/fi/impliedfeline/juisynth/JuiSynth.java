@@ -47,14 +47,15 @@ public class JuiSynth {
             audioline.open(format);
             audioline.start();
 
-            // Game loop :)
-            int timer = 5000;
-            long lastTime = System.currentTimeMillis();
+            // Fetching system time on each iteration too slow,
+            // distorted signal. Reducing a number on each iteration instead,
+            // writing the amount of buffers on variable
+            int bufferCount = 100;
 
-            while (timer > 0) {
-                generateSineIntoBuffer(sampleBuffer, sampleRate, 440, samplesPerBuffer);
+            while (bufferCount > 0) {
+                generateWaveIntoBuffer(sampleBuffer, sampleRate, 440, samplesPerBuffer);
                 audioline.write(sampleBuffer, 0, bufferSize);
-                timer -= (System.currentTimeMillis() - lastTime);
+                bufferCount -= 1;
             }
 
         } catch (LineUnavailableException e) {
@@ -69,7 +70,7 @@ public class JuiSynth {
 
     // Calculate the y value of a sine wave at frequency for each discrete point x,
     // and put into buffer.
-    public static void generateSineIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
+    public static void generateWaveIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
         Oscillator oscillator = new Oscillator();
         oscillator.setWaveform(Oscillator.Waveform.SIN);
