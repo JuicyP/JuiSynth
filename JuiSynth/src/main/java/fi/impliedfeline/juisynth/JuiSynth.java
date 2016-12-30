@@ -21,6 +21,8 @@ public class JuiSynth {
 
     public static void main(String[] args) {
 
+        // BEWARE! Software is LOUD
+        
         // Prototype modeled after Dr. Dobb's synth articles 
         // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
         // Testing
@@ -34,7 +36,9 @@ public class JuiSynth {
         SourceDataLine audioline = null;
 
 
-        int bufferSize = 1000;
+        // Larger buffer less suspectible to system running slow
+        // Working on a laptop from the last decade
+        int bufferSize = 10000;
         // 16-bit samples so two indices of a byte array represent a single sample.
         // Thus, amount of samples per buffer is half the size of the array.
         int samplesPerBuffer = bufferSize / 2;
@@ -50,7 +54,7 @@ public class JuiSynth {
             // Fetching system time on each iteration too slow,
             // distorted signal. Reducing a number on each iteration instead,
             // writing the amount of buffers on variable
-            int bufferCount = 100;
+            int bufferCount = 10;
 
             while (bufferCount > 0) {
                 generateWaveIntoBuffer(sampleBuffer, sampleRate, 440, samplesPerBuffer);
@@ -73,7 +77,7 @@ public class JuiSynth {
     public static void generateWaveIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
         Oscillator oscillator = new Oscillator();
-        oscillator.setWaveform(Oscillator.Waveform.SIN);
+        oscillator.setWaveform(Oscillator.Waveform.TRI);
         int index = 0;
 
         for (int i = 0; i < samplesPerBuffer; i++) {

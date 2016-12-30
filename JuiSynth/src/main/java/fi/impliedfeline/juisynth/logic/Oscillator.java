@@ -99,7 +99,7 @@ public class Oscillator implements SignalSource {
             return;
         }
 
-        double amplitude = generateWaveY(signal);
+        double amplitude = generateWaveAmplitude(signal);
 
         if (fm) {
             applyFM(amplitude, signal);
@@ -117,7 +117,7 @@ public class Oscillator implements SignalSource {
 
     }
 
-    private double generateWaveY(SignalStatus signal) {
+    private double generateWaveAmplitude(SignalStatus signal) {
 
         int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
         double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
@@ -130,9 +130,31 @@ public class Oscillator implements SignalSource {
             }
         }
 
-        double y;
+        double y = calculateFunctionY(x);
 
-        // TODO: Refactor into separate method
+        if (inverse) {
+            y = -y;
+        }
+
+        if (signal.getBufferIndex() % samplesInPeriod == 0) {
+            signal.setCompletePeriod();
+        }
+
+        return y;
+    }
+    
+    private void applyFM(double amplitude, SignalStatus signal) {
+        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * fmDepth));
+    }
+    
+    private void applyAM(double amplitude, SignalStatus signal) {
+        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
+    }
+    
+    private double calculateFunctionY(double x) {
+        
+        double y;
+        
         switch (waveform) {
 
             default:
@@ -153,32 +175,14 @@ public class Oscillator implements SignalSource {
                 break;
 
             case TRI:
-                y = Math.abs(x % samplesInPeriod - 2) - 1;
+                y = 2.0 * Math.abs(2.0 * (x - Math.floor(x + 0.5))) - 1;
                 break;
 
-            // TODO: Noise generator field, don't instantiate new object on each
-            // sample fetch.
             case NOI:
                 y = 2 * noiseGenerator.nextDouble() - 1;
         }
-
-        if (inverse) {
-            y = -y;
-        }
-
-        if (signal.getBufferIndex() % samplesInPeriod == 0) {
-            signal.setCompletePeriod();
-        }
-
+        
         return y;
-    }
-    
-    private void applyFM(double amplitude, SignalStatus signal) {
-        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * fmDepth));
-    }
-    
-    private void applyAM(double amplitude, SignalStatus signal) {
-        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
     }
 
 }
