@@ -48,7 +48,7 @@ public class JuiSynth {
             audioline.start();
 
             // Game loop :)
-            int timer = 1000;
+            int timer = 5000;
             long lastTime = System.currentTimeMillis();
 
             while (timer > 0) {
@@ -71,7 +71,8 @@ public class JuiSynth {
     // and put into buffer.
     public static void generateSineIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
-        SignalSource oscillator = new Oscillator();
+        Oscillator oscillator = new Oscillator();
+        oscillator.setWaveform(Oscillator.Waveform.SIN);
         int index = 0;
 
         for (int i = 0; i < samplesPerBuffer; i++) {

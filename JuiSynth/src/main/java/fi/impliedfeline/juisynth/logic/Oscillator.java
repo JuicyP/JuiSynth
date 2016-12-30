@@ -33,6 +33,8 @@ public class Oscillator implements SignalSource {
     private boolean sync = false;
     private boolean invert = false;
     private boolean invertOnSync = false;
+    
+    private Random noiseGenerator = new Random();
 
     public Oscillator() {
     }
@@ -117,7 +119,7 @@ public class Oscillator implements SignalSource {
 
     private double generateWaveY(SignalStatus signal) {
 
-        long samplesInPeriod = (long) (signal.getSampleRate() / signal.getFrequency());
+        int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
         double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
         boolean inverse = invert;
 
@@ -139,7 +141,7 @@ public class Oscillator implements SignalSource {
                 break;
 
             case SQU:
-                if (signal.getBufferIndex() < (samplesInPeriod / 2)) {
+                if (x < 0.5) {
                     y = 1.0;
                 } else {
                     y = -1.0;
@@ -157,7 +159,7 @@ public class Oscillator implements SignalSource {
             // TODO: Noise generator field, don't instantiate new object on each
             // sample fetch.
             case NOI:
-                y = 2 * new Random().nextDouble() - 1;
+                y = 2 * noiseGenerator.nextDouble() - 1;
         }
 
         if (inverse) {
