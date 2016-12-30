@@ -91,21 +91,38 @@ public class Oscillator implements SignalSource {
     public void generateSample(SignalStatus signal) {
 
         if (bypass) {
-            signalSource.generateSample(signal);
+            if (signalSource != null) {
+                signalSource.generateSample(signal);
+            }
             return;
+        }
+
+        double amplitude = generateWaveY(signal);
+
+        if (fm) {
+            applyFM(amplitude, signal);
+        }
+
+        if (signalSource != null) {
+            signalSource.generateSample(signal);
+        }
+
+        if (am) {
+            applyAM(amplitude, signal);
         }
 
     }
 
-    private void generateWaveY(SignalStatus signal) {
+    private double generateWaveY(SignalStatus signal) {
 
         int samplesInPeriod = (int) (signal.getSampleRate() / signal.getFrequency());
         double x = (signal.getBufferIndex() & samplesInPeriod) / (double) samplesInPeriod;
+        boolean inverse = invert;
 
         if (sync && signal.getCompletePeriod()) {
             x = 0;
             if (invertOnSync) {
-                invert = !invert;
+                inverse = !inverse;
             }
         }
 
@@ -134,22 +151,30 @@ public class Oscillator implements SignalSource {
             case TRI:
                 y = Math.abs(x % samplesInPeriod - 2) - 1;
                 break;
-                
+
             // TODO: Noise generator field, don't instantiate new object on each
             // sample fetch.
             case NOI:
                 y = 2 * new Random().nextDouble() - 1;
         }
 
-        if (invert) {
+        if (inverse) {
             y = -y;
         }
-
-        signal.setAmplitude(y);
 
         if (signal.getBufferIndex() % samplesInPeriod == 0) {
             signal.setCompletePeriod();
         }
+
+        return y;
+    }
+    
+    private void applyFM(double amplitude, SignalStatus signal) {
+        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * fmDepth));
+    }
+    
+    private void applyAM(double amplitude, SignalStatus signal) {
+        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
     }
 
 }
