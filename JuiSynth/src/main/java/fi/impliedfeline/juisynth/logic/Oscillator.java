@@ -56,7 +56,7 @@ public class Oscillator implements SignalSource {
     public void setBypass(boolean bypass) {
         this.bypass = bypass;
     }
-    
+
     public void setAdd(boolean add) {
         this.add = add;
     }
@@ -197,5 +197,4 @@ public class Oscillator implements SignalSource {
     private void applyAM(double amplitude, SignalStatus signal) {
         signal.setAmplitude(signal.getAmplitude() * Math.pow(2, amplitude * amDepth));
     }
-
 }

@@ -10,7 +10,7 @@ package fi.impliedfeline.juisynth.logic;
  * @author juicyp
  */
 public interface SignalSource {
-    
+
     public void generateSample(SignalStatus signal);
-    
+
 }

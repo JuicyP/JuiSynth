@@ -22,7 +22,6 @@ public class JuiSynth {
     public static void main(String[] args) {
 
         // BEWARE! Software is LOUD
-        
         // Prototype modeled after Dr. Dobb's synth articles 
         // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
         // Testing
@@ -34,7 +33,6 @@ public class JuiSynth {
         AudioFormat format = new AudioFormat(sampleRate, 16, 1, true, true);
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
         SourceDataLine audioline = null;
-
 
         // Larger buffer less suspectible to system running slow
         // Working on a laptop from the last decade
@@ -77,7 +75,7 @@ public class JuiSynth {
     public static void generateWaveIntoBuffer(byte[] sampleBuffer, int sampleRate, double frequency, int samplesPerBuffer) {
 
         Oscillator oscillator = new Oscillator();
-        oscillator.setWaveform(Oscillator.Waveform.TRI);
+        oscillator.setWaveform(Oscillator.Waveform.NOI);
         oscillator.setAdd(true);
         int index = 0;
 
