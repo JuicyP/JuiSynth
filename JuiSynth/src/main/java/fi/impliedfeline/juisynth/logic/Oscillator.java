@@ -132,7 +132,7 @@ public class Oscillator implements SignalSource {
                 break;
 
             case TRI:
-                y = 2 * Math.abs(2.0 * (x - Math.floor(x + 0.5))) - 1;
+                y = Math.abs(x % samplesInPeriod - 2) - 1;
                 break;
                 
             // TODO: Noise generator field, don't instantiate new object on each
