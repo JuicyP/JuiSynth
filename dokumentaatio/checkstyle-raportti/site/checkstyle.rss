@@ -23,9 +23,9 @@ under the License.
     <link>${project.url}</link>
     <description>JuiSynth - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2016</copyright>
+    <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 4,
+      <title>File: 7,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -60,7 +60,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Player.java">fi/impliedfeline/juisynth/logic/Player.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.JuiSynth.java">fi/impliedfeline/juisynth/JuiSynth.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Waveform.java">fi/impliedfeline/juisynth/logic/Waveform.java</a>
                 </td>
                 <td>
                   0
@@ -89,6 +117,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Oscillator.java">fi/impliedfeline/juisynth/logic/Oscillator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.WaveformCalculator.java">fi/impliedfeline/juisynth/logic/WaveformCalculator.java</a>
                 </td>
                 <td>
                   0
