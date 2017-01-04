@@ -18,10 +18,6 @@ import java.util.Random;
 // Featuritis?
 public class Oscillator implements SignalSource {
 
-    public enum Waveform {
-        SIN, SQU, SAW, TRI, NOI
-    }
-
     private SignalSource signalSource = null;
 
     private Waveform waveform = Waveform.SIN;
@@ -171,7 +167,7 @@ public class Oscillator implements SignalSource {
             }
         }
 
-        double y = calculateFunctionY(x);
+        double y = WaveformCalculator.calculateWaveformY(x, waveform);
 
         if (inverse) {
             y = -y;
@@ -181,39 +177,6 @@ public class Oscillator implements SignalSource {
             signal.setCompletePeriodTrue();
         }
 
-        return y;
-    }
-
-    // Encapsulate into own class?
-    private double calculateFunctionY(double x) {
-
-        double y;
-
-        switch (waveform) {
-            default:
-            case SIN:
-                y = Math.sin(2.0 * Math.PI * x);
-                break;
-
-            case SQU:
-                if (x < 0.5) {
-                    y = 1.0;
-                } else {
-                    y = -1.0;
-                }
-                break;
-
-            case SAW:
-                y = 2.0 * (x - Math.floor(x + 0.5));
-                break;
-
-            case TRI:
-                y = 2.0 * Math.abs(2.0 * (x - Math.floor(x + 0.5))) - 1;
-                break;
-
-            case NOI:
-                y = 2 * noiseGenerator.nextDouble() - 1;
-        }
         return y;
     }
 

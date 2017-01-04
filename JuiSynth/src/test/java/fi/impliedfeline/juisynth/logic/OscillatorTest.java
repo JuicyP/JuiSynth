@@ -26,7 +26,7 @@ public class OscillatorTest {
     @Before
     public void setUp() {
         o = new Oscillator();
-        o.setWaveform(Oscillator.Waveform.SIN);
+        o.setWaveform(Waveform.SIN);
         
         o.setBypass(false);
         o.setAdd(true);
@@ -76,7 +76,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeTriangleReturnsOneWithZeroIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.TRI);
+        o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
@@ -84,7 +84,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeTriangleReturnsOneWithHalfPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.TRI);
+        o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 2, frequency);
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
@@ -92,7 +92,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeTriangleReturnsNegativeOneWithFullPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.TRI);
+        o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod, frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
@@ -100,7 +100,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeTriangleReturnsZeroWithQuarterPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.TRI);
+        o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 4, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
@@ -108,7 +108,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeTriangleReturnsZeroWithThreeQuartersPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.TRI);
+        o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(sampleRate, 3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
@@ -116,7 +116,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSquareReturnsOneWithZeroIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
@@ -124,7 +124,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSquareReturnsNegativeOneWithHalfPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 2, frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
@@ -132,7 +132,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSquareReturnsOneWithFullPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod, frequency);
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
@@ -140,7 +140,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSquareReturnsOneWithQuarterPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 4, frequency);
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
@@ -148,7 +148,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSquareReturnsNegativeOneWithThreeQuartersPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(sampleRate, 3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
@@ -156,7 +156,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSawReturnsZeroWithZeroIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SAW);
+        o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
@@ -164,7 +164,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSawReturnsNegativeOneWithHalfPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SAW);
+        o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 2, frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
@@ -172,7 +172,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSawReturnsZeroWithFullPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SAW);
+        o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
@@ -180,7 +180,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSawReturnsHalfWithQuarterPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SAW);
+        o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(sampleRate, samplesInPeriod / 4, frequency);
         o.generateSample(s);
         assertEquals(0.5, s.getAmplitude(), 0.1);
@@ -188,7 +188,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeSawReturnsNegativeHalfWithThreeQuartersPhaseIndexBuffer() {
-        o.setWaveform(Oscillator.Waveform.SAW);
+        o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(sampleRate, 3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
         assertEquals(-0.5, s.getAmplitude(), 0.1);
@@ -196,7 +196,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeDoesNotModifySampleWithBypass() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         o.setBypass(true);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
         o.generateSample(s);
@@ -205,7 +205,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeModifiesFrequencyWithFM() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         o.setFm(true);
         o.setFmDepth(1);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
@@ -215,7 +215,7 @@ public class OscillatorTest {
     
     @Test
     public void generateWaveAmplitudeDoesNotModifyFrequencyWithFMDepthZero() {
-        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setWaveform(Waveform.SQU);
         o.setFm(true);
         o.setFmDepth(0);
         SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
