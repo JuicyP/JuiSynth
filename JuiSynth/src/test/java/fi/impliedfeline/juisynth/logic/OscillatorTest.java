@@ -193,4 +193,34 @@ public class OscillatorTest {
         o.generateSample(s);
         assertEquals(-0.5, s.getAmplitude(), 0.1);
     }
+    
+    @Test
+    public void generateWaveAmplitudeDoesNotModifySampleWithBypass() {
+        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setBypass(true);
+        SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
+        o.generateSample(s);
+        assertEquals(0, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateWaveAmplitudeModifiesFrequencyWithFM() {
+        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setFm(true);
+        o.setFmDepth(1);
+        SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
+        o.generateSample(s);
+        assertEquals(4, s.getFrequency(), 0.1);
+    }
+    
+    @Test
+    public void generateWaveAmplitudeDoesNotModifyFrequencyWithFMDepthZero() {
+        o.setWaveform(Oscillator.Waveform.SQU);
+        o.setFm(true);
+        o.setFmDepth(0);
+        SignalStatus s = new SignalStatus(sampleRate, 0, frequency);
+        o.generateSample(s);
+        assertEquals(2, s.getFrequency(), 0.1);
+    }
+    // Signal paths of more than one oscillator into their own class
 }

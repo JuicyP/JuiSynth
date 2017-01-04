@@ -26,33 +26,35 @@ public class JuiSynth {
     public static void main(String[] args) {
 
         int centsInOctave = 1200;
-        
+
         Oscillator carrier = new Oscillator();
         carrier.setAdd(true);
-        
-        //FM doesn't work as intended. Sounds cool as hell though
+
+        // FM doesn't work as intended. Sounds cool as hell though,
+        // thinking of leaving it as it is.
         Oscillator modulator = new Oscillator();
         modulator.setFm(true);
         modulator.setFmDepth(0.1);
-        modulator.setAm(true);
-        modulator.setAmDepth(1);
-        modulator.setTuning(centsInOctave);
         modulator.setSignalSource(carrier);
-        
+
         Player player = new Player();
         player.setSignalSource(modulator);
         player.startPlayer();
+
+        delay(8000);
         
-        delay(10000);
+        modulator.setBypass(true);
         
+        delay(1000);
+
         player.stopPlayer();
     }
-    
+
     private static void delay(long ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
-            
+
         }
     }
 }

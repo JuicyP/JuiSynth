@@ -36,6 +36,7 @@ public class Player extends Thread {
     private boolean done;
     private byte[] sampleBuffer = new byte[BUFFER_SIZE];
     private SignalSource signalSource;
+    private int bufferIndex;
 
     public Player() {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
@@ -58,29 +59,7 @@ public class Player extends Thread {
             int bufferIndex = 0;
 
             while (!done) {
-
-                
-                Arrays.fill(sampleBuffer, (byte) 0);
-
-                int index = 0;
-
-                for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
-
-                    // Maybe just use same SignalStatus instance for successive sample fetches?
-                    // Less memory garbage
-                    SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, 440);
-                    bufferIndex++;
-                    signalSource.generateSample(signal);
-
-                    double ds = signal.getAmplitude() * Short.MAX_VALUE;
-                    short ss = (short) Math.round(ds);
-                    // Big endian, shift first eight bits and add as first part of sample
-                    sampleBuffer[index++] = (byte) (ss >> 8);
-                    sampleBuffer[index++] = (byte) (ss & 0xFF);
-                }
-                
-                audioline.write(sampleBuffer, 0, BUFFER_SIZE);
-
+                writeBuffer();
             }
 
         } catch (LineUnavailableException e) {
@@ -106,5 +85,29 @@ public class Player extends Thread {
 
     public void setSignalSource(SignalSource signalSource) {
         this.signalSource = signalSource;
+    }
+
+    private void writeBuffer() {
+
+        Arrays.fill(sampleBuffer, (byte) 0);
+
+        int index = 0;
+
+        for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
+
+            // Maybe just use same SignalStatus instance for successive sample fetches?
+            // Less memory garbage
+            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, 440);
+            bufferIndex++;
+            signalSource.generateSample(signal);
+
+            double ds = signal.getAmplitude() * Short.MAX_VALUE;
+            short ss = (short) Math.round(ds);
+            // Big endian, shift first eight bits and add as first part of sample
+            sampleBuffer[index++] = (byte) (ss >> 8);
+            sampleBuffer[index++] = (byte) (ss & 0xFF);
+        }
+
+        audioline.write(sampleBuffer, 0, BUFFER_SIZE);
     }
 }

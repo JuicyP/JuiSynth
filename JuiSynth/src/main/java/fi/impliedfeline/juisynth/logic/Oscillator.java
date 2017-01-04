@@ -17,8 +17,6 @@ public class Oscillator implements SignalSource {
     public enum Waveform {
         SIN, SQU, SAW, TRI, NOI
     }
-    
-    private boolean debug = false;
 
     private SignalSource signalSource = null;
 
@@ -43,10 +41,6 @@ public class Oscillator implements SignalSource {
     private Random noiseGenerator = new Random();
 
     public Oscillator() {
-    }
-    
-    public void setDebug(boolean debug) {
-        this.debug = debug;
     }
 
     public void setSignalSource(SignalSource signalSource) {
@@ -179,10 +173,6 @@ public class Oscillator implements SignalSource {
             signal.setCompletePeriodTrue();
         }
 
-        if (debug) {
-            System.out.println(x + " " + y);
-        }
-
         return y;
     }
 
@@ -192,7 +182,6 @@ public class Oscillator implements SignalSource {
         double y;
 
         switch (waveform) {
-
             default:
             case SIN:
                 y = Math.sin(2.0 * Math.PI * x);
@@ -217,7 +206,6 @@ public class Oscillator implements SignalSource {
             case NOI:
                 y = 2 * noiseGenerator.nextDouble() - 1;
         }
-
         return y;
     }
 
