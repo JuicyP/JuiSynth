@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class WaveformCalculator {
     
-    private static final Random noiseGenerator = new Random();
+    private static final Random NOISE_GENERATOR = new Random();
 
     public static double calculateWaveformY(double x, Waveform waveform) {
 
@@ -42,7 +42,7 @@ public class WaveformCalculator {
                 break;
 
             case NOI:
-                y = 2 * noiseGenerator.nextDouble() - 1;
+                y = 2 * NOISE_GENERATOR.nextDouble() - 1;
         }
         return y;
     }
