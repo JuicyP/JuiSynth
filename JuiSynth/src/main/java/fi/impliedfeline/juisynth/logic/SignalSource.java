@@ -6,7 +6,9 @@
 package fi.impliedfeline.juisynth.logic;
 
 /**
- *
+ * Defines a method signature for generating a sample, receiving a SignalStatus
+ * object.
+ * @see SignalStatus
  * @author juicyp
  */
 public interface SignalSource {

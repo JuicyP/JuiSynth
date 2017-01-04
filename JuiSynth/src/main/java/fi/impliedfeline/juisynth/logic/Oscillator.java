@@ -8,7 +8,11 @@ package fi.impliedfeline.juisynth.logic;
 import java.util.Random;
 
 /**
- *
+ * Receives a SignalStatus-object along a signal path
+ * consisting of SignalSources and modifies it based on
+ * it's state. Oscillator implements SignalSource.
+ * 
+ * @see SignalSource SignalStatus
  * @author juicyp
  */
 // Featuritis?
@@ -105,6 +109,10 @@ public class Oscillator implements SignalSource {
         this.invertOnSync = inverseOnSync;
     }
 
+    /**
+     * Branches based on state and modifies signal amplitude and/or frequency.
+     * @param signal SignalStatus passed along the signal path.
+     */
     @Override
     public void generateSample(SignalStatus signal) {
 

@@ -13,7 +13,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 /**
- *
+ * Starts a thread and writes sample data fetched from SignalSource
+ * into SourceDataLine.
  * @author juicyp
  */
 public class Player extends Thread {
@@ -37,6 +38,7 @@ public class Player extends Thread {
     private byte[] sampleBuffer = new byte[BUFFER_SIZE];
     private SignalSource signalSource;
     private int bufferIndex;
+    private double frequency = 440;
 
     public Player() {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
@@ -72,15 +74,27 @@ public class Player extends Thread {
         }
 
     }
-
+    
+    /**
+     * Starts the player on a new thread.
+     * @see stopPlayer
+     */
     public void startPlayer() {
         if (signalSource != null) {
             start();
         }
     }
 
+    /**
+     * Sets a flag to kill the thread.
+     * @see startPlayer
+     */
     public void stopPlayer() {
         done = true;
+    }
+    
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
     }
 
     public void setSignalSource(SignalSource signalSource) {
@@ -97,7 +111,7 @@ public class Player extends Thread {
 
             // Maybe just use same SignalStatus instance for successive sample fetches?
             // Less memory garbage
-            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, 440);
+            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, frequency);
             bufferIndex++;
             signalSource.generateSample(signal);
 

@@ -6,7 +6,7 @@
 package fi.impliedfeline.juisynth.logic;
 
 /**
- *
+ * Contains information relevant to a sample in a signal path.
  * @author juicyp
  */
 public class SignalStatus {
@@ -20,6 +20,12 @@ public class SignalStatus {
 
     private boolean completePeriod = false;
 
+    /**
+     * 
+     * @param sampleRate The sample rate of the sample based signal path
+     * @param bufferIndex The sample index
+     * @param frequency The frequency of the periodic waveform to be generated
+     */
     public SignalStatus(int sampleRate, int bufferIndex, double frequency) {
         this.sampleRate = sampleRate;
         this.bufferIndex = bufferIndex;

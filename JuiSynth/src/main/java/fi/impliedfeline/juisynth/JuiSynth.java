@@ -48,6 +48,7 @@ public class JuiSynth {
         delay(1000);
 
         player.stopPlayer();
+        
     }
 
     private static void delay(long ms) {
