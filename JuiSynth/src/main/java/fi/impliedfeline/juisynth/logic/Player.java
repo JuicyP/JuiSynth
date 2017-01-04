@@ -24,7 +24,9 @@ public class Player extends Thread {
     private static final boolean SIGNED = true;
     private static final boolean BIG_ENDIAN = true;
 
-    private static final int BUFFER_SIZE = 10000;
+    private static final int BUFFER_SIZE = 200;
+    // 16-bit samples so two indices of a byte array represent a single sample.
+    // Thus, amount of samples per buffer is half the size of the array.
     private static final int SAMPLES_PER_BUFFER = BUFFER_SIZE / 2;
 
     private AudioFormat format;
@@ -36,7 +38,9 @@ public class Player extends Thread {
     private SignalSource signalSource;
 
     public Player() {
-
+        // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
+        // amount of channels, signedness (true for signed),
+        // endianness (true for big endian) in that order as format information.
         format = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE, CHANNELS, SIGNED, BIG_ENDIAN);
         info = new DataLine.Info(SourceDataLine.class, format);
     }
@@ -51,6 +55,7 @@ public class Player extends Thread {
             audioline = (SourceDataLine) AudioSystem.getLine(info);
             audioline.open(format);
             audioline.start();
+            int bufferIndex = 0;
 
             while (!done) {
 
@@ -58,14 +63,13 @@ public class Player extends Thread {
                 Arrays.fill(sampleBuffer, (byte) 0);
 
                 int index = 0;
-                int bufferIndex = 0;
 
                 for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
-                    bufferIndex++;
 
                     // Maybe just use same SignalStatus instance for successive sample fetches?
                     // Less memory garbage
                     SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, 440);
+                    bufferIndex++;
                     signalSource.generateSample(signal);
 
                     double ds = signal.getAmplitude() * Short.MAX_VALUE;

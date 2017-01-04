@@ -11,18 +11,19 @@ import java.util.Random;
  *
  * @author juicyp
  */
-
 // Featuritis?
 public class Oscillator implements SignalSource {
 
     public enum Waveform {
         SIN, SQU, SAW, TRI, NOI
     }
+    
+    private boolean debug = false;
 
     private SignalSource signalSource = null;
 
     private Waveform waveform = Waveform.SIN;
-    
+
     private int tuning = 0;
     private boolean fixed = false;
 
@@ -43,6 +44,10 @@ public class Oscillator implements SignalSource {
 
     public Oscillator() {
     }
+    
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
     public void setSignalSource(SignalSource signalSource) {
         this.signalSource = signalSource;
@@ -51,7 +56,7 @@ public class Oscillator implements SignalSource {
     public void setWaveform(Waveform waveform) {
         this.waveform = waveform;
     }
-    
+
     public int getTuning() {
         return tuning;
     }
@@ -59,8 +64,8 @@ public class Oscillator implements SignalSource {
     public void setTuning(int tuning) {
         this.tuning = tuning;
     }
-    
-    public void setFixes(boolean fixed) {
+
+    public void setFixed(boolean fixed) {
         this.fixed = fixed;
     }
 
@@ -135,26 +140,26 @@ public class Oscillator implements SignalSource {
                 signal.setAmplitude(signal.getAmplitude() * amplitude);
             } else {
                 signal.setAmplitude(amplitude);
-                
+
             }
         }
 
     }
 
     private double generateWaveAmplitude(SignalStatus signal) {
-        
-        double frequency = signal.getFrequency();
-        
-        if (fixed) {
-            frequency = 440;
-        }
-        
-        // Equal temperant tuning has 12 semitones in an octave,
-        // one semitone = 100 cents.
-        frequency *= Math.pow(2.0, (tuning/(double)1200));
 
-        long samplesInPeriod = (long) (signal.getSampleRate() / frequency);
-        double x = (signal.getBufferIndex() % samplesInPeriod) / (double) samplesInPeriod;
+        double frequency = signal.getFrequency();
+
+        if (fixed) {
+            frequency = 440.0;
+        }
+
+        // Equal temperant tuning = 12 semitones in an octave,
+        // one semitone = 100 cents.
+        frequency *= Math.pow(2.0, (tuning / (double) 1200));
+
+        double samplesInPeriod = signal.getSampleRate() / frequency;
+        double x = (signal.getBufferIndex() % samplesInPeriod) / samplesInPeriod;
         boolean inverse = invert;
 
         if (sync && signal.getAndUpdateCompletePeriod()) {
@@ -172,6 +177,10 @@ public class Oscillator implements SignalSource {
 
         if (signal.getBufferIndex() % samplesInPeriod == 0) {
             signal.setCompletePeriodTrue();
+        }
+
+        if (debug) {
+            System.out.println(x + " " + y);
         }
 
         return y;
