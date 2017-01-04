@@ -4,4 +4,5 @@ Päivä | Tunnit | Kuvaus
 21.12.2016 | 5h | Aihepiiriin tutustuminen, suunnittelu ja repon luonti
 28.12.2016 | 4h | Yhteyksien suunnittelu, arkkitehtuuri
 29.12.2016 | 6h | Arkkitehtuuri, logiikan suunnittelu
-30.12.2016 | 7h | Implementointi
+30.12.2016 | 7h | Oskillaattorin implementointi
+04.01.2017 | 5h | Player-luokan implementointi, refaktorointi
