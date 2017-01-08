@@ -6,12 +6,14 @@
 package fi.impliedfeline.juisynth;
 
 import fi.impliedfeline.juisynth.logic.*;
+import fi.impliedfeline.juisynth.ui.*;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.LineUnavailableException;
 import java.util.Arrays;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -24,7 +26,11 @@ public class JuiSynth {
     // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
     // Testing
     public static void main(String[] args) {
-
+        
+        UI ui = new UI();
+        SwingUtilities.invokeLater(ui);
+        
+        /*
         int centsInOctave = 1200;
 
         Oscillator carrier = new Oscillator();
@@ -48,7 +54,7 @@ public class JuiSynth {
         delay(1000);
 
         player.stopPlayer();
-        
+        */
     }
 
     private static void delay(long ms) {
