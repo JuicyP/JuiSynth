@@ -38,8 +38,6 @@ public class Oscillator implements SignalSource {
     private boolean invert = false;
     private boolean invertOnSync = false;
 
-    private Random noiseGenerator = new Random();
-
     public Oscillator() {
     }
 

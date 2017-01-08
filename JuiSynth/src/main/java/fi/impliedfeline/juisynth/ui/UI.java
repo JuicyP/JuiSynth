@@ -5,9 +5,11 @@
  */
 package fi.impliedfeline.juisynth.ui;
 
+import fi.impliedfeline.juisynth.logic.*;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -16,11 +18,19 @@ import javax.swing.*;
 public class UI implements Runnable {
     
     private JFrame frame;
+    private Oscillator oscillator;
+    private Player player;
 
     @Override
     public void run() {
+        oscillator = new Oscillator();
+        oscillator.setAdd(true);
+        
+        player = new Player();      
+        player.setSignalSource(oscillator);
+        
         frame = new JFrame("JuiSynth");
-        frame.setPreferredSize(new Dimension(1000, 600));
+        frame.setPreferredSize(new Dimension(300, 500));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -30,16 +40,18 @@ public class UI implements Runnable {
         frame.setVisible(true);
     }
     
+    //TODO: Refactor into separate classes extending JPanel
     private void instantiateComponents(Container container) {
         BoxLayout layout = new BoxLayout(container, BoxLayout.Y_AXIS);
         container.setLayout(layout);
         
-        JLabel operatorName = new JLabel("Carrier");
+        /*
         JLabel ampLabel = new JLabel("Volume");
         JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
         amp.setMajorTickSpacing(10);
         amp.setPaintTicks(true);
         amp.setPaintLabels(true);
+        */
         
         JLabel tuningLabel = new JLabel("Tuning");
         JSlider tuning = new JSlider(JSlider.HORIZONTAL, -3600, 3600, 0);
@@ -50,38 +62,25 @@ public class UI implements Runnable {
         JButton start = new JButton("Start");
         JButton stop = new JButton("Stop");
         
-        JLabel waveformsLabel = new JLabel("Waveforms");
-        JRadioButton sine = new JRadioButton("Sine");
-        JRadioButton square = new JRadioButton("Square");
-        JRadioButton saw = new JRadioButton("Saw");
-        JRadioButton triangle = new JRadioButton("Triangle");
-        JRadioButton noise = new JRadioButton("Noise");
-        
-        ButtonGroup waveforms = new ButtonGroup();
-        waveforms.add(sine);
-        waveforms.add(square);
-        waveforms.add(saw);
-        waveforms.add(triangle);
-        waveforms.add(noise);
-        
-        //container.add(operatorName);
-        
+        JLabel waveformLabel = new JLabel("Waveform");
+        JComboBox waveform = new JComboBox(Waveform.values());
+        /*
         container.add(ampLabel);
         container.add(amp);
+        */
         
+        tuning.addChangeListener(new OscillatorTuningListener(oscillator, tuning));
         container.add(tuningLabel);
         container.add(tuning);
         
-        container.add(waveformsLabel);
-        container.add(sine);
-        container.add(square);
-        container.add(saw);
-        container.add(triangle);
-        container.add(noise);
+        waveform.addActionListener(new OscillatorWaveformListener(oscillator, waveform));
+        container.add(waveformLabel);
+        container.add(waveform);
         
+        start.addActionListener(new PlayerStartListener(player));
         container.add(start);
+        stop.addActionListener(new PlayerStopListener(player));
         container.add(stop);
-        
     }
     
     public JFrame getFrame() {
