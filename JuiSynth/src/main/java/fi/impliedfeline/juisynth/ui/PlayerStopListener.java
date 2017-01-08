@@ -10,13 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Listens to button and stops player.
  * @author juicyp
  */
 public class PlayerStopListener implements ActionListener {
 
     private Player player;
     
+    /**
+     * Sets value of player field.
+     * @param player 
+     */
     public PlayerStopListener(Player player) {
         this.player = player;
     }

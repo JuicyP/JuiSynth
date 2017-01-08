@@ -10,13 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Listens to button and starts player.
  * @author juicyp
  */
 public class PlayerStartListener implements ActionListener {
 
     private Player player;
     
+    /**
+     * Sets value of player field.
+     * @param player 
+     */
     public PlayerStartListener(Player player) {
         this.player = player;
     }

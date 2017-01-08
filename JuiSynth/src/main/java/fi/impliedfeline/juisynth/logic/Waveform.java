@@ -6,7 +6,7 @@
 package fi.impliedfeline.juisynth.logic;
 
 /**
- *
+ * Waveform enumerator encapsulates all implemented waveforms.
  * @author juicyp
  */
 public enum Waveform {

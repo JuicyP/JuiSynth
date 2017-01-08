@@ -40,6 +40,9 @@ public class Player extends Thread {
     private int bufferIndex;
     private double frequency = 440;
 
+    /**
+     * Constructor for Player sets format according to values specified in fields.
+     */
     public Player() {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
         // amount of channels, signedness (true for signed),

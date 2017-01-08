@@ -21,7 +21,8 @@ public class SignalStatus {
     private boolean completePeriod = false;
 
     /**
-     * 
+     * Constructor for SignalStatus object sets sample rate, index of buffer and
+     * frequency of signal.
      * @param sampleRate The sample rate of the sample based signal path
      * @param bufferIndex The sample index
      * @param frequency The frequency of the periodic waveform to be generated
@@ -44,6 +45,10 @@ public class SignalStatus {
         return frequency;
     }
 
+    /**
+     * Sets non-negative frequency.
+     * @param frequency 
+     */
     public void setFrequency(double frequency) {
         if (frequency < 0) {
             return;
@@ -55,6 +60,10 @@ public class SignalStatus {
         return amplitude;
     }
 
+    /**
+     * Sets amplitude between -1 and 1 inclusive.
+     * @param amplitude 
+     */
     public void setAmplitude(double amplitude) {
         if (amplitude < -1 || amplitude > 1) {
             return;
@@ -62,6 +71,10 @@ public class SignalStatus {
         this.amplitude = amplitude;
     }
 
+    /**
+     * Returns value of completePeriod field and sets to false.
+     * @return returns value of completePeriod field.
+     */
     public boolean getAndUpdateCompletePeriod() {
         if (completePeriod) {
             completePeriod = false;
@@ -71,6 +84,9 @@ public class SignalStatus {
         return false;
     }
 
+    /**
+     * Sets completePeriod-field to true.
+     */
     public void setCompletePeriodTrue() {
         this.completePeriod = true;
     }

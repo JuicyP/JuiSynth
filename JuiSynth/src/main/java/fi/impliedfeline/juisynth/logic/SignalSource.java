@@ -13,6 +13,10 @@ package fi.impliedfeline.juisynth.logic;
  */
 public interface SignalSource {
 
+    /**
+     * Interface for a method that takes in a SignalStatus object.
+     * @param signal 
+     */
     public void generateSample(SignalStatus signal);
 
 }

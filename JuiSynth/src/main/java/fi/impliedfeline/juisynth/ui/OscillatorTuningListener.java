@@ -13,7 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- *
+ * Listens to changes made on a slider and updates Oscillator tuning value.
  * @author juicyp
  */
 public class OscillatorTuningListener implements ChangeListener {
@@ -21,6 +21,11 @@ public class OscillatorTuningListener implements ChangeListener {
     private Oscillator oscillator;
     private JSlider slider;
     
+    /**
+     * Constructor sets values of fields.
+     * @param oscillator Oscillator to be modified.
+     * @param slider Slider to be listened.
+     */
     public OscillatorTuningListener(Oscillator oscillator, JSlider slider) {
         this.oscillator = oscillator;
         this.slider = slider;

@@ -15,7 +15,7 @@ import javax.sound.sampled.LineUnavailableException;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
-/**
+/** Main class for JuiSynth project.
  *
  * @author juicyp
  */
@@ -25,6 +25,10 @@ public class JuiSynth {
     // Prototype modeled after Dr. Dobb's synth articles 
     // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
     // Testing
+    /**
+     * main method, does not take arguments.
+     * @param args 
+     */
     public static void main(String[] args) {
         
         UI ui = new UI();
@@ -54,7 +58,7 @@ public class JuiSynth {
         delay(1000);
 
         player.stopPlayer();
-        */
+        
     }
 
     private static void delay(long ms) {
@@ -63,5 +67,7 @@ public class JuiSynth {
         } catch (InterruptedException e) {
 
         }
+    */
     }
+
 }

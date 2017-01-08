@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 7,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,7 +46,63 @@ under the License.
           <tbody>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.PlayerStopListener.java">fi/impliedfeline/juisynth/ui/PlayerStopListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.PlayerStartListener.java">fi/impliedfeline/juisynth/ui/PlayerStartListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.UI.java">fi/impliedfeline/juisynth/ui/UI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.SignalStatus.java">fi/impliedfeline/juisynth/logic/SignalStatus.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.OscillatorWaveformListener.java">fi/impliedfeline/juisynth/ui/OscillatorWaveformListener.java</a>
                 </td>
                 <td>
                   0
@@ -89,6 +145,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Waveform.java">fi/impliedfeline/juisynth/logic/Waveform.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.OscillatorTuningListener.java">fi/impliedfeline/juisynth/ui/OscillatorTuningListener.java</a>
                 </td>
                 <td>
                   0

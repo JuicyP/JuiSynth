@@ -12,7 +12,7 @@ import javax.swing.*;
 import javax.swing.JComboBox;
 
 /**
- *
+ * Main UI implementation of JuiSynth.
  * @author juicyp
  */
 public class UI implements Runnable {

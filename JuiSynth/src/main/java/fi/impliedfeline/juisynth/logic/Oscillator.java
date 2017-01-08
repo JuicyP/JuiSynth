@@ -15,7 +15,6 @@ import java.util.Random;
  * @see SignalSource SignalStatus
  * @author juicyp
  */
-// Featuritis?
 public class Oscillator implements SignalSource {
 
     private SignalSource signalSource = null;
@@ -37,9 +36,6 @@ public class Oscillator implements SignalSource {
     private boolean sync = false;
     private boolean invert = false;
     private boolean invertOnSync = false;
-
-    public Oscillator() {
-    }
 
     public void setSignalSource(SignalSource signalSource) {
         this.signalSource = signalSource;
@@ -73,6 +69,10 @@ public class Oscillator implements SignalSource {
         this.fm = fm;
     }
 
+    /**
+     * Setter for depth of applied FM.
+     * @param fmDepth Double value between -1 and 1 inclusive.
+     */
     public void setFmDepth(double fmDepth) {
         if (fmDepth < -1 || fmDepth > 1) {
             return;
@@ -80,10 +80,15 @@ public class Oscillator implements SignalSource {
         this.fmDepth = fmDepth;
     }
 
+    
     public void setAm(boolean am) {
         this.am = am;
     }
 
+    /**
+     * Setter for depth of applied AM.
+     * @param amDepth Double value between -1 and 1 inclusive.
+     */
     public void setAmDepth(double amDepth) {
         if (amDepth < -1 || amDepth > 1) {
             return;
