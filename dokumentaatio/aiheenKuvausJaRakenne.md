@@ -24,6 +24,6 @@ Syntetisaattori tukee myös amplitudimodulaatiota, joskin tämä ei ole yhtä yl
 ## Luokkakaavio
 ![Luokkakaavio](luokkakaavio.png)
 ## Sekvenssikaavio yksi oskillaattoriselle monosyntetisaattorille
-![Sekvenssikaavio](sekvenssikaavio.png
+![Sekvenssikaavio](sekvenssikaavio.png)
 
 
