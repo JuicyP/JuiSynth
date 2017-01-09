@@ -7,6 +7,7 @@ package fi.impliedfeline.juisynth.logic;
 
 /**
  * Contains information relevant to a sample in a signal path.
+ *
  * @author juicyp
  */
 public class SignalStatus {
@@ -18,11 +19,14 @@ public class SignalStatus {
     private double frequency;
     private double amplitude = 0;
 
+    private boolean activeNote = true;
     private boolean completePeriod = false;
+    private int activeOperatorCount = 0;
 
     /**
      * Constructor for SignalStatus object sets sample rate, index of buffer and
      * frequency of signal.
+     *
      * @param sampleRate The sample rate of the sample based signal path
      * @param bufferIndex The sample index
      * @param frequency The frequency of the periodic waveform to be generated
@@ -47,7 +51,8 @@ public class SignalStatus {
 
     /**
      * Sets non-negative frequency.
-     * @param frequency 
+     *
+     * @param frequency
      */
     public void setFrequency(double frequency) {
         if (frequency < 0) {
@@ -62,7 +67,8 @@ public class SignalStatus {
 
     /**
      * Sets amplitude between -1 and 1 inclusive.
-     * @param amplitude 
+     *
+     * @param amplitude
      */
     public void setAmplitude(double amplitude) {
         if (amplitude < -1 || amplitude > 1) {
@@ -73,6 +79,7 @@ public class SignalStatus {
 
     /**
      * Returns value of completePeriod field and sets to false.
+     *
      * @return returns value of completePeriod field.
      */
     public boolean getAndUpdateCompletePeriod() {
@@ -89,6 +96,23 @@ public class SignalStatus {
      */
     public void setCompletePeriodTrue() {
         this.completePeriod = true;
+    }
+
+    public int getActiveOperatorCount() {
+        return activeOperatorCount;
+    }
+
+    public boolean getActiveNote() {
+        return activeNote;
+    }
+
+    public void setActiveNote(boolean activeNote) {
+        this.activeNote = activeNote;
+    }
+
+    // Should I really implement logic in accessors? Seems really off
+    public void setActiveOperatorCountToOneHigher() {
+        activeOperatorCount++;
     }
 
 }

@@ -22,6 +22,7 @@ public class Oscillator implements SignalSource {
     private Waveform waveform = Waveform.SIN;
 
     private int tuning = 0;
+    private int volume = 100;
     private boolean fixed = false;
 
     private boolean bypass = false;
@@ -43,6 +44,17 @@ public class Oscillator implements SignalSource {
 
     public void setWaveform(Waveform waveform) {
         this.waveform = waveform;
+    }
+    
+    public int getVolume() {
+        return volume;
+    }
+    
+    public void setVolume(int volume) {
+        if (volume < 0 || volume > 100) {
+            return;
+        }
+        this.volume = volume;
     }
 
     public int getTuning() {
@@ -79,7 +91,6 @@ public class Oscillator implements SignalSource {
         }
         this.fmDepth = fmDepth;
     }
-
     
     public void setAm(boolean am) {
         this.am = am;
@@ -114,7 +125,7 @@ public class Oscillator implements SignalSource {
      */
     @Override
     public void generateSample(SignalStatus signal) {
-
+        
         if (bypass) {
             if (signalSource != null) {
                 signalSource.generateSample(signal);
@@ -123,9 +134,15 @@ public class Oscillator implements SignalSource {
         }
 
         double amplitude = generateWaveAmplitude(signal);
+        amplitude *= volume / (double) 100;
 
         if (fm) {
             applyFM(amplitude, signal);
+        }
+        
+        // Prevent self-AM modulation
+        if (add) {
+            signal.setActiveOperatorCountToOneHigher();
         }
 
         if (signalSource != null) {
@@ -138,13 +155,12 @@ public class Oscillator implements SignalSource {
 
         if (add) {
             if (signalSource != null) {
-                signal.setAmplitude(signal.getAmplitude() * amplitude);
+                signal.setAmplitude(signal.getAmplitude() + amplitude / signal.getActiveOperatorCount());
             } else {
-                signal.setAmplitude(amplitude);
-
+                // Active operator count will always be non zero
+                signal.setAmplitude(amplitude / signal.getActiveOperatorCount());
             }
         }
-
     }
 
     private double generateWaveAmplitude(SignalStatus signal) {
