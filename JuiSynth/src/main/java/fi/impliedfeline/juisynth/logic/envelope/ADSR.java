@@ -5,6 +5,7 @@
  */
 package fi.impliedfeline.juisynth.logic.envelope;
 
+import fi.impliedfeline.juisynth.logic.player.Settings;
 import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
 
 /**
@@ -57,7 +58,7 @@ public class ADSR extends EnvelopeGenerator {
     // Useless casts?
     @Override
     public double generateEnvelope(SignalStatus signal) {
-        int elapsedTime = (int) (signal.getBufferIndex() / (double) signal.getSampleRate() * 1000);
+        int elapsedTime = (int) (signal.getBufferIndex() / (double) Settings.SAMPLE_RATE * 1000);
         double amplitude = 0;
 
         if (signal.getActiveNote()) {
@@ -77,7 +78,7 @@ public class ADSR extends EnvelopeGenerator {
             noteOffBufferIndex = signal.getBufferIndex();
         }
 
-        int noteOffTime = (int) (noteOffBufferIndex / (double) signal.getSampleRate() * 1000);
+        int noteOffTime = (int) (noteOffBufferIndex / (double) Settings.SAMPLE_RATE * 1000);
         // Time elapsed after noteOff isn't longer than release
         if (release >= elapsedTime - noteOffTime) {
             amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) release);

@@ -23,22 +23,11 @@ import javax.swing.SwingWorker;
  */
 public class Player {
 
-    public static final int SAMPLE_RATE = 88200;
-    private static final int SAMPLE_SIZE = 16;
-    private static final int CHANNELS = 1;
-    private static final boolean SIGNED = true;
-    private static final boolean BIG_ENDIAN = true;
-
-    private static final int BUFFER_SIZE = 200;
-    // 16-bit samples so two indices of a byte array represent a single sample.
-    // Thus, amount of samples per buffer is half the size of the array.
-    private static final int SAMPLES_PER_BUFFER = BUFFER_SIZE / 2;
-
     private AudioFormat format;
     private DataLine.Info info;
     private SourceDataLine audioline;
 
-    private byte[] sampleBuffer = new byte[BUFFER_SIZE];
+    private byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
     private SignalSource signalSource;
     private int bufferIndex;
     private double frequency = 440;
@@ -53,7 +42,8 @@ public class Player {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
         // amount of channels, signedness (true for signed),
         // endianness (true for big endian) in that order as format information.
-        format = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE, CHANNELS, SIGNED, BIG_ENDIAN);
+        format = new AudioFormat(Settings.SAMPLE_RATE, Settings.SAMPLE_SIZE,
+                                Settings.CHANNELS, Settings.SIGNED, Settings.BIG_ENDIAN);
         info = new DataLine.Info(SourceDataLine.class, format);
     }
 
@@ -127,12 +117,12 @@ public class Player {
 
         int index = 0;
         
-        for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
+        for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
 
             // Maybe just use same SignalStatus instance for successive sample fetches?
             // Less memory garbage
             
-            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex++, frequency);
+            SignalStatus signal = new SignalStatus(bufferIndex++, frequency);
             signalSource.generateSample(signal);
 
             double ds = signal.getAmplitude() * Short.MAX_VALUE;
@@ -143,6 +133,6 @@ public class Player {
 
         }
 
-        audioline.write(sampleBuffer, 0, BUFFER_SIZE);
+        audioline.write(sampleBuffer, 0, Settings.BUFFER_SIZE);
     }
 }

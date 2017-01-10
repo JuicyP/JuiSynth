@@ -12,8 +12,6 @@ package fi.impliedfeline.juisynth.logic.signal;
  */
 public class SignalStatus {
 
-    // Encapsulate sampleRate into singleton?
-    private int sampleRate;
     private int bufferIndex;
 
     private double frequency;
@@ -27,18 +25,12 @@ public class SignalStatus {
      * Constructor for SignalStatus object sets sample rate, index of buffer and
      * frequency of signal.
      *
-     * @param sampleRate The sample rate of the sample based signal path
      * @param bufferIndex The sample index
      * @param frequency The frequency of the periodic waveform to be generated
      */
-    public SignalStatus(int sampleRate, int bufferIndex, double frequency) {
-        this.sampleRate = sampleRate;
+    public SignalStatus(int bufferIndex, double frequency) {
         this.bufferIndex = bufferIndex;
         this.frequency = frequency;
-    }
-
-    public int getSampleRate() {
-        return sampleRate;
     }
 
     public int getBufferIndex() {

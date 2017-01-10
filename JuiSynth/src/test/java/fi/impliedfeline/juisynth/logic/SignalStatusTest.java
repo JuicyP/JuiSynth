@@ -29,14 +29,13 @@ public class SignalStatusTest {
         sampleRate = 44100;
         bufferIndex = 0;
         frequency = 440;
-        s = new SignalStatus(sampleRate, bufferIndex, frequency);
+        s = new SignalStatus(bufferIndex, frequency);
     }
 
     @Test
     public void constructorValuesSet() {
         assertEquals(0, s.getAmplitude(), 0.1);
         assertEquals(false, s.getAndUpdateCompletePeriod());
-        assertEquals(sampleRate, s.getSampleRate());
         assertEquals(bufferIndex, s.getBufferIndex());
         assertEquals(frequency, s.getFrequency(), 0.1);
     }

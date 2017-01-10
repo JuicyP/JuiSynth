@@ -5,6 +5,7 @@
  */
 package fi.impliedfeline.juisynth.logic.oscillator;
 
+import fi.impliedfeline.juisynth.logic.player.Settings;
 import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
 import fi.impliedfeline.juisynth.logic.signal.SignalSource;
 
@@ -176,7 +177,7 @@ public class Oscillator implements SignalSource {
         // one semitone = 100 cents.
         frequency *= Math.pow(2.0, (tuning / (double) 1200));
 
-        double samplesInPeriod = signal.getSampleRate() / frequency;
+        double samplesInPeriod = Settings.SAMPLE_RATE / frequency;
         double x = (signal.getBufferIndex() % samplesInPeriod) / samplesInPeriod;
         boolean inverse = invert;
 
