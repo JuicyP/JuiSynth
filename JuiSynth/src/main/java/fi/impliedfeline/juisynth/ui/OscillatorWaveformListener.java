@@ -5,8 +5,8 @@
  */
 package fi.impliedfeline.juisynth.ui;
 
-import fi.impliedfeline.juisynth.logic.Oscillator;
-import fi.impliedfeline.juisynth.logic.Waveform;
+import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
+import fi.impliedfeline.juisynth.logic.oscillator.Waveform;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;

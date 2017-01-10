@@ -5,6 +5,8 @@
  */
 package fi.impliedfeline.juisynth.logic;
 
+import fi.impliedfeline.juisynth.logic.player.Player;
+import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

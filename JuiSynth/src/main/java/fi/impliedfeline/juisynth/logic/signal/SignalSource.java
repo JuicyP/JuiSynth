@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.logic;
+package fi.impliedfeline.juisynth.logic.signal;
 
 /**
  * Defines a method signature for generating a sample, receiving a SignalStatus

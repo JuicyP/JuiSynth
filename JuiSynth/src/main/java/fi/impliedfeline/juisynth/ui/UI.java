@@ -5,7 +5,9 @@
  */
 package fi.impliedfeline.juisynth.ui;
 
-import fi.impliedfeline.juisynth.logic.*;
+import fi.impliedfeline.juisynth.logic.player.Player;
+import fi.impliedfeline.juisynth.logic.oscillator.Waveform;
+import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;

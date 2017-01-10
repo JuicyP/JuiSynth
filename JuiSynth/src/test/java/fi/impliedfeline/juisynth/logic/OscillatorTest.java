@@ -5,6 +5,9 @@
  */
 package fi.impliedfeline.juisynth.logic;
 
+import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
+import fi.impliedfeline.juisynth.logic.oscillator.Waveform;
+import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

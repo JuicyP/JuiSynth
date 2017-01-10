@@ -5,7 +5,7 @@
  */
 package fi.impliedfeline.juisynth.ui;
 
-import fi.impliedfeline.juisynth.logic.Player;
+import fi.impliedfeline.juisynth.logic.player.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

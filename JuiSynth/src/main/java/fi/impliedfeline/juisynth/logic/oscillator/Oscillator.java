@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.logic;
+package fi.impliedfeline.juisynth.logic.oscillator;
 
-import java.util.Random;
+import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
+import fi.impliedfeline.juisynth.logic.signal.SignalSource;
 
 /**
  * Receives a SignalStatus-object along a signal path

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.logic;
+package fi.impliedfeline.juisynth.logic.player;
 
+import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
+import fi.impliedfeline.juisynth.logic.signal.SignalSource;
 import java.util.Arrays;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -125,15 +127,12 @@ public class Player {
 
         int index = 0;
         
-        SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, frequency);
-
         for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
 
             // Maybe just use same SignalStatus instance for successive sample fetches?
             // Less memory garbage
             
-            signal.setFrequency(frequency);
-            signal.setBufferIndex(bufferIndex);
+            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex++, frequency);
             signalSource.generateSample(signal);
 
             double ds = signal.getAmplitude() * Short.MAX_VALUE;

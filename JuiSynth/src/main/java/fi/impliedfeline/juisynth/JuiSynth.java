@@ -5,7 +5,6 @@
  */
 package fi.impliedfeline.juisynth;
 
-import fi.impliedfeline.juisynth.logic.*;
 import fi.impliedfeline.juisynth.ui.*;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
