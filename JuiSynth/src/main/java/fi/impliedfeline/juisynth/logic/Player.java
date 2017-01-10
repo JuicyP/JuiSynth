@@ -11,15 +11,17 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+import javax.swing.SwingWorker;
 
 /**
- * Starts a thread and writes sample data fetched from SignalSource
- * into SourceDataLine.
+ * Starts a thread and writes sample data fetched from SignalSource into
+ * SourceDataLine.
+ *
  * @author juicyp
  */
-public class Player extends Thread {
+public class Player {
 
-    private static final int SAMPLE_RATE = 88200;
+    public static final int SAMPLE_RATE = 88200;
     private static final int SAMPLE_SIZE = 16;
     private static final int CHANNELS = 1;
     private static final boolean SIGNED = true;
@@ -34,14 +36,16 @@ public class Player extends Thread {
     private DataLine.Info info;
     private SourceDataLine audioline;
 
-    private boolean done;
     private byte[] sampleBuffer = new byte[BUFFER_SIZE];
     private SignalSource signalSource;
     private int bufferIndex;
     private double frequency = 440;
 
+    private SwingWorker worker;
+
     /**
-     * Constructor for Player sets format according to values specified in fields.
+     * Constructor for Player sets format according to values specified in
+     * fields.
      */
     public Player() {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
@@ -51,51 +55,62 @@ public class Player extends Thread {
         info = new DataLine.Info(SourceDataLine.class, format);
     }
 
-    @Override
-    public void run() {
-
-        done = false;
-
-        try {
-
-            audioline = (SourceDataLine) AudioSystem.getLine(info);
-            audioline.open(format);
-            audioline.start();
-            int bufferIndex = 0;
-
-            while (!done) {
-                writeBuffer();
-            }
-
-        } catch (LineUnavailableException e) {
-
-        } finally {
-
-            audioline.drain();
-            audioline.close();
-
-        }
-
-    }
-    
     /**
      * Starts the player on a new thread.
+     *
      * @see stopPlayer
      */
     public void startPlayer() {
-        if (signalSource != null) {
-            start();
+        if (signalSource != null && worker == null) {
+            worker = new SwingWorker<Void, Void>() {
+
+                private boolean done;
+
+                @Override
+                protected Void doInBackground() {
+
+                    done = false;
+
+                    try {
+                        audioline = (SourceDataLine) AudioSystem.getLine(info);
+                        audioline.open(format);
+                        audioline.start();
+                        bufferIndex = 0;
+
+                        while (!done) {
+                            writeBuffer();
+                        }
+
+                    } catch (LineUnavailableException e) {
+
+                    } finally {
+                        audioline.drain();
+                        audioline.close();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    done = true;
+                }
+            };
+            worker.execute();
         }
     }
 
     /**
      * Sets a flag to kill the thread.
+     *
      * @see startPlayer
      */
     public void stopPlayer() {
-        done = true;
+        if (worker != null) {
+            worker.cancel(true);
+            worker = null;
+        }
     }
-    
+
     public void setFrequency(double frequency) {
         this.frequency = frequency;
     }
@@ -109,13 +124,16 @@ public class Player extends Thread {
         Arrays.fill(sampleBuffer, (byte) 0);
 
         int index = 0;
+        
+        SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, frequency);
 
         for (int i = 0; i < SAMPLES_PER_BUFFER; i++) {
 
             // Maybe just use same SignalStatus instance for successive sample fetches?
             // Less memory garbage
-            SignalStatus signal = new SignalStatus(SAMPLE_RATE, bufferIndex, frequency);
-            bufferIndex++;
+            
+            signal.setFrequency(frequency);
+            signal.setBufferIndex(bufferIndex);
             signalSource.generateSample(signal);
 
             double ds = signal.getAmplitude() * Short.MAX_VALUE;
@@ -123,6 +141,7 @@ public class Player extends Thread {
             // Big endian, shift first eight bits and add as first part of sample
             sampleBuffer[index++] = (byte) (ss >> 8);
             sampleBuffer[index++] = (byte) (ss & 0xFF);
+
         }
 
         audioline.write(sampleBuffer, 0, BUFFER_SIZE);

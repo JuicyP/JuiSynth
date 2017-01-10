@@ -6,28 +6,31 @@
 package fi.impliedfeline.juisynth.ui;
 
 import fi.impliedfeline.juisynth.logic.Player;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.SwingUtilities;
 
 /**
  * Listens to button and starts player.
+ *
  * @author juicyp
  */
 public class PlayerStartListener implements ActionListener {
 
     private Player player;
-    
+
     /**
      * Sets value of player field.
-     * @param player 
+     *
+     * @param player
      */
     public PlayerStartListener(Player player) {
         this.player = player;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         player.startPlayer();
     }
-    
 }

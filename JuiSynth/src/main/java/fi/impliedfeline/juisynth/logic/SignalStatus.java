@@ -45,6 +45,10 @@ public class SignalStatus {
         return bufferIndex;
     }
 
+    public void setBufferIndex(int bufferIndex) {
+        this.bufferIndex = bufferIndex;
+    }
+
     public double getFrequency() {
         return frequency;
     }
