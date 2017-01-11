@@ -251,5 +251,4 @@ public class Oscillator implements SignalSource {
     private void applyAM(double amplitude, SignalStatus signal) {
         signal.setAmplitude(signal.getAmplitude() * Math.pow(2, (amplitude - 1) * amDepth));
     }
-
 }

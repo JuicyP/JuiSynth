@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 12,
-             Errors: 0,
+      <title>File: 22,
+             Errors: 1,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,7 +46,21 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.PlayerStopListener.java">fi/impliedfeline/juisynth/ui/PlayerStopListener.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.Oscillator.java">juisynth/logic/oscillator/Oscillator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.JuiSynth.java">juisynth/JuiSynth.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.PlayerStartListener.java">fi/impliedfeline/juisynth/ui/PlayerStartListener.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.PlayerMode.java">juisynth/gui/PlayerMode.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.UI.java">fi/impliedfeline/juisynth/ui/UI.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorModeListener.java">juisynth/gui/listener/OscillatorModeListener.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.SignalStatus.java">fi/impliedfeline/juisynth/logic/SignalStatus.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.player.Player.java">juisynth/logic/player/Player.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.OscillatorWaveformListener.java">fi/impliedfeline/juisynth/ui/OscillatorWaveformListener.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.player.Settings.java">juisynth/logic/player/Settings.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Player.java">fi/impliedfeline/juisynth/logic/Player.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.ADSR.java">juisynth/logic/envelope/ADSR.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.JuiSynth.java">fi/impliedfeline/juisynth/JuiSynth.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.EnvelopeGenerator.java">juisynth/logic/envelope/EnvelopeGenerator.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Waveform.java">fi/impliedfeline/juisynth/logic/Waveform.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorOptionsPanel.java">juisynth/gui/OscillatorOptionsPanel.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.ui.OscillatorTuningListener.java">fi/impliedfeline/juisynth/ui/OscillatorTuningListener.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorParameter.java">juisynth/gui/OscillatorParameter.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.SignalSource.java">fi/impliedfeline/juisynth/logic/SignalSource.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.WaveformCalculator.java">juisynth/logic/oscillator/WaveformCalculator.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.Oscillator.java">fi/impliedfeline/juisynth/logic/Oscillator.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OperatorPanel.java">juisynth/gui/OperatorPanel.java</a>
                 </td>
                 <td>
                   0
@@ -200,7 +214,133 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.impliedfeline.juisynth.logic.WaveformCalculator.java">fi/impliedfeline/juisynth/logic/WaveformCalculator.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.Waveform.java">juisynth/logic/oscillator/Waveform.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.signal.SignalSource.java">juisynth/logic/signal/SignalSource.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.PlayerModeListener.java">juisynth/gui/listener/PlayerModeListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorMode.java">juisynth/gui/OscillatorMode.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.signal.SignalStatus.java">juisynth/logic/signal/SignalStatus.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorParameterListener.java">juisynth/gui/listener/OscillatorParameterListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.GUI.java">juisynth/gui/GUI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.PlayerPanel.java">juisynth/gui/PlayerPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.PlayerAmpListener.java">juisynth/gui/listener/PlayerAmpListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorWaveformListener.java">juisynth/gui/listener/OscillatorWaveformListener.java</a>
                 </td>
                 <td>
                   0

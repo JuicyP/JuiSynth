@@ -5,11 +5,12 @@
  */
 package juisynth.logic.player;
 
-import juisynth.logic.player.Player;
 import juisynth.logic.oscillator.Oscillator;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import juisynth.logic.signal.SignalStatus;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,14 +25,14 @@ public class PlayerTest {
     private Player p;
     private Oscillator o;
     private double ampDefaultValue;
-    private SourceDataLineStub s;
+    private SourceDataLineStub a;
     
     public PlayerTest() {
     }
     
     @Before
     public void setUp() {
-        s = new SourceDataLineStub();
+        a = new SourceDataLineStub();
         p = new Player();
         o = new Oscillator();
         o.setAdd(true);
@@ -68,10 +69,32 @@ public class PlayerTest {
         p.setSignalSource(o);
         Field field = p.getClass().getDeclaredField("audioline");
         field.setAccessible(true);
-        field.set(p, s);
+        field.set(p, a);
         Method method = p.getClass().getDeclaredMethod("writeBuffer");
         method.setAccessible(true);
         method.invoke(p, new Object[0]);
-        assertNotNull(s.getSampleBuffer());
+        
+        int index = 0;
+        byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
+        for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
+            SignalStatus s = new SignalStatus(i, p.getFrequency());
+            o.generateSample(s);
+            s.setAmplitude(s.getAmplitude() * p.getAmp());
+            
+            double ds = s.getAmplitude() * Short.MAX_VALUE;
+            short ss = (short) Math.round(ds);
+            // Big endian, shift first eight bits and add as first part of sample
+            sampleBuffer[index++] = (byte) (ss >> 8);
+            sampleBuffer[index++] = (byte) (ss & 0xFF);
+        }
+        
+        assertArrayEquals(a.getSampleBuffer(), sampleBuffer);
+    }
+    
+    @Test
+    public void startingThreadDoesntKillProgram() {
+        p.setSignalSource(o);
+        p.startPlayer();
+        p.stopPlayer();
     }
 }

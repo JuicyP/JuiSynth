@@ -35,17 +35,6 @@ public class Player {
     private double frequency = 440;
     private double amp = 1;
 
-    public double getAmp() {
-        return amp;
-    }
-
-    public void setAmp(double amp) {
-        if (amp < 0 || amp > 1) {
-            return;
-        }
-        this.amp = amp;
-    }
-
     /**
      * Constructor for Player sets format according to values specified in
      * fields.
@@ -57,6 +46,32 @@ public class Player {
         format = new AudioFormat(Settings.SAMPLE_RATE, Settings.SAMPLE_SIZE,
                 Settings.CHANNELS, Settings.SIGNED, Settings.BIG_ENDIAN);
         info = new DataLine.Info(SourceDataLine.class, format);
+    }
+
+    public double getAmp() {
+        return amp;
+    }
+
+    public void setAmp(double amp) {
+        if (amp < 0 || amp > 1) {
+            return;
+        }
+        this.amp = amp;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        if (frequency < 0) {
+            return;
+        }
+        this.frequency = frequency;
+    }
+
+    public void setSignalSource(SignalSource signalSource) {
+        this.signalSource = signalSource;
     }
 
     /**
@@ -113,14 +128,6 @@ public class Player {
             worker.cancel(true);
             worker = null;
         }
-    }
-
-    public void setFrequency(double frequency) {
-        this.frequency = frequency;
-    }
-
-    public void setSignalSource(SignalSource signalSource) {
-        this.signalSource = signalSource;
     }
 
     private byte[] writeBuffer() {
