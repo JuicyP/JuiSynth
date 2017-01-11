@@ -31,13 +31,13 @@ public class Player {
     private SignalSource signalSource;
     private int bufferIndex;
     private double frequency = 440;
-    private int amp = 100;
+    private double amp = 1;
 
-    public int getAmp() {
+    public double getAmp() {
         return amp;
     }
 
-    public void setAmp(int amp) {
+    public void setAmp(double amp) {
         if (amp < 0 || amp > 100) {
             return;
         }
@@ -136,7 +136,7 @@ public class Player {
             
             SignalStatus signal = new SignalStatus(bufferIndex++, frequency);
             signalSource.generateSample(signal);
-            signal.setAmplitude(signal.getAmplitude() * (amp / (double) 100));
+            signal.setAmplitude(signal.getAmplitude() * amp);
             
             double ds = signal.getAmplitude() * Short.MAX_VALUE;
             short ss = (short) Math.round(ds);

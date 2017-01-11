@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.ui;
+package fi.impliedfeline.juisynth.gui;
 
 import fi.impliedfeline.juisynth.logic.player.Player;
-import fi.impliedfeline.juisynth.logic.oscillator.Waveform;
 import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
-import javax.swing.JComboBox;
 
 /**
  * Main UI implementation of JuiSynth.
  * @author juicyp
  */
-public class UI implements Runnable {
+public class GUI implements Runnable {
     
     private JFrame frame;
     
@@ -45,11 +43,11 @@ public class UI implements Runnable {
         oscillator4.setBypass(true);
         oscillator4.setSignalSource(oscillator3);
         
-        player = new Player();      
+        player = new Player();
         player.setSignalSource(oscillator4);
         
         frame = new JFrame("JuiSynth");
-        frame.setPreferredSize(new Dimension(1200, 300));
+        frame.setPreferredSize(new Dimension(1200, 400));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -59,15 +57,14 @@ public class UI implements Runnable {
         frame.setVisible(true);
     }
     
-    //TODO: Refactor into separate classes extending JPanel
     private void instantiateComponents(Container container) {
         BoxLayout layout = new BoxLayout(container, BoxLayout.X_AXIS);
         container.setLayout(layout);
         
-        container.add(new Operator(oscillator1));
-        container.add(new Operator(oscillator2));       
-        container.add(new Operator(oscillator3));
-        container.add(new Operator(oscillator4));
+        container.add(new OperatorPanel(oscillator1));
+        container.add(new OperatorPanel(oscillator2));       
+        container.add(new OperatorPanel(oscillator3));
+        container.add(new OperatorPanel(oscillator4));
         container.add(new PlayerPanel(player));
     }
     

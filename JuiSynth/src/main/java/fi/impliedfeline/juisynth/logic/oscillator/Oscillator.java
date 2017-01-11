@@ -10,10 +10,10 @@ import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
 import fi.impliedfeline.juisynth.logic.signal.SignalSource;
 
 /**
- * Receives a SignalStatus-object along a signal path
- * consisting of SignalSources and modifies it based on
- * it's state. Oscillator implements SignalSource.
- * 
+ * Receives a SignalStatus-object along a signal path consisting of
+ * SignalSources and modifies it based on it's state. Oscillator implements
+ * SignalSource.
+ *
  * @see SignalSource SignalStatus
  * @author juicyp
  */
@@ -24,7 +24,7 @@ public class Oscillator implements SignalSource {
     private Waveform waveform = Waveform.SIN;
 
     private int tuning = 0;
-    private int amp = 100;
+    private double amp = 1;
     private boolean fixed = false;
 
     private boolean bypass = false;
@@ -47,13 +47,13 @@ public class Oscillator implements SignalSource {
     public void setWaveform(Waveform waveform) {
         this.waveform = waveform;
     }
-    
-    public int getAmp() {
+
+    public double getAmp() {
         return amp;
     }
-    
-    public void setAmp(int amp) {
-        if (amp < 0 || amp > 100) {
+
+    public void setAmp(double amp) {
+        if (amp < 0 || amp > 1) {
             return;
         }
         this.amp = amp;
@@ -67,24 +67,45 @@ public class Oscillator implements SignalSource {
         this.tuning = tuning;
     }
 
+    public boolean getFixed() {
+        return fixed;
+    }
+
     public void setFixed(boolean fixed) {
         this.fixed = fixed;
+    }
+    
+    public boolean getBypass() {
+        return bypass;
     }
 
     public void setBypass(boolean bypass) {
         this.bypass = bypass;
     }
+    
+    public boolean getAdd() {
+        return add;
+    }
 
     public void setAdd(boolean add) {
         this.add = add;
+    }
+    
+    public boolean getFm() {
+        return fm;
     }
 
     public void setFm(boolean fm) {
         this.fm = fm;
     }
+    
+    public double getFmDepth() {
+        return fmDepth;
+    }
 
     /**
      * Setter for depth of applied FM.
+     *
      * @param fmDepth Double value between -1 and 1 inclusive.
      */
     public void setFmDepth(double fmDepth) {
@@ -94,12 +115,21 @@ public class Oscillator implements SignalSource {
         this.fmDepth = fmDepth;
     }
     
+    public boolean getAm() {
+        return am;
+    }
+
     public void setAm(boolean am) {
         this.am = am;
+    }
+    
+    public double getAmDepth() {
+        return amDepth;
     }
 
     /**
      * Setter for depth of applied AM.
+     *
      * @param amDepth Double value between -1 and 1 inclusive.
      */
     public void setAmDepth(double amDepth) {
@@ -108,26 +138,39 @@ public class Oscillator implements SignalSource {
         }
         this.amDepth = amDepth;
     }
+    
+    public boolean getSync() {
+        return sync;
+    }
 
     public void setSync(boolean sync) {
         this.sync = sync;
     }
-
-    public void setInverse(boolean invert) {
-        this.invert = invert;
+    
+    public boolean getInvert() {
+        return invert;
     }
 
-    public void setInverseOnSync(boolean inverseOnSync) {
-        this.invertOnSync = inverseOnSync;
+    public void setInvert(boolean invert) {
+        this.invert = invert;
+    }
+    
+    public boolean getInvertOnSync() {
+        return invertOnSync;
+    }
+
+    public void setInvertOnSync(boolean invertOnSync) {
+        this.invertOnSync = invertOnSync;
     }
 
     /**
      * Branches based on state and modifies signal amplitude and/or frequency.
+     *
      * @param signal SignalStatus passed along the signal path.
      */
     @Override
     public void generateSample(SignalStatus signal) {
-        
+
         if (bypass) {
             if (signalSource != null) {
                 signalSource.generateSample(signal);
@@ -136,12 +179,12 @@ public class Oscillator implements SignalSource {
         }
 
         double amplitude = generateWaveAmplitude(signal);
-        amplitude *= amp / (double) 100;
+        amplitude *= amp;
 
         if (fm) {
             applyFM(amplitude, signal);
         }
-        
+
         // Prevent self-AM modulation
         if (add) {
             signal.setActiveOperatorCountToOneHigher();
@@ -208,4 +251,5 @@ public class Oscillator implements SignalSource {
     private void applyAM(double amplitude, SignalStatus signal) {
         signal.setAmplitude(signal.getAmplitude() * Math.pow(2, (amplitude - 1) * amDepth));
     }
+
 }

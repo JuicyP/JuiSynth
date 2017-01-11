@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.ui;
+package fi.impliedfeline.juisynth.gui;
 
-import fi.impliedfeline.juisynth.ui.listener.PlayerStopListener;
-import fi.impliedfeline.juisynth.ui.listener.PlayerStartListener;
+import fi.impliedfeline.juisynth.gui.listener.PlayerModeListener;
+import fi.impliedfeline.juisynth.gui.listener.PlayerAmpListener;
 import fi.impliedfeline.juisynth.logic.player.Player;
-import fi.impliedfeline.juisynth.ui.listener.PlayerAmpListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,8 +32,8 @@ public class PlayerPanel extends JPanel {
 
     private void instantiateComponents() {
         JLabel ampLabel = new JLabel("Master");
-        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
-        amp.setMajorTickSpacing(10);
+        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, (int)(player.getAmp() * 100));
+        amp.setMajorTickSpacing(50);
         amp.setPaintTicks(true);
         amp.setPaintLabels(true);
         
@@ -44,9 +44,9 @@ public class PlayerPanel extends JPanel {
         amp.addChangeListener(new PlayerAmpListener(player, amp));
         add(amp);
         
-        start.addActionListener(new PlayerStartListener(player));
+        start.addActionListener(new PlayerModeListener(player, PlayerMode.START));
         add(start);
-        stop.addActionListener(new PlayerStopListener(player));
+        stop.addActionListener(new PlayerModeListener(player, PlayerMode.STOP));
         add(stop);
     }
 }

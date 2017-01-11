@@ -5,7 +5,7 @@
  */
 package fi.impliedfeline.juisynth;
 
-import fi.impliedfeline.juisynth.ui.*;
+import fi.impliedfeline.juisynth.gui.GUI;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
@@ -30,7 +30,7 @@ public class JuiSynth {
      */
     public static void main(String[] args) {
         
-        UI ui = new UI();
+        GUI ui = new GUI();
         SwingUtilities.invokeLater(ui);
         
         /*

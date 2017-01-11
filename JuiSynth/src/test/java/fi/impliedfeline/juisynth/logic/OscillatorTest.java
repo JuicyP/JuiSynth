@@ -39,8 +39,8 @@ public class OscillatorTest {
         o.setAm(false);
         
         o.setSync(false);
-        o.setInverse(false);
-        o.setInverseOnSync(false);
+        o.setInvert(false);
+        o.setInvertOnSync(false);
     }
     
     @Test
