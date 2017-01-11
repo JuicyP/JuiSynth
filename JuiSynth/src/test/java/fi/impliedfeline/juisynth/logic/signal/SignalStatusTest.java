@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.logic;
+package fi.impliedfeline.juisynth.logic.signal;
 
-import fi.impliedfeline.juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -35,7 +34,6 @@ public class SignalStatusTest {
     @Test
     public void constructorValuesSet() {
         assertEquals(0, s.getAmplitude(), 0.1);
-        assertEquals(false, s.getAndUpdateCompletePeriod());
         assertEquals(bufferIndex, s.getBufferIndex());
         assertEquals(frequency, s.getFrequency(), 0.1);
     }
@@ -96,18 +94,4 @@ public class SignalStatusTest {
         s.setAmplitude(amplitude);
         assertEquals(0, s.getAmplitude(), 0.1);
     }
-
-    @Test
-    public void setCompletePeriodSets() {
-        s.setCompletePeriodTrue();
-        assertTrue(s.getAndUpdateCompletePeriod());
-    }
-
-    @Test
-    public void successiveGetCompletePeriodReturnsFalse() {
-        s.setCompletePeriodTrue();
-        s.getAndUpdateCompletePeriod();
-        assertFalse(s.getAndUpdateCompletePeriod());
-    }
-
 }

@@ -187,7 +187,7 @@ public class Oscillator implements SignalSource {
 
         // Prevent self-AM modulation
         if (add) {
-            signal.setActiveOperatorCountToOneHigher();
+            signal.setActiveOperatorCount(signal.getActiveOperatorCount() + 1);
         }
 
         if (signalSource != null) {
@@ -224,7 +224,8 @@ public class Oscillator implements SignalSource {
         double x = (signal.getBufferIndex() % samplesInPeriod) / samplesInPeriod;
         boolean inverse = invert;
 
-        if (sync && signal.getAndUpdateCompletePeriod()) {
+        if (sync && signal.getCompletePeriod()) {
+            signal.setCompletePeriod(false);
             x = 0;
             if (invertOnSync) {
                 inverse = !inverse;
@@ -238,7 +239,7 @@ public class Oscillator implements SignalSource {
         }
 
         if (signal.getBufferIndex() % samplesInPeriod == 0) {
-            signal.setCompletePeriodTrue();
+            signal.setCompletePeriod(true);
         }
 
         return y;

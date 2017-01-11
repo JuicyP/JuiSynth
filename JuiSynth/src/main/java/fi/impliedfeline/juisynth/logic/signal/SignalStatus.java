@@ -78,24 +78,20 @@ public class SignalStatus {
      *
      * @return returns value of completePeriod field.
      */
-    public boolean getAndUpdateCompletePeriod() {
-        if (completePeriod) {
-            completePeriod = false;
-            return true;
-        }
-
-        return false;
+    public boolean getCompletePeriod() {
+        return completePeriod;
     }
-
-    /**
-     * Sets completePeriod-field to true.
-     */
-    public void setCompletePeriodTrue() {
-        this.completePeriod = true;
+    
+    public void setCompletePeriod(boolean completePeriod) {
+        this.completePeriod = completePeriod;
     }
 
     public int getActiveOperatorCount() {
         return activeOperatorCount;
+    }
+    
+    public void setActiveOperatorCount(int activeOperatorCount) {
+        this.activeOperatorCount = activeOperatorCount;
     }
 
     public boolean getActiveNote() {
@@ -105,10 +101,4 @@ public class SignalStatus {
     public void setActiveNote(boolean activeNote) {
         this.activeNote = activeNote;
     }
-
-    // Should I really implement logic in accessors? Seems really off
-    public void setActiveOperatorCountToOneHigher() {
-        activeOperatorCount++;
-    }
-
 }

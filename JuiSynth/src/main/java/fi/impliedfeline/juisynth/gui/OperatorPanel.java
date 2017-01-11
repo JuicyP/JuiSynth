@@ -5,7 +5,6 @@
  */
 package fi.impliedfeline.juisynth.gui;
 
-
 import fi.impliedfeline.juisynth.gui.listener.OscillatorWaveformListener;
 import fi.impliedfeline.juisynth.gui.listener.OscillatorParameterListener;
 import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
@@ -39,8 +38,8 @@ public class OperatorPanel extends JPanel {
         amp.setPaintLabels(true);
         
         JLabel tuningLabel = new JLabel("Tuning");
-        JSlider tuning = new JSlider(JSlider.HORIZONTAL, -3600, 3600, oscillator.getTuning());
-        tuning.setMajorTickSpacing(1200);
+        JSlider tuning = new JSlider(JSlider.HORIZONTAL, -7200, 7200, oscillator.getTuning());
+        tuning.setMajorTickSpacing(3600);
         tuning.setPaintTicks(true);
         tuning.setPaintLabels(true);
         tuning.setPaintTrack(false);
