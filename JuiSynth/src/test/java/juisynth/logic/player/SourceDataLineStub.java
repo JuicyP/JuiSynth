@@ -15,7 +15,7 @@ import javax.sound.sampled.SourceDataLine;
  *
  * @author juicyp
  */
-public class AudioLine implements SourceDataLine {
+public class SourceDataLineStub implements SourceDataLine {
 
     private byte[] sampleBuffer;
 

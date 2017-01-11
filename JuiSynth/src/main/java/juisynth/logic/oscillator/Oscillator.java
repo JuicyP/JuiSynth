@@ -215,7 +215,6 @@ public class Oscillator implements SignalSource {
         if (fixed) {
             frequency = 440.0;
         }
-
         // Equal temperant tuning = 12 semitones in an octave,
         // one semitone = 100 cents.
         frequency *= Math.pow(2.0, (tuning / (double) 1200));

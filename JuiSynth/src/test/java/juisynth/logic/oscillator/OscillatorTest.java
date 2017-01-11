@@ -5,8 +5,6 @@
  */
 package juisynth.logic.oscillator;
 
-import juisynth.logic.oscillator.Oscillator;
-import juisynth.logic.oscillator.Waveform;
 import juisynth.logic.player.Settings;
 import juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
@@ -21,8 +19,8 @@ public class OscillatorTest {
     
     private Oscillator o;
     private int sampleRate = Settings.SAMPLE_RATE;
-    private double frequency = 2;
-    private int samplesInPeriod = sampleRate / (int) frequency;
+    private double frequency = 4;
+    private int samplesInPeriod = (int) (sampleRate / frequency);
     
     public OscillatorTest() {
     }
@@ -30,56 +28,119 @@ public class OscillatorTest {
     @Before
     public void setUp() {
         o = new Oscillator();
-        o.setWaveform(Waveform.SIN);
-        
-        o.setBypass(false);
         o.setAdd(true);
-        
-        o.setFm(false);
-        o.setAm(false);
-        
-        o.setSync(false);
-        o.setInvert(false);
-        o.setInvertOnSync(false);
     }
     
     @Test
-    public void generateWaveAmplitudeSineReturnsZeroWithZeroIndexBuffer() {
+    public void setAmpZeroSets() {
+        o.setAmp(0);
+        assertEquals(0, o.getAmp(), 0.1);
+    }
+    
+    @Test
+    public void setAmpOneSets() {
+        o.setAmp(0);
+        o.setAmp(1);
+        assertEquals(1, o.getAmp(), 0.1);
+    }
+    
+    @Test
+    public void setAmpNegativeFails() {
+        o.setAmp(-0.1);
+        assertEquals(1, o.getAmp(), 0.1);
+    }
+    
+    @Test
+    public void setAmpLargerThanOneFails() {
+        o.setAmp(1.1);
+        assertEquals(1, o.getAmp(), 0.05);
+    }
+    
+    @Test
+    public void setFmDepthOneSets() {
+        o.setFmDepth(1);
+        assertEquals(1, o.getFmDepth(), 0.1);
+    }
+    
+    @Test
+    public void setFmDepthNegativeOneSets() {
+        o.setFmDepth(-1);
+        assertEquals(-1, o.getFmDepth(), 0.1);
+    }
+    
+    @Test
+    public void setFmDepthGreaterThanOneFails() {
+        o.setFmDepth(1.1);
+        assertEquals(0, o.getFmDepth(), 0.05);
+    }
+    
+    @Test
+    public void setFmDepthLessThanNegativeOneFails() {
+        o.setFmDepth(-1.1);
+        assertEquals(0, o.getFmDepth(), 0.05);
+    }
+    
+    @Test
+    public void setAmDepthOneSets() {
+        o.setFmDepth(1);
+        assertEquals(1, o.getFmDepth(), 0.1);
+    }
+    
+    @Test
+    public void setAmDepthNegativeOneSets() {
+        o.setFmDepth(-1);
+        assertEquals(-1, o.getFmDepth(), 0.1);
+    }
+    
+    @Test
+    public void setAmDepthGreaterThanOneFails() {
+        o.setFmDepth(1.1);
+        assertEquals(0, o.getFmDepth(), 0.05);
+    }
+    
+    @Test
+    public void setAmDepthLessThanNegativeOneFails() {
+        o.setFmDepth(-1.1);
+        assertEquals(0, o.getFmDepth(), 0.05);
+    }
+    
+    @Test
+    public void generateSampleSineReturnsZeroWithZeroIndexBuffer() {
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeSineReturnsZeroWithHalfPhaseIndexBuffer() {
+    public void generateSampleSineReturnsZeroWithHalfPhaseIndexBuffer() {
         SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeSineReturnsZeroWithFullPhaseIndexBuffer() {
+    public void generateSampleSineReturnsZeroWithFullPhaseIndexBuffer() {
         SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
         o.generateSample(s);
         assertEquals(0, s.getAmplitude(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeSineReturnsOneWithQuarterPhaseIndexBuffer() {
+    public void generateSampleSineReturnsOneWithQuarterPhaseIndexBuffer() {
         SignalStatus s = new SignalStatus(samplesInPeriod / 4, frequency);
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeSineReturnsNegativeOneWithThreeQuartersPhaseIndexBuffer() {
+    public void generateSampleSineReturnsNegativeOneWithThreeQuartersPhaseIndexBuffer() {
         SignalStatus s = new SignalStatus(3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
         assertEquals(-1, s.getAmplitude(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeTriangleReturnsOneWithZeroIndexBuffer() {
+    public void generateSampleTriangleReturnsNegativeOneWithZeroIndexBuffer() {
         o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
@@ -87,7 +148,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeTriangleReturnsOneWithHalfPhaseIndexBuffer() {
+    public void generateSampleTriangleReturnsOneWithHalfPhaseIndexBuffer() {
         o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
         o.generateSample(s);
@@ -95,7 +156,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeTriangleReturnsNegativeOneWithFullPhaseIndexBuffer() {
+    public void generateSampleTriangleReturnsNegativeOneWithFullPhaseIndexBuffer() {
         o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
         o.generateSample(s);
@@ -103,7 +164,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeTriangleReturnsZeroWithQuarterPhaseIndexBuffer() {
+    public void generateSampleTriangleReturnsZeroWithQuarterPhaseIndexBuffer() {
         o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(samplesInPeriod / 4, frequency);
         o.generateSample(s);
@@ -111,7 +172,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeTriangleReturnsZeroWithThreeQuartersPhaseIndexBuffer() {
+    public void generateSampleTriangleReturnsZeroWithThreeQuartersPhaseIndexBuffer() {
         o.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
@@ -119,7 +180,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSquareReturnsOneWithZeroIndexBuffer() {
+    public void generateSampleSquareReturnsOneWithZeroIndexBuffer() {
         o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
@@ -127,7 +188,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSquareReturnsNegativeOneWithHalfPhaseIndexBuffer() {
+    public void generateSampleSquareReturnsNegativeOneWithHalfPhaseIndexBuffer() {
         o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
         o.generateSample(s);
@@ -135,7 +196,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSquareReturnsOneWithFullPhaseIndexBuffer() {
+    public void generateSampleSquareReturnsOneWithFullPhaseIndexBuffer() {
         o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
         o.generateSample(s);
@@ -143,7 +204,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSquareReturnsOneWithQuarterPhaseIndexBuffer() {
+    public void generateSampleSquareReturnsOneWithQuarterPhaseIndexBuffer() {
         o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(samplesInPeriod / 4, frequency);
         o.generateSample(s);
@@ -151,7 +212,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSquareReturnsNegativeOneWithThreeQuartersPhaseIndexBuffer() {
+    public void generateSampleSquareReturnsNegativeOneWithThreeQuartersPhaseIndexBuffer() {
         o.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
@@ -159,7 +220,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSawReturnsZeroWithZeroIndexBuffer() {
+    public void generateSampleSawReturnsZeroWithZeroIndexBuffer() {
         o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
@@ -167,7 +228,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSawReturnsNegativeOneWithHalfPhaseIndexBuffer() {
+    public void generateSampleSawReturnsNegativeOneWithHalfPhaseIndexBuffer() {
         o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
         o.generateSample(s);
@@ -175,7 +236,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSawReturnsZeroWithFullPhaseIndexBuffer() {
+    public void generateSampleSawReturnsZeroWithFullPhaseIndexBuffer() {
         o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
         o.generateSample(s);
@@ -183,7 +244,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSawReturnsHalfWithQuarterPhaseIndexBuffer() {
+    public void generateSampleSawReturnsHalfWithQuarterPhaseIndexBuffer() {
         o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(samplesInPeriod / 4, frequency);
         o.generateSample(s);
@@ -191,7 +252,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeSawReturnsNegativeHalfWithThreeQuartersPhaseIndexBuffer() {
+    public void generateSampleSawReturnsNegativeHalfWithThreeQuartersPhaseIndexBuffer() {
         o.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(3 * (samplesInPeriod / 4), frequency);
         o.generateSample(s);
@@ -199,7 +260,7 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeDoesNotModifySampleWithBypass() {
+    public void generateSampleDoesNotModifySampleWithBypass() {
         o.setWaveform(Waveform.SQU);
         o.setBypass(true);
         SignalStatus s = new SignalStatus(0, frequency);
@@ -208,23 +269,100 @@ public class OscillatorTest {
     }
     
     @Test
-    public void generateWaveAmplitudeModifiesFrequencyWithFM() {
+    public void generateSampleModifiesFrequencyWithFM() {
         o.setWaveform(Waveform.SQU);
         o.setFm(true);
         o.setFmDepth(1);
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
-        assertEquals(4, s.getFrequency(), 0.1);
+        assertEquals(frequency * 2, s.getFrequency(), 0.1);
     }
     
     @Test
-    public void generateWaveAmplitudeDoesNotModifyFrequencyWithFMDepthZero() {
+    public void generateSampleDoesNotModifyFrequencyWithFMDepthZero() {
         o.setWaveform(Waveform.SQU);
         o.setFm(true);
         o.setFmDepth(0);
         SignalStatus s = new SignalStatus(0, frequency);
         o.generateSample(s);
-        assertEquals(2, s.getFrequency(), 0.1);
+        assertEquals(frequency, s.getFrequency(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsOneWithHalfPhaseIndexBufferAndTuningOneOctaveUp() {
+        o.setTuning(1200);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
+        o.generateSample(s);
+        assertEquals(1, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsOneWithFullPhaseIndexBufferAndTuningOneOctaveDown() {
+        o.setTuning(-1200);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
+        o.generateSample(s);
+        assertEquals(-1, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsZeroWithZeroAmp() {
+        o.setAmp(0);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(0, frequency);
+        o.generateSample(s);
+        assertEquals(0, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsHalfWithHalfAmp() {
+        o.setAmp(0.5);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(0, frequency);
+        o.generateSample(s);
+        assertEquals(0.5, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleFixedOperatesWithConcertPitchFrequency() {
+        o.setFixed(true);
+        SignalStatus s = new SignalStatus(0, frequency);
+        o.generateSample(s);
+        double fixedAmplitude = s.getAmplitude();
+        o.setFixed(false);
+        s.setFrequency(440);
+        o.generateSample(s);
+        double concertPitchAmplitude = s.getAmplitude();
+        assertEquals(concertPitchAmplitude, fixedAmplitude, 0.1);
+    }
+    
+    @Test
+    public void generateSampleDoesNotModifySampleWithAddDisabled() {
+        o.setAdd(false);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
+        o.generateSample(s);
+        assertEquals(0, s.getAmplitude(), 0.1);
+        
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsNegativeOneWithZeroIndexBufferInvert() {
+        o.setInvert(true);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(0, frequency);
+        o.generateSample(s);
+        assertEquals(-1, s.getAmplitude(), 0.1);
+    }
+    
+    @Test
+    public void generateSampleSquareReturnsOneWithHalfPhaseIndexBufferInvert() {
+        o.setInvert(true);
+        o.setWaveform(Waveform.SQU);
+        SignalStatus s = new SignalStatus(samplesInPeriod / 2, frequency);
+        o.generateSample(s);
+        assertEquals(1, s.getAmplitude(), 0.1);
     }
     // Signal paths of more than one oscillator into their own class
 }

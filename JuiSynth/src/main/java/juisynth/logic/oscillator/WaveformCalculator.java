@@ -24,6 +24,10 @@ public class WaveformCalculator {
     public static double calculateWaveformY(double x, Waveform waveform) {
 
         double y;
+        
+        if (x > 1 || x < 0) {
+            return 0;
+        }
 
         switch (waveform) {
             default:

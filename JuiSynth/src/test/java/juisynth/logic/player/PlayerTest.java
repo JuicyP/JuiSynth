@@ -24,14 +24,14 @@ public class PlayerTest {
     private Player p;
     private Oscillator o;
     private double ampDefaultValue;
-    private AudioLine a;
+    private SourceDataLineStub s;
     
     public PlayerTest() {
     }
     
     @Before
     public void setUp() {
-        a = new AudioLine();
+        s = new SourceDataLineStub();
         p = new Player();
         o = new Oscillator();
         o.setAdd(true);
@@ -68,10 +68,10 @@ public class PlayerTest {
         p.setSignalSource(o);
         Field field = p.getClass().getDeclaredField("audioline");
         field.setAccessible(true);
-        field.set(p, a);
+        field.set(p, s);
         Method method = p.getClass().getDeclaredMethod("writeBuffer");
         method.setAccessible(true);
         method.invoke(p, new Object[0]);
-        assertNotNull(a.getSampleBuffer());
+        assertNotNull(s.getSampleBuffer());
     }
 }
