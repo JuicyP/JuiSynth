@@ -20,19 +20,36 @@ import javax.swing.JComboBox;
 public class UI implements Runnable {
     
     private JFrame frame;
-    private Oscillator oscillator;
+    
+    private Oscillator oscillator1;
+    private Oscillator oscillator2;
+    private Oscillator oscillator3;
+    private Oscillator oscillator4;
+           
     private Player player;
 
     @Override
     public void run() {
-        oscillator = new Oscillator();
-        oscillator.setAdd(true);
+        oscillator1 = new Oscillator();
+        oscillator1.setAdd(true);
+        
+        oscillator2 = new Oscillator();
+        oscillator2.setBypass(true);
+        oscillator2.setSignalSource(oscillator1);
+        
+        oscillator3 = new Oscillator();
+        oscillator3.setBypass(true);
+        oscillator3.setSignalSource(oscillator2);
+        
+        oscillator4 = new Oscillator();
+        oscillator4.setBypass(true);
+        oscillator4.setSignalSource(oscillator3);
         
         player = new Player();      
-        player.setSignalSource(oscillator);
+        player.setSignalSource(oscillator4);
         
         frame = new JFrame("JuiSynth");
-        frame.setPreferredSize(new Dimension(300, 500));
+        frame.setPreferredSize(new Dimension(1000, 500));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -44,45 +61,14 @@ public class UI implements Runnable {
     
     //TODO: Refactor into separate classes extending JPanel
     private void instantiateComponents(Container container) {
-        BoxLayout layout = new BoxLayout(container, BoxLayout.Y_AXIS);
+        BoxLayout layout = new BoxLayout(container, BoxLayout.X_AXIS);
         container.setLayout(layout);
         
-        /*
-        JLabel ampLabel = new JLabel("Volume");
-        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-        amp.setMajorTickSpacing(10);
-        amp.setPaintTicks(true);
-        amp.setPaintLabels(true);
-        */
-        
-        JLabel tuningLabel = new JLabel("Tuning");
-        JSlider tuning = new JSlider(JSlider.HORIZONTAL, -3600, 3600, 0);
-        tuning.setMajorTickSpacing(1200);
-        tuning.setPaintTicks(true);
-        tuning.setPaintLabels(true);
-        
-        JButton start = new JButton("Start");
-        JButton stop = new JButton("Stop");
-        
-        JLabel waveformLabel = new JLabel("Waveform");
-        JComboBox waveform = new JComboBox(Waveform.values());
-        /*
-        container.add(ampLabel);
-        container.add(amp);
-        */
-        
-        tuning.addChangeListener(new OscillatorTuningListener(oscillator, tuning));
-        container.add(tuningLabel);
-        container.add(tuning);
-        
-        waveform.addActionListener(new OscillatorWaveformListener(oscillator, waveform));
-        container.add(waveformLabel);
-        container.add(waveform);
-        
-        start.addActionListener(new PlayerStartListener(player));
-        container.add(start);
-        stop.addActionListener(new PlayerStopListener(player));
-        container.add(stop);
+        container.add(new Operator(oscillator1));
+        container.add(new Operator(oscillator2));       
+        container.add(new Operator(oscillator3));
+        container.add(new Operator(oscillator4));
+        container.add(new PlayerPanel(player));
     }
     
     public JFrame getFrame() {

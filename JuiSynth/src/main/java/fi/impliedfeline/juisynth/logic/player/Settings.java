@@ -21,7 +21,7 @@ public final class Settings {
     public static final boolean SIGNED = true;
     public static final boolean BIG_ENDIAN = true;
     
-    public static final int BUFFER_SIZE = 200;
+    public static final int BUFFER_SIZE = 400;
     // 16-bit samples so two indices of a byte array represent a single sample.
     // Thus, amount of samples per buffer is half the size of the array.
     public static final int SAMPLES_PER_BUFFER = BUFFER_SIZE / 2;
