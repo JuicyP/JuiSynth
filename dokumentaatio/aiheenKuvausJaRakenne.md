@@ -27,6 +27,7 @@ Kun Player käynnistetään, se avaa uuden SwingWorker säikeen joka pyytää Si
 - Oscillator toteuttaa SignalSource-interfacen, sekä omistaa oliomuuttujana SignalSource-interfacen toteuttavan olion. Oskillaattorit pyytävät SignalSourceaan muuttamaan SignalStatusta, jonka jälkeen ne itse muokkaavat SignalStatusta omien asetuksiensa mukaisesti.
 - EnvelopeGenerator oliot toteuttavat metodin generateEnvelope, joka ottaa parametrina SignalStatuksen ja palauttaa amplitudin SignalStatuksen vaiheeseen perustuen. Oscillator käyttää EnvelopeGeneratorilta saatua amplitudia omien parametriensa säätöön.
 - ADSR on toteutus EnvelopeGeneratorista, joka pitää sisällään kolme vaihetta joiden sisällä amplitudi generoidaan SignalStatuksen vaiheesta, sekä pysyvän amplituditason, joka säilytetään kahden viimeisen vaiheen välillä.
+
 ## Sekvenssikaavio yksi oskillaattoriselle monosyntetisaattorille
 ![Sekvenssikaavio](sekvenssikaavio.png)
 
