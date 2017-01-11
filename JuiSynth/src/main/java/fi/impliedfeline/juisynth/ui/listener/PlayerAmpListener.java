@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.ui;
+package fi.impliedfeline.juisynth.ui.listener;
 
-import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
+import fi.impliedfeline.juisynth.logic.player.Player;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -14,14 +14,18 @@ import javax.swing.event.ChangeListener;
  *
  * @author juicyp
  */
-public class OscillatorAmpListener implements ChangeListener {
+public class PlayerAmpListener implements ChangeListener {
 
-    public OscillatorAmpListener(Oscillator oscillator, JSlider amp) {
+    private Player player;
+    private JSlider slider;
+
+    public PlayerAmpListener(Player player, JSlider slider) {
+        this.player = player;
+        this.slider = slider;
     }
 
     @Override
     public void stateChanged(ChangeEvent ce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        player.setAmp(slider.getValue());
     }
-    
 }

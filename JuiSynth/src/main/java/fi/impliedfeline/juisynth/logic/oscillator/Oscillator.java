@@ -24,7 +24,7 @@ public class Oscillator implements SignalSource {
     private Waveform waveform = Waveform.SIN;
 
     private int tuning = 0;
-    private int volume = 100;
+    private int amp = 100;
     private boolean fixed = false;
 
     private boolean bypass = false;
@@ -48,15 +48,15 @@ public class Oscillator implements SignalSource {
         this.waveform = waveform;
     }
     
-    public int getVolume() {
-        return volume;
+    public int getAmp() {
+        return amp;
     }
     
-    public void setVolume(int volume) {
-        if (volume < 0 || volume > 100) {
+    public void setAmp(int amp) {
+        if (amp < 0 || amp > 100) {
             return;
         }
-        this.volume = volume;
+        this.amp = amp;
     }
 
     public int getTuning() {
@@ -136,7 +136,7 @@ public class Oscillator implements SignalSource {
         }
 
         double amplitude = generateWaveAmplitude(signal);
-        amplitude *= volume / (double) 100;
+        amplitude *= amp / (double) 100;
 
         if (fm) {
             applyFM(amplitude, signal);

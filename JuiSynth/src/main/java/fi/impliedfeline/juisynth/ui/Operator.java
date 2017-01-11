@@ -6,6 +6,9 @@
 package fi.impliedfeline.juisynth.ui;
 
 
+import fi.impliedfeline.juisynth.ui.listener.OscillatorWaveformListener;
+import fi.impliedfeline.juisynth.ui.listener.OscillatorAmpListener;
+import fi.impliedfeline.juisynth.ui.listener.OscillatorTuningListener;
 import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
 import fi.impliedfeline.juisynth.logic.oscillator.Waveform;
 import javax.swing.BoxLayout;
@@ -31,7 +34,7 @@ public class Operator extends JPanel {
 
     private void instantiateComponents() {
         JLabel ampLabel = new JLabel("Volume");
-        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
         amp.setMajorTickSpacing(10);
         amp.setPaintTicks(true);
         amp.setPaintLabels(true);

@@ -5,10 +5,15 @@
  */
 package fi.impliedfeline.juisynth.ui;
 
+import fi.impliedfeline.juisynth.ui.listener.PlayerStopListener;
+import fi.impliedfeline.juisynth.ui.listener.PlayerStartListener;
 import fi.impliedfeline.juisynth.logic.player.Player;
+import fi.impliedfeline.juisynth.ui.listener.PlayerAmpListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 /**
  *
@@ -25,10 +30,20 @@ public class PlayerPanel extends JPanel {
         instantiateComponents();
     }
 
-    private void instantiateComponents() {     
+    private void instantiateComponents() {
+        JLabel ampLabel = new JLabel("Master");
+        JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+        amp.setMajorTickSpacing(10);
+        amp.setPaintTicks(true);
+        amp.setPaintLabels(true);
+        
         JButton start = new JButton("Start");
         JButton stop = new JButton("Stop");
-            
+        
+        add(ampLabel);
+        amp.addChangeListener(new PlayerAmpListener(player, amp));
+        add(amp);
+        
         start.addActionListener(new PlayerStartListener(player));
         add(start);
         stop.addActionListener(new PlayerStopListener(player));

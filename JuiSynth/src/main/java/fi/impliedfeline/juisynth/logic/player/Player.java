@@ -31,6 +31,18 @@ public class Player {
     private SignalSource signalSource;
     private int bufferIndex;
     private double frequency = 440;
+    private int amp = 100;
+
+    public int getAmp() {
+        return amp;
+    }
+
+    public void setAmp(int amp) {
+        if (amp < 0 || amp > 100) {
+            return;
+        }
+        this.amp = amp;
+    }
 
     private SwingWorker worker;
 
@@ -124,7 +136,8 @@ public class Player {
             
             SignalStatus signal = new SignalStatus(bufferIndex++, frequency);
             signalSource.generateSample(signal);
-
+            signal.setAmplitude(signal.getAmplitude() * (amp / (double) 100));
+            
             double ds = signal.getAmplitude() * Short.MAX_VALUE;
             short ss = (short) Math.round(ds);
             // Big endian, shift first eight bits and add as first part of sample
@@ -135,4 +148,5 @@ public class Player {
 
         audioline.write(sampleBuffer, 0, Settings.BUFFER_SIZE);
     }
+
 }

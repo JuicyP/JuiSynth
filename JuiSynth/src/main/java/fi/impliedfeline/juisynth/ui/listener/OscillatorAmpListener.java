@@ -3,37 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.ui;
+package fi.impliedfeline.juisynth.ui.listener;
 
 import fi.impliedfeline.juisynth.logic.oscillator.Oscillator;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Listens to changes made on a slider and updates Oscillator tuning value.
+ *
  * @author juicyp
  */
-public class OscillatorTuningListener implements ChangeListener {
-
+public class OscillatorAmpListener implements ChangeListener {
+    
     private Oscillator oscillator;
     private JSlider slider;
-    
-    /**
-     * Constructor sets values of fields.
-     * @param oscillator Oscillator to be modified.
-     * @param slider Slider to be listened.
-     */
-    public OscillatorTuningListener(Oscillator oscillator, JSlider slider) {
+
+    public OscillatorAmpListener(Oscillator oscillator, JSlider slider) {
         this.oscillator = oscillator;
         this.slider = slider;
     }
-    
+
     @Override
     public void stateChanged(ChangeEvent ce) {
-        oscillator.setTuning(slider.getValue());
+        oscillator.setAmp(slider.getValue());
     }
     
 }

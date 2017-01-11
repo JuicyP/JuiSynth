@@ -49,7 +49,7 @@ public class UI implements Runnable {
         player.setSignalSource(oscillator4);
         
         frame = new JFrame("JuiSynth");
-        frame.setPreferredSize(new Dimension(1000, 500));
+        frame.setPreferredSize(new Dimension(1200, 300));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         

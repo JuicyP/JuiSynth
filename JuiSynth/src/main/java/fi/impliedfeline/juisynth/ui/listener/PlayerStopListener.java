@@ -3,34 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.impliedfeline.juisynth.ui;
+package fi.impliedfeline.juisynth.ui.listener;
 
 import fi.impliedfeline.juisynth.logic.player.Player;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 
 /**
- * Listens to button and starts player.
- *
+ * Listens to button and stops player.
  * @author juicyp
  */
-public class PlayerStartListener implements ActionListener {
+public class PlayerStopListener implements ActionListener {
 
     private Player player;
-
+    
     /**
      * Sets value of player field.
-     *
-     * @param player
+     * @param player 
      */
-    public PlayerStartListener(Player player) {
+    public PlayerStopListener(Player player) {
         this.player = player;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
-        player.startPlayer();
+        player.stopPlayer();
     }
+    
 }
