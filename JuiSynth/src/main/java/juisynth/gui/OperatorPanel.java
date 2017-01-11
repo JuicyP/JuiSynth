@@ -73,9 +73,11 @@ public class OperatorPanel extends JPanel {
         add(waveformLabel);
         add(waveform);
         
+        add(fmLabel);
         fm.addChangeListener(new OscillatorParameterListener(oscillator, fm, OscillatorParameter.FM));
         add(fm);
         
+        add(amLabel);
         am.addChangeListener(new OscillatorParameterListener(oscillator, am, OscillatorParameter.AM));
         add(am);
         
