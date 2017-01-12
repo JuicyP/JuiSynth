@@ -22,6 +22,8 @@ public class Oscillator implements SignalSource {
     private SignalSource signalSource = null;
 
     private Waveform waveform = Waveform.SIN;
+    
+    private double phase = 0;
 
     private int tuning = 0;
     private double amp = 1;
@@ -39,6 +41,14 @@ public class Oscillator implements SignalSource {
     private boolean sync = false;
     private boolean invert = false;
     private boolean invertOnSync = false;
+    
+    public double getPhase() {
+        return phase;
+    }
+    
+    public void setPhase(double phase) {
+        this.phase = phase;
+    }
 
     public void setSignalSource(SignalSource signalSource) {
         this.signalSource = signalSource;
@@ -220,25 +230,28 @@ public class Oscillator implements SignalSource {
         frequency *= Math.pow(2.0, (tuning / (double) 1200));
 
         double samplesInPeriod = Settings.SAMPLE_RATE / frequency;
-        double x = (signal.getBufferIndex() % samplesInPeriod) / samplesInPeriod;
+        phase += frequency / Settings.SAMPLE_RATE;
+        
         boolean inverse = invert;
-
+        
         if (sync && signal.getCompletePeriod()) {
             signal.setCompletePeriod(false);
-            x = 0;
+            phase = 0;
             if (invertOnSync) {
                 inverse = !inverse;
             }
         }
-
-        double y = WaveformCalculator.calculateWaveformY(x, waveform);
+        
+        if (phase == 0 || (phase % 1) < phase) {
+            signal.setCompletePeriod(true);
+        }
+        
+        phase %= 1;
+        
+        double y = WaveformCalculator.calculateWaveformY(phase, waveform);
 
         if (inverse) {
             y = -y;
-        }
-
-        if (signal.getBufferIndex() % samplesInPeriod == 0) {
-            signal.setCompletePeriod(true);
         }
 
         return y;

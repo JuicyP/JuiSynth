@@ -31,7 +31,7 @@ public class Player {
 
     private byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
     private SignalSource signalSource;
-    private int bufferIndex;
+    private int bufferIndex = 0;
     private double frequency = 440;
     private double amp = 1;
 
@@ -94,7 +94,6 @@ public class Player {
                         audioline = (SourceDataLine) AudioSystem.getLine(info);
                         audioline.open(format);
                         audioline.start();
-                        bufferIndex = 0;
 
                         while (!done) {
                             writeBuffer();
@@ -139,8 +138,7 @@ public class Player {
         SignalStatus signal = new SignalStatus(bufferIndex, frequency);
 
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
-            // Maybe just use same SignalStatus instance for successive sample fetches?
-            // Less memory garbage
+
             signal.setAmplitude(0);
             signal.setBufferIndex(bufferIndex++);
             signal.setFrequency(frequency);
@@ -155,6 +153,8 @@ public class Player {
             // Big endian, shift first eight bits and add as first part of sample
             sampleBuffer[index++] = (byte) (ss >> 8);
             sampleBuffer[index++] = (byte) (ss & 0xFF);
+            
+            bufferIndex %= Settings.SAMPLE_RATE;
         }
         audioline.write(sampleBuffer, 0, Settings.BUFFER_SIZE);
         return sampleBuffer;

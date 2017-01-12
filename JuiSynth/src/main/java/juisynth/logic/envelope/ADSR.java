@@ -21,8 +21,8 @@ public class ADSR extends EnvelopeGenerator {
     private int release = 0;
 
     private double noteOffLevel;
-    // Watch out for unexpected behaviour due to overflowing buffer indices
-    private int noteOffBufferIndex = -1;
+    private int sampleTimer = -1;
+    private int noteOffSample = -1;
 
     public ADSR() {
     }
@@ -58,11 +58,12 @@ public class ADSR extends EnvelopeGenerator {
     // Useless casts?
     @Override
     public double generateEnvelope(SignalStatus signal) {
-        int elapsedTime = (int) (signal.getBufferIndex() / (double) Settings.SAMPLE_RATE * 1000);
+        int elapsedTime = (int) (sampleTimer / (double) Settings.SAMPLE_RATE * 1000);
         double amplitude = 0;
+        sampleTimer++;
 
         if (signal.getActiveNote()) {
-            noteOffBufferIndex = -1;
+            noteOffSample = -1;
             if (attack >= elapsedTime) {
                 amplitude = elapsedTime / (double) attack;
             } else if (attack + decay >= elapsedTime) {
@@ -74,17 +75,18 @@ public class ADSR extends EnvelopeGenerator {
             return amplitude;
         }
 
-        if (noteOffBufferIndex == -1) {
-            noteOffBufferIndex = signal.getBufferIndex();
+        if (noteOffSample == -1) {
+            noteOffSample = sampleTimer;
         }
 
-        int noteOffTime = (int) (noteOffBufferIndex / (double) Settings.SAMPLE_RATE * 1000);
+        int noteOffTime = (int) (noteOffSample / (double) Settings.SAMPLE_RATE * 1000);
         // Time elapsed after noteOff isn't longer than release
         if (release >= elapsedTime - noteOffTime) {
-            amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) release);
+            return amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) release);
         }
 
-        return amplitude;
+        sampleTimer = 0;
+        return 0;
     }
 
 }
