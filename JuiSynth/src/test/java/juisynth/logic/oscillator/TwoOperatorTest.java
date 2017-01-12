@@ -7,10 +7,7 @@ package juisynth.logic.oscillator;
 
 import juisynth.logic.player.Settings;
 import juisynth.logic.signal.SignalStatus;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -46,10 +43,10 @@ public class TwoOperatorTest {
         o2.setFmDepth(1);
         o2.setAmDepth(1);
         o2.setBypass(true);
-        SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
+        SignalStatus s = new SignalStatus( frequency);
         o1.generateSample(s);
         double firstOperatorAmplitude = s.getAmplitude();
-        s = new SignalStatus(samplesInPeriod, frequency);
+        s = new SignalStatus( frequency);
         o2.generateSample(s);
         double secondOperatorAmplitude = s.getAmplitude();
         
@@ -65,7 +62,7 @@ public class TwoOperatorTest {
         o1.setFmDepth(1);
         o1.setAmDepth(1);
         o1.setBypass(true);
-        SignalStatus s = new SignalStatus(samplesInPeriod, frequency);
+        SignalStatus s = new SignalStatus( frequency);
         o2.generateSample(s);
         
         assertEquals(1, s.getAmplitude(), 0.1);
@@ -74,7 +71,7 @@ public class TwoOperatorTest {
     @Test
     public void generateSampleTwoOperatorAddSetsSignalStatusActiveOperatorCountToTwo() {
         o2.setAdd(true);
-        SignalStatus s = new SignalStatus(0, frequency);
+        SignalStatus s = new SignalStatus( frequency);
         o2.generateSample(s);
        
         assertEquals(2, s.getActiveOperatorCount(), 0.1);
@@ -85,7 +82,7 @@ public class TwoOperatorTest {
         o1.setWaveform(Waveform.SQU);
         o2.setAdd(true);
         o2.setAmp(0);
-        SignalStatus s = new SignalStatus(0, frequency);
+        SignalStatus s = new SignalStatus( frequency);
         o2.generateSample(s);
        
         assertEquals(0.5, s.getAmplitude(), 0.1);
@@ -98,7 +95,7 @@ public class TwoOperatorTest {
         o1.setWaveform(Waveform.SQU);
         o2.setWaveform(Waveform.SQU);
         
-        SignalStatus s = new SignalStatus(0, frequency);
+        SignalStatus s = new SignalStatus( frequency);
         o2.generateSample(s);
        
         assertEquals(0, s.getAmplitude(), 0.1);

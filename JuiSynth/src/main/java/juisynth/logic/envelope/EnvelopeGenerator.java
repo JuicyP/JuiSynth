@@ -13,5 +13,5 @@ import juisynth.logic.signal.SignalStatus;
  */
 public abstract class EnvelopeGenerator {
     
-    public abstract double generateEnvelope(SignalStatus signal);
+    public abstract double generateEnvelope(boolean activeNote);
 }

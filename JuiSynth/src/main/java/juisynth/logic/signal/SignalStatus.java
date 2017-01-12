@@ -12,33 +12,30 @@ package juisynth.logic.signal;
  */
 public class SignalStatus {
 
-    private int bufferIndex;
-
     private double frequency;
-    private double amplitude = 0;
+    private final double frequencyInit;
+    
+    private double amplitude;
+    private final double amplitudeInit = 0;
 
-    private boolean activeNote = true;
-    private boolean completePeriod = false;
-    private int activeOperatorCount = 0;
+    private boolean activeNote;
+    private final boolean activeNoteInit = true;
+    
+    private boolean completePeriod;
+    private final boolean completePeriodInit = false;
+    
+    private int activeOperatorCount;
+    private final int activeOperatorCountInit = 0;
 
     /**
      * Constructor for SignalStatus object sets sample rate, index of buffer and
      * frequency of signal.
      *
-     * @param bufferIndex The sample index
      * @param frequency The frequency of the periodic waveform to be generated
      */
-    public SignalStatus(int bufferIndex, double frequency) {
-        this.bufferIndex = bufferIndex;
-        this.frequency = frequency;
-    }
-
-    public int getBufferIndex() {
-        return bufferIndex;
-    }
-
-    public void setBufferIndex(int bufferIndex) {
-        this.bufferIndex = bufferIndex;
+    public SignalStatus(double frequency) {
+        this.frequencyInit = frequency;
+        resetSignal();
     }
 
     public double getFrequency() {
@@ -81,7 +78,7 @@ public class SignalStatus {
     public boolean getCompletePeriod() {
         return completePeriod;
     }
-    
+
     public void setCompletePeriod(boolean completePeriod) {
         this.completePeriod = completePeriod;
     }
@@ -89,7 +86,7 @@ public class SignalStatus {
     public int getActiveOperatorCount() {
         return activeOperatorCount;
     }
-    
+
     public void setActiveOperatorCount(int activeOperatorCount) {
         this.activeOperatorCount = activeOperatorCount;
     }
@@ -100,5 +97,17 @@ public class SignalStatus {
 
     public void setActiveNote(boolean activeNote) {
         this.activeNote = activeNote;
+    }
+
+    public void resetSignal() {
+        resetFrequency();
+        this.amplitude = amplitudeInit;
+        this.activeNote = activeNoteInit;
+        this.completePeriod = completePeriodInit;
+        this.activeOperatorCount = activeOperatorCountInit;
+    }
+    
+    public void resetFrequency() {
+        this.frequency = frequencyInit;
     }
 }

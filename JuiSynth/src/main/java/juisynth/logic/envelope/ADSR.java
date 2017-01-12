@@ -6,7 +6,6 @@
 package juisynth.logic.envelope;
 
 import juisynth.logic.player.Settings;
-import juisynth.logic.signal.SignalStatus;
 
 /**
  *
@@ -17,7 +16,7 @@ public class ADSR extends EnvelopeGenerator {
     // Instantiating fields at declaration here as well for uniformity
     private int attack = 0;
     private int decay = 0;
-    private int sustain = 100;
+    private double sustain = 1;
     private int release = 0;
 
     private double noteOffLevel;
@@ -26,12 +25,20 @@ public class ADSR extends EnvelopeGenerator {
 
     public ADSR() {
     }
+    
+    public int getAttack() {
+        return attack;
+    }
 
     public void setAttack(int attack) {
         if (attack < 0) {
             return;
         }
         this.attack = attack;
+    }
+    
+    public int getDecay() {
+        return decay;
     }
 
     public void setDecay(int decay) {
@@ -40,12 +47,20 @@ public class ADSR extends EnvelopeGenerator {
         }
         this.decay = decay;
     }
+    
+    public double getSustain() {
+        return sustain;
+    }
 
-    public void setSustain(int sustain) {
-        if (sustain < 0 || sustain > 100) {
+    public void setSustain(double sustain) {
+        if (sustain < 0 || sustain > 1) {
             return;
         }
         this.sustain = sustain;
+    }
+    
+    public int getRelease() {
+        return release;
     }
 
     public void setRelease(int release) {
@@ -55,21 +70,20 @@ public class ADSR extends EnvelopeGenerator {
         this.release = release;
     }
 
-    // Useless casts?
     @Override
-    public double generateEnvelope(SignalStatus signal) {
+    public double generateEnvelope(boolean activeNote) {
+        sampleTimer++;
         int elapsedTime = (int) (sampleTimer / (double) Settings.SAMPLE_RATE * 1000);
         double amplitude = 0;
-        sampleTimer++;
-
-        if (signal.getActiveNote()) {
+        
+        if (activeNote) {
             noteOffSample = -1;
-            if (attack >= elapsedTime) {
+            if (attack > elapsedTime) {
                 amplitude = elapsedTime / (double) attack;
-            } else if (attack + decay >= elapsedTime) {
+            } else if (attack + decay > elapsedTime) {
                 amplitude = 1 - (1 - sustain) * ((elapsedTime - attack) / (double) decay);
             } else {
-                amplitude = sustain / (double) 100;
+                amplitude = sustain;
             }
             noteOffLevel = amplitude;
             return amplitude;
@@ -81,11 +95,11 @@ public class ADSR extends EnvelopeGenerator {
 
         int noteOffTime = (int) (noteOffSample / (double) Settings.SAMPLE_RATE * 1000);
         // Time elapsed after noteOff isn't longer than release
-        if (release >= elapsedTime - noteOffTime) {
+        if (release > elapsedTime - noteOffTime) {
             return amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) release);
         }
 
-        sampleTimer = 0;
+        sampleTimer = -1;
         return 0;
     }
 

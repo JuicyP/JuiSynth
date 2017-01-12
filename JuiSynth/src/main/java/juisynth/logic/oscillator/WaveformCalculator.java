@@ -48,7 +48,7 @@ public class WaveformCalculator {
                 break;
 
             case TRI:
-                y = 2.0 * Math.abs(2.0 * (x - Math.floor(x + 0.5))) - 1;
+                y = Math.abs((4 * x + 3) % 4 - 2) - 1;
                 break;
 
             case NOI:

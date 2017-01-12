@@ -36,10 +36,20 @@ public class WaveformCalculatorTest {
     public void calculateWaveformYReturnsZeroWithZeroAndSaw() {
         assertEquals(0, WaveformCalculator.calculateWaveformY(0, Waveform.SAW), 0.1);
     }
+    
+    @Test
+    public void calculateWaveformYReturnsHalfWithQuarterAndSaw() {
+        assertEquals(0.5, WaveformCalculator.calculateWaveformY(0.25, Waveform.SAW), 0.1);
+    }
 
     @Test
     public void calculateWaveformYReturnsNegativeOneWithHalfAndSaw() {
         assertEquals(-1, WaveformCalculator.calculateWaveformY(0.5, Waveform.SAW), 0.1);
+    }
+    
+    @Test
+    public void calculateWaveformYReturnsNegativeHalfWithThreeQuartersAndSaw() {
+        assertEquals(-0.5, WaveformCalculator.calculateWaveformY(0.75, Waveform.SAW), 0.1);
     }
 
     @Test
@@ -48,18 +58,28 @@ public class WaveformCalculatorTest {
     }
     
     @Test
-    public void calculateWaveformYReturnsNegativeOneWithZeroAndTriangle() {
-        assertEquals(-1, WaveformCalculator.calculateWaveformY(0, Waveform.TRI), 0.1);
+    public void calculateWaveformYReturnsZeroWithZeroAndTriangle() {
+        assertEquals(0, WaveformCalculator.calculateWaveformY(0, Waveform.TRI), 0.1);
+    }
+    
+    @Test
+    public void calculateWaveformYReturnsOneWithQuarterAndTriangle() {
+        assertEquals(1, WaveformCalculator.calculateWaveformY(0.25, Waveform.TRI), 0.1);
     }
 
     @Test
-    public void calculateWaveformYReturnsOneWithHalfAndTriangle() {
-        assertEquals(1, WaveformCalculator.calculateWaveformY(0.5, Waveform.TRI), 0.1);
+    public void calculateWaveformYReturnsZeroWithHalfAndTriangle() {
+        assertEquals(0, WaveformCalculator.calculateWaveformY(0.5, Waveform.TRI), 0.1);
+    }
+    
+    @Test
+    public void calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle() {
+        assertEquals(-1, WaveformCalculator.calculateWaveformY(0.75, Waveform.TRI), 0.1);
     }
 
     @Test
-    public void calculateWaveformYReturnsNegativeOneWithOneAndTriangle() {
-        assertEquals(-1, WaveformCalculator.calculateWaveformY(1, Waveform.TRI), 0.1);
+    public void calculateWaveformYReturnsZeroWithOneAndTriangle() {
+        assertEquals(0, WaveformCalculator.calculateWaveformY(1, Waveform.TRI), 0.1);
     }
     
 

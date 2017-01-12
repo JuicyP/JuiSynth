@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import juisynth.logic.signal.SignalStatus;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -75,9 +74,12 @@ public class PlayerTest {
         method.invoke(p, new Object[0]);
         
         int index = 0;
+        o = new Oscillator();
+        o.setAdd(true);
+        
         byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
-            SignalStatus s = new SignalStatus(i, p.getFrequency());
+            SignalStatus s = new SignalStatus(p.getFrequency());
             o.generateSample(s);
             s.setAmplitude(s.getAmplitude() * p.getAmp());
             

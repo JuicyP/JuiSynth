@@ -5,7 +5,6 @@
  */
 package juisynth.logic.signal;
 
-import juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,8 +16,6 @@ import static org.junit.Assert.*;
 public class SignalStatusTest {
 
     private SignalStatus s;
-    private int sampleRate;
-    private int bufferIndex;
     private double frequency;
 
     public SignalStatusTest() {
@@ -26,16 +23,13 @@ public class SignalStatusTest {
 
     @Before
     public void setUp() {
-        sampleRate = 44100;
-        bufferIndex = 0;
         frequency = 440;
-        s = new SignalStatus(bufferIndex, frequency);
+        s = new SignalStatus(frequency);
     }
 
     @Test
     public void constructorValuesSet() {
         assertEquals(0, s.getAmplitude(), 0.1);
-        assertEquals(bufferIndex, s.getBufferIndex());
         assertEquals(frequency, s.getFrequency(), 0.1);
     }
 

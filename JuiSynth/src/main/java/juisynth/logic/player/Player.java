@@ -31,7 +31,6 @@ public class Player {
 
     private byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
     private SignalSource signalSource;
-    private int bufferIndex = 0;
     private double frequency = 440;
     private double amp = 1;
 
@@ -135,12 +134,11 @@ public class Player {
 
         int index = 0;
 
-        SignalStatus signal = new SignalStatus(bufferIndex, frequency);
+        SignalStatus signal = new SignalStatus(frequency);
 
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
 
             signal.setAmplitude(0);
-            signal.setBufferIndex(bufferIndex++);
             signal.setFrequency(frequency);
             signal.setCompletePeriod(false);
             signal.setActiveOperatorCount(0);
@@ -153,8 +151,6 @@ public class Player {
             // Big endian, shift first eight bits and add as first part of sample
             sampleBuffer[index++] = (byte) (ss >> 8);
             sampleBuffer[index++] = (byte) (ss & 0xFF);
-            
-            bufferIndex %= Settings.SAMPLE_RATE;
         }
         audioline.write(sampleBuffer, 0, Settings.BUFFER_SIZE);
         return sampleBuffer;
