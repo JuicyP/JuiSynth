@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juisynth.logic.envelope;
+package juisynth.logic.filter;
+
+import juisynth.logic.signal.SignalStatus;
 
 /**
  *
  * @author juicyp
  */
-public abstract class EnvelopeGenerator {
+public abstract class Filter {
     
-    public abstract double generateEnvelope(boolean activeNote);
+    public abstract double generateFilter(SignalStatus signal);
 }

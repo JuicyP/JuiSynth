@@ -81,28 +81,27 @@ public class OscillatorTest {
 
     @Test
     public void setAmDepthOneSets() {
-        o.setFmDepth(1);
-        assertEquals(1, o.getFmDepth(), 0.1);
+        o.setAmDepth(1);
+        assertEquals(1, o.getAmDepth(), 0.1);
     }
 
     @Test
     public void setAmDepthNegativeOneSets() {
-        o.setFmDepth(-1);
-        assertEquals(-1, o.getFmDepth(), 0.1);
+        o.setAmDepth(-1);
+        assertEquals(-1, o.getAmDepth(), 0.1);
     }
 
     @Test
     public void setAmDepthGreaterThanOneFails() {
-        o.setFmDepth(1.1);
-        assertEquals(0, o.getFmDepth(), 0.05);
+        o.setAmDepth(1.1);
+        assertEquals(0, o.getAmDepth(), 0.05);
     }
 
     @Test
     public void setAmDepthLessThanNegativeOneFails() {
-        o.setFmDepth(-1.1);
-        assertEquals(0, o.getFmDepth(), 0.05);
+        o.setAmDepth(-1.1);
+        assertEquals(0, o.getAmDepth(), 0.05);
     }
-
 
     @Test
     public void generateSampleDoesNotModifySampleWithBypass() {
@@ -221,5 +220,21 @@ public class OscillatorTest {
         s.resetSignal();
         o.generateSample(s);
         assertEquals(1, s.getAmplitude(), 0.1);
+    }
+
+    @Test
+    public void generateSampleReturnsZeroWithSyncAndCompletePeriodTrue() {
+        o.setSync(true);
+        SignalStatus s = new SignalStatus(frequency);
+        s.setCompletePeriod(true);
+        assertEquals(0, s.getAmplitude(), 0.1);
+    }
+
+    @Test
+    public void generateSampleReturnsOneWithSyncAndCompletePeriodFalse() {
+        o.setSync(true);
+        SignalStatus s = new SignalStatus(frequency);
+        s.setCompletePeriod(false);
+        assertEquals(0, s.getAmplitude(), 0.1);
     }
 }

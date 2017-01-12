@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  *
  * @author juicyp
  */
-public class TwoOperatorTest {
+public class TwoOscillatorTest {
     
     private Oscillator o1;
     private Oscillator o2;
@@ -23,7 +23,7 @@ public class TwoOperatorTest {
     private double frequency = 4;
     private int samplesInPeriod = (int) (sampleRate / frequency);
     
-    public TwoOperatorTest() {
+    public TwoOscillatorTest() {
     }
     
     @Before
@@ -100,7 +100,6 @@ public class TwoOperatorTest {
        
         assertEquals(0, s.getAmplitude(), 0.1);
     }
-    
     
     
 }

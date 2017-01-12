@@ -229,7 +229,6 @@ public class Oscillator implements SignalSource {
         // one semitone = 100 cents.
         frequency *= Math.pow(2.0, (tuning / (double) 1200));
 
-        double samplesInPeriod = Settings.SAMPLE_RATE / frequency;
         phase += frequency / Settings.SAMPLE_RATE;
         
         boolean inverse = invert;

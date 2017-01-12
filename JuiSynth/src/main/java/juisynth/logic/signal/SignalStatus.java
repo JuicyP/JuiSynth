@@ -26,6 +26,9 @@ public class SignalStatus {
     
     private int activeOperatorCount;
     private final int activeOperatorCountInit = 0;
+    
+    private double operatorPhase;
+    private final double operatorPhaseInit = 0;
 
     /**
      * Constructor for SignalStatus object sets sample rate, index of buffer and
@@ -98,6 +101,17 @@ public class SignalStatus {
     public void setActiveNote(boolean activeNote) {
         this.activeNote = activeNote;
     }
+    
+    public double getOperatorPhase() {
+        return operatorPhase;
+    }
+    
+    public void setOperatorPhase(double operatorPhase) {
+        if (operatorPhase < 0 || operatorPhase > 1) {
+            return;
+        }
+        this.operatorPhase = operatorPhase;
+    }
 
     public void resetSignal() {
         resetFrequency();
@@ -105,6 +119,7 @@ public class SignalStatus {
         this.activeNote = activeNoteInit;
         this.completePeriod = completePeriodInit;
         this.activeOperatorCount = activeOperatorCountInit;
+        this.operatorPhase = operatorPhaseInit;
     }
     
     public void resetFrequency() {
