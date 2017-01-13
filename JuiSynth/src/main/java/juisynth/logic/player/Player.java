@@ -148,7 +148,8 @@ public class Player {
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
 
             signal.resetSignal();
-            signal.setActiveNote(activeNote);
+            signal.setActiveNote(getActiveNote());
+            signal.setFrequency(getFrequency());
 
             signalSource.generateSample(signal);
             signal.setAmplitude(signal.getAmplitude() * amp);
@@ -158,6 +159,7 @@ public class Player {
             // Big endian, shift first eight bits and add as first part of sample
             sampleBuffer[index++] = (byte) (ss >> 8);
             sampleBuffer[index++] = (byte) (ss & 0xFF);
+            
         }
         audioline.write(sampleBuffer, 0, Settings.BUFFER_SIZE);
         return sampleBuffer;

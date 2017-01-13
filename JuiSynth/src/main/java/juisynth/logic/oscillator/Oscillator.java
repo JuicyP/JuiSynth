@@ -276,6 +276,10 @@ public class Oscillator implements SignalSource {
             y = filter.generateFilter(phase, y);
         }
         
+        if (envelopeGenerator != null) {
+            y *= envelopeGenerator.generateEnvelope(signal.getActiveNote());
+        }
+        
         if (inverse) {
             y = -y;
         }

@@ -19,7 +19,7 @@ public class ADSR extends EnvelopeGenerator {
     private double sustain = 1;
     private int release = 0;
 
-    private double noteOffLevel;
+    private double noteOffLevel = 0;
     private int sampleTimer = -1;
     private int noteOffSample = -1;
 
@@ -100,6 +100,8 @@ public class ADSR extends EnvelopeGenerator {
         }
 
         sampleTimer = -1;
+        noteOffSample = -1;
+        noteOffLevel = 0;
         return 0;
     }
 

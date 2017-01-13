@@ -10,6 +10,7 @@ import juisynth.logic.oscillator.Oscillator;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
+import juisynth.gui.listener.KeyboardListener;
 
 /**
  * Main UI implementation of JuiSynth.
@@ -52,6 +53,8 @@ public class GUI implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         instantiateComponents(frame.getContentPane());
+        
+        frame.addKeyListener(new KeyboardListener(player));
         
         frame.pack();
         frame.setVisible(true);

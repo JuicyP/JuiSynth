@@ -20,7 +20,7 @@ public class SignalStatus {
     private final double amplitudeInit = 0;
 
     private boolean activeNote;
-    private final boolean activeNoteInit = true;
+    private final boolean activeNoteInit = false;
     
     private boolean completePeriod;
     private final boolean completePeriodInit = false;
