@@ -26,4 +26,6 @@ public final class Settings {
     // Thus, amount of samples per buffer is half the size of the array.
     public static final int SAMPLES_PER_BUFFER = BUFFER_SIZE / 2;
     
+    public static final double CONCERT_PITCH = 440;
+    
 }
