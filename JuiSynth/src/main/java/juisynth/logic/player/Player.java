@@ -23,8 +23,8 @@ import javax.swing.SwingWorker;
  */
 public class Player {
 
-    private AudioFormat format;
-    private DataLine.Info info;
+    private final AudioFormat format;
+    private final DataLine.Info info;
     private SourceDataLine audioline;
 
     private SwingWorker worker;
@@ -33,6 +33,7 @@ public class Player {
     private SignalSource signalSource;
     private double frequency = 440;
     private double amp = 1;
+    private boolean activeNote = false;
 
     /**
      * Constructor for Player sets format according to values specified in
@@ -67,6 +68,14 @@ public class Player {
             return;
         }
         this.frequency = frequency;
+    }
+    
+    public boolean getActiveNote() {
+        return activeNote;
+    }
+    
+    public void setActiveNote(boolean activeNote) {
+        this.activeNote = activeNote;
     }
 
     public void setSignalSource(SignalSource signalSource) {
@@ -138,10 +147,8 @@ public class Player {
 
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
 
-            signal.setAmplitude(0);
-            signal.setFrequency(frequency);
-            signal.setCompletePeriod(false);
-            signal.setActiveOperatorCount(0);
+            signal.resetSignal();
+            signal.setActiveNote(activeNote);
 
             signalSource.generateSample(signal);
             signal.setAmplitude(signal.getAmplitude() * amp);

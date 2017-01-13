@@ -6,7 +6,7 @@
 package juisynth.gui.listener;
 
 import juisynth.logic.oscillator.Oscillator;
-import juisynth.logic.oscillator.Waveform;
+import juisynth.logic.Waveform;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;

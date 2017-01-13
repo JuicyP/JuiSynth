@@ -10,5 +10,5 @@ package juisynth.gui;
  * @author juicyp
  */
 public enum PlayerMode {
-    START, STOP
+    START, STOP, PLAY
 }

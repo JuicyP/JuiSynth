@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juisynth.logic.oscillator;
+package juisynth.gui;
 
 /**
- * Waveform enumerator encapsulates all implemented waveforms.
+ *
  * @author juicyp
  */
-public enum Waveform {
-    SIN, SQU, SAW, TRI, NOI
+public enum ADSRParameter {
+    ATTACK, DECAY, SUSTAIN, RELEASE
 }

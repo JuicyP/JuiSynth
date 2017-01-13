@@ -47,7 +47,7 @@ public class GUI implements Runnable {
         player.setSignalSource(oscillator4);
         
         frame = new JFrame("JuiSynth");
-        frame.setPreferredSize(new Dimension(1200, 400));
+        frame.setPreferredSize(new Dimension(1200, 750));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -66,6 +66,8 @@ public class GUI implements Runnable {
         container.add(new OperatorPanel(oscillator3));
         container.add(new OperatorPanel(oscillator4));
         container.add(new PlayerPanel(player));
+        
+        
     }
     
     public JFrame getFrame() {

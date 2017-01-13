@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juisynth.logic.filter;
-
-import juisynth.logic.signal.SignalStatus;
+package juisynth.logic;
 
 /**
  *
  * @author juicyp
  */
-public abstract class Filter {
+public class Operator {
     
-    public abstract double generateFilter(double phase, double amplitude);
 }

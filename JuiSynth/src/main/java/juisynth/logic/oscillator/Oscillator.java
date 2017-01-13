@@ -5,6 +5,10 @@
  */
 package juisynth.logic.oscillator;
 
+import juisynth.logic.Waveform;
+import juisynth.logic.WaveformCalculator;
+import juisynth.logic.envelope.EnvelopeGenerator;
+import juisynth.logic.filter.Filter;
 import juisynth.logic.player.Settings;
 import juisynth.logic.signal.SignalStatus;
 import juisynth.logic.signal.SignalSource;
@@ -41,6 +45,25 @@ public class Oscillator implements SignalSource {
     private boolean sync = false;
     private boolean invert = false;
     private boolean invertOnSync = false;
+    
+    private Filter filter;
+    private EnvelopeGenerator envelopeGenerator;
+    
+    public Filter getFilter() {
+        return filter;
+    }
+    
+    public void setFilter(Filter filter) {
+        this.filter = filter;
+    }
+    
+    public EnvelopeGenerator getEnvelopeGenerator() {
+        return envelopeGenerator;
+    }
+    
+    public void setEnvelopeGenerator(EnvelopeGenerator envelopeGenerator) {
+        this.envelopeGenerator = envelopeGenerator;
+    }
     
     public double getPhase() {
         return phase;
@@ -248,7 +271,11 @@ public class Oscillator implements SignalSource {
         phase %= 1;
         
         double y = WaveformCalculator.calculateWaveformY(phase, waveform);
-
+        
+        if (filter != null) {
+            y = filter.generateFilter(phase, y);
+        }
+        
         if (inverse) {
             y = -y;
         }

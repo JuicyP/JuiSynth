@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juisynth.logic.filter;
-
-import juisynth.logic.signal.SignalStatus;
+package juisynth.logic;
 
 /**
- *
+ * Waveform enumerator encapsulates all implemented waveforms.
  * @author juicyp
  */
-public abstract class Filter {
-    
-    public abstract double generateFilter(double phase, double amplitude);
+public enum Waveform {
+    SIN, SQU, SAW, TRI, NOI
 }

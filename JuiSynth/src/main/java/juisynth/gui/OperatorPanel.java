@@ -8,12 +8,16 @@ package juisynth.gui;
 import juisynth.gui.listener.OscillatorWaveformListener;
 import juisynth.gui.listener.OscillatorParameterListener;
 import juisynth.logic.oscillator.Oscillator;
-import juisynth.logic.oscillator.Waveform;
+import juisynth.logic.Waveform;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import juisynth.gui.listener.SpectrumFilterListener;
+import juisynth.logic.envelope.ADSR;
+import juisynth.logic.filter.SpectrumFilter;
 
 /**
  *
@@ -22,44 +26,63 @@ import javax.swing.JSlider;
 public class OperatorPanel extends JPanel {
     
     private Oscillator oscillator;
+    private SpectrumFilter spectrumFilter;
+    private ADSR adsr;
     
     public OperatorPanel(Oscillator oscillator) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // TODO: Instantiate new oscillator instead of passing after refactoring
+        // Operator/Oscillator
         this.oscillator = oscillator;
+        this.spectrumFilter = new SpectrumFilter();
+        this.adsr = new ADSR();
+        this.oscillator.setFilter(this.spectrumFilter);
+        this.oscillator.setEnvelopeGenerator(adsr);
         instantiateComponents();
     }
 
     private void instantiateComponents() {
-        JLabel ampLabel = new JLabel("Volume");
+        JLabel oscLabel = new JLabel("Oscillator", SwingConstants.CENTER);
+        
+        JLabel ampLabel = new JLabel("Volume", SwingConstants.CENTER);
         JSlider amp = new JSlider(JSlider.HORIZONTAL, 0, 100, (int) (oscillator.getAmp() * 100));
         amp.setMajorTickSpacing(50);
         amp.setPaintTicks(true);
         amp.setPaintLabels(true);
         
-        JLabel tuningLabel = new JLabel("Tuning");
+        JLabel tuningLabel = new JLabel("Tuning", SwingConstants.CENTER);
         JSlider tuning = new JSlider(JSlider.HORIZONTAL, -7200, 7200, oscillator.getTuning());
         tuning.setMajorTickSpacing(3600);
         tuning.setPaintTicks(true);
         tuning.setPaintLabels(true);
         tuning.setPaintTrack(false);
         
-        JLabel waveformLabel = new JLabel("Waveform");
+        JLabel filterLabel = new JLabel("Filter", SwingConstants.CENTER);
+        JLabel filterParameterLabel = new JLabel("Cutoff", SwingConstants.CENTER);
+        JSlider filter = new JSlider(JSlider.HORIZONTAL, 0, 100, (int) (spectrumFilter.getDepth() * 100));
+        filter.setMajorTickSpacing(100);
+        filter.setPaintTicks(true);
+        filter.setPaintLabels(true);
+        
+        JLabel waveformLabel = new JLabel("Waveform", SwingConstants.CENTER);
         JComboBox waveform = new JComboBox(Waveform.values());
         
-        JLabel fmLabel = new JLabel("FM Depth");
+        JLabel fmLabel = new JLabel("FM Depth", SwingConstants.CENTER);
         JSlider fm = new JSlider(JSlider.HORIZONTAL, -100, 100, (int) (oscillator.getFmDepth() * 100));
         fm.setMajorTickSpacing(100);
         fm.setPaintTicks(true);
         fm.setPaintLabels(true);
         fm.setPaintTrack(false);
         
-        JLabel amLabel = new JLabel("AM Depth");
+        JLabel amLabel = new JLabel("AM Depth", SwingConstants.CENTER);
         JSlider am = new JSlider(JSlider.HORIZONTAL, -100, 100, (int) (oscillator.getAmDepth() * 100));
         am.setMajorTickSpacing(100);
         am.setPaintTicks(true);
         am.setPaintLabels(true);
         am.setPaintTrack(false);
+        
+        add(oscLabel);
         
         amp.addChangeListener(new OscillatorParameterListener(oscillator, amp, OscillatorParameter.AMP));
         add(ampLabel);
@@ -82,5 +105,12 @@ public class OperatorPanel extends JPanel {
         add(am);
         
         add(new OscillatorOptionsPanel(oscillator));
+        
+        add(filterLabel);
+        filter.addChangeListener(new SpectrumFilterListener(spectrumFilter, filter));
+        add(filterParameterLabel);
+        add(filter);
+        
+        add(new ADSRPanel(adsr));
     }
 }

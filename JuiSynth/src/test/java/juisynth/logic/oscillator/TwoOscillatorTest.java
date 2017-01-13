@@ -5,6 +5,7 @@
  */
 package juisynth.logic.oscillator;
 
+import juisynth.logic.Waveform;
 import juisynth.logic.player.Settings;
 import juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
