@@ -105,7 +105,7 @@ public class KeyboardListener implements KeyListener {
                 break;
         }
          player.setFrequency(note.noteToFrequency());
-         player.setActiveNote(true);   
+         player.setActiveNote(true);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        //player.setActiveNote(false);
+        player.setActiveNote(false);
     }
 
 }

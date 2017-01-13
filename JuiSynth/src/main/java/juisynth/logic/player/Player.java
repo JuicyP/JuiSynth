@@ -33,7 +33,7 @@ public class Player {
     private SignalSource signalSource;
     private double frequency = 440;
     private double amp = 1;
-    private boolean activeNote = false;
+    private boolean activeNote = true;
 
     /**
      * Constructor for Player sets format according to values specified in
@@ -89,7 +89,7 @@ public class Player {
      */
     public void startPlayer() {
         if (signalSource != null && worker == null) {
-            worker = new SwingWorker<Void, Void>() {
+            worker = new SwingWorker() {
 
                 private boolean done;
 
@@ -110,8 +110,8 @@ public class Player {
                     } catch (LineUnavailableException e) {
 
                     } finally {
-                        audioline.drain();
-                        audioline.close();
+                        Player.this.audioline.drain();
+                        Player.this.audioline.close();
                     }
                     return null;
                 }
@@ -148,8 +148,8 @@ public class Player {
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {
 
             signal.resetSignal();
-            signal.setActiveNote(getActiveNote());
-            signal.setFrequency(getFrequency());
+            signal.setActiveNote(activeNote);
+            signal.setFrequency(frequency);
 
             signalSource.generateSample(signal);
             signal.setAmplitude(signal.getAmplitude() * amp);

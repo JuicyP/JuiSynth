@@ -26,6 +26,8 @@ public class GUI implements Runnable {
     private Oscillator oscillator4;
            
     private Player player;
+    
+    private static KeyboardListener keyboardListener;
 
     @Override
     public void run() {
@@ -47,6 +49,8 @@ public class GUI implements Runnable {
         player = new Player();
         player.setSignalSource(oscillator4);
         
+        keyboardListener = new KeyboardListener(player);
+        
         frame = new JFrame("JuiSynth");
         frame.setPreferredSize(new Dimension(1200, 750));
         
@@ -54,7 +58,7 @@ public class GUI implements Runnable {
         
         instantiateComponents(frame.getContentPane());
         
-        frame.addKeyListener(new KeyboardListener(player));
+        frame.addKeyListener(keyboardListener);
         
         frame.pack();
         frame.setVisible(true);
