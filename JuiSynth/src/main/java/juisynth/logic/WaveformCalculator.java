@@ -17,26 +17,24 @@ public class WaveformCalculator {
 
     /**
      * Calculates the y position of a wave based on the waveform and the position x.
-     * @param x The x position of a wave.
+     * @param phase The x position of a wave.
      * @param waveform Specified waveform.
      * @return returns y position of a wave.
      */
-    public static double calculateWaveformY(double x, Waveform waveform) {
+    public static double calculateWaveformY(double phase, Waveform waveform) {
 
         double y;
         
-        if (x > 1 || x < 0) {
-            return 0;
-        }
-
+        phase %= 1;
+        
         switch (waveform) {
             default:
             case SIN:
-                y = Math.sin(2.0 * Math.PI * x);
+                y = Math.sin(2.0 * Math.PI * phase);
                 break;
 
             case SQU:
-                if (x < 0.5) {
+                if (phase < 0.5) {
                     y = 1.0;
                 } else {
                     y = -1.0;
@@ -44,11 +42,11 @@ public class WaveformCalculator {
                 break;
 
             case SAW:
-                y = 2.0 * (x - Math.floor(x + 0.5));
+                y = 2.0 * (phase - Math.floor(phase + 0.5));
                 break;
 
             case TRI:
-                y = Math.abs((4 * x + 3) % 4 - 2) - 1;
+                y = Math.abs((4 * phase + 3) % 4 - 2) - 1;
                 break;
 
             case NOI:

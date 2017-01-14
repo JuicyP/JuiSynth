@@ -7,7 +7,6 @@ package juisynth.logic.filter;
 
 import juisynth.logic.Waveform;
 import juisynth.logic.WaveformCalculator;
-import juisynth.logic.signal.SignalStatus;
 
 /**
  *
@@ -15,23 +14,12 @@ import juisynth.logic.signal.SignalStatus;
  */
 public class SpectrumFilter extends Filter {
     
-    private double depth;
-    
     public SpectrumFilter() {
-    }
-    
-    public double getDepth() {
-        return depth;
-    }
-    
-    public void setDepth(double depth) {
-        this.depth = depth;
     }
 
     @Override
-    public double generateFilter(double phase, double amplitude) {
-        double filteredAmplitude = WaveformCalculator.calculateWaveformY(phase, Waveform.SIN);
-        return depth * filteredAmplitude + (1 - depth) * amplitude;
+    public double generateFilter(double phase) {
+        return WaveformCalculator.calculateWaveformY(phase, Waveform.SIN);
     }
     
 }

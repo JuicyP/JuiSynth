@@ -30,8 +30,8 @@ public class WaveformCalculatorTest {
     }
 
     @Test
-    public void calculateWaveformYReturnNegativeOneWithOneAndSquare() {
-        assertEquals(-1, WaveformCalculator.calculateWaveformY(1, Waveform.SQU), 0.1);
+    public void calculateWaveformYReturnsOneWithOneAndSquare() {
+        assertEquals(1, WaveformCalculator.calculateWaveformY(1, Waveform.SQU), 0.1);
     }
     
     @Test

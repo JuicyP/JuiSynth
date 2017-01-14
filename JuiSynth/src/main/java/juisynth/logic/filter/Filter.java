@@ -5,7 +5,6 @@
  */
 package juisynth.logic.filter;
 
-import juisynth.logic.signal.SignalStatus;
 
 /**
  *
@@ -13,5 +12,5 @@ import juisynth.logic.signal.SignalStatus;
  */
 public abstract class Filter {
     
-    public abstract double generateFilter(double phase, double amplitude);
+    public abstract double generateFilter(double phase);
 }
