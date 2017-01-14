@@ -75,7 +75,7 @@ public class Note {
                 break;
         }
 
-        return frequency * Math.pow(2, semitonesFromA/12);
+        return frequency * Math.pow(2, semitonesFromA / (double) 12);
     }
 
 }

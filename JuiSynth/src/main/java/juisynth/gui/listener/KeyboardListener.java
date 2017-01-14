@@ -5,8 +5,8 @@
  */
 package juisynth.gui.listener;
 
+import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import juisynth.logic.Note;
 import juisynth.logic.player.Player;
 
@@ -14,7 +14,7 @@ import juisynth.logic.player.Player;
  *
  * @author juicyp
  */
-public class KeyboardListener implements KeyListener {
+public class KeyboardListener implements KeyEventDispatcher {
 
     private Player player;
 
@@ -23,23 +23,10 @@ public class KeyboardListener implements KeyListener {
     }
 
     // Here there be monsters
-    @Override
     public void keyTyped(KeyEvent ke) {
         Note note;
-        char noteChar = ke.getKeyChar();
-        switch (noteChar) {
-            case ']':
-                note = new Note(Note.NoteName.D, 6);
-                break;
-            case '=':
-                note = new Note(Note.NoteName.D, 6, Note.Accidental.FLAT);
-                break;
-            case '[':
-                note = new Note(Note.NoteName.B, 6);
-                break;
-            case '-':
-                note = new Note(Note.NoteName.B, 6, Note.Accidental.FLAT);
-                break;
+        char key = ke.getKeyChar();
+        switch (key) {
             case 'p':
                 note = new Note(Note.NoteName.C, 6);
                 break;
@@ -108,14 +95,24 @@ public class KeyboardListener implements KeyListener {
          player.setActiveNote(true);
     }
 
-    @Override
     public void keyPressed(KeyEvent ke) {
         player.setActiveNote(true);
     }
 
-    @Override
     public void keyReleased(KeyEvent ke) {
         player.setActiveNote(false);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent ke) {
+        if (ke.getID() == KeyEvent.KEY_PRESSED) {
+            keyPressed(ke);
+        } else if (ke.getID() == KeyEvent.KEY_RELEASED) {
+            keyReleased(ke);
+        } else if (ke.getID() == KeyEvent.KEY_TYPED) {
+            keyTyped(ke);
+        }
+        return true;
     }
 
 }

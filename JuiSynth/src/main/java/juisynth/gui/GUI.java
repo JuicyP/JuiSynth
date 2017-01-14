@@ -9,6 +9,7 @@ import juisynth.logic.player.Player;
 import juisynth.logic.oscillator.Oscillator;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import javax.swing.*;
 import juisynth.gui.listener.KeyboardListener;
 
@@ -27,7 +28,7 @@ public class GUI implements Runnable {
            
     private Player player;
     
-    private static KeyboardListener keyboardListener;
+    private KeyboardListener keyboardListener;
 
     @Override
     public void run() {
@@ -56,9 +57,9 @@ public class GUI implements Runnable {
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        instantiateComponents(frame.getContentPane());
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyboardListener);
         
-        frame.addKeyListener(keyboardListener);
+        instantiateComponents(frame.getContentPane());
         
         frame.pack();
         frame.setVisible(true);
@@ -73,8 +74,6 @@ public class GUI implements Runnable {
         container.add(new OperatorPanel(oscillator3));
         container.add(new OperatorPanel(oscillator4));
         container.add(new PlayerPanel(player));
-        
-        
     }
     
     public JFrame getFrame() {

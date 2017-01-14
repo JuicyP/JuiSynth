@@ -13,6 +13,8 @@
     <suppress files="SourceDataLineStub.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="SignalStatusTest.java" checks="[a-zA-Z0-9]*"/>
     
+    <suppress files="ADSRPanel.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="ADSRParameter.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="GUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OperatorPanel.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorMode.java" checks="[a-zA-Z0-9]*"/>
@@ -21,9 +23,12 @@
     <suppress files="PlayerMode.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerPanel.java" checks="[a-zA-Z0-9]*"/>
     
+    <suppress files="ADSRParameterListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="KeyboardListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorModeListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorParameterListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorWaveformListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerAmpListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerModeListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="SpectrumFilterListener.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>
