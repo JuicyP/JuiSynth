@@ -11,3 +11,6 @@ Päivä | Tunnit | Kuvaus
 10.01.2017 | 7h | Playerin-SwingWorker toteutuksen implementointi, refaktorointi
 11.01.2017 | 10h| GUI-kuuntelijoiden implementointi, GUI:n päivittäminen, dokumentointi, testien kirjoittaminen
 12.01.2017 | 8h | Testien kirjoittaminen, algoritmin korjaus, suodattimen implementointi 
+13.01.2017 | 5h | Note implementaatio, näppäimistön kuuntelija 
+14.01.2017 | 4h | Testaus
+15.01.2017 | 5h | JavaDocin kirjoitus, refaktorointi
