@@ -1,0 +1,9 @@
+juisynth
+juisynth.gui
+juisynth.gui.listener
+juisynth.logic
+juisynth.logic.envelope
+juisynth.logic.filter
+juisynth.logic.oscillator
+juisynth.logic.player
+juisynth.logic.signal

@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 22,
-             Errors: 1,
+      <title>File: 37,
+             Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,49 +46,35 @@ under the License.
           <tbody>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.filter.FilterSettings.java">juisynth/logic/filter/FilterSettings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OperatorMode.java">juisynth/gui/OperatorMode.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.Oscillator.java">juisynth/logic/oscillator/Oscillator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.JuiSynth.java">juisynth/JuiSynth.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.PlayerMode.java">juisynth/gui/PlayerMode.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorModeListener.java">juisynth/gui/listener/OscillatorModeListener.java</a>
                 </td>
                 <td>
                   0
@@ -116,20 +102,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.logic.player.Settings.java">juisynth/logic/player/Settings.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.ADSR.java">juisynth/logic/envelope/ADSR.java</a>
                 </td>
                 <td>
@@ -144,77 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.EnvelopeGenerator.java">juisynth/logic/envelope/EnvelopeGenerator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorOptionsPanel.java">juisynth/gui/OscillatorOptionsPanel.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorParameter.java">juisynth/gui/OscillatorParameter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.WaveformCalculator.java">juisynth/logic/oscillator/WaveformCalculator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.OperatorPanel.java">juisynth/gui/OperatorPanel.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.Waveform.java">juisynth/logic/oscillator/Waveform.java</a>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OperatorParameter.java">juisynth/gui/OperatorParameter.java</a>
                 </td>
                 <td>
                   0
@@ -242,63 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.PlayerModeListener.java">juisynth/gui/listener/PlayerModeListener.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorMode.java">juisynth/gui/OscillatorMode.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#juisynth.logic.signal.SignalStatus.java">juisynth/logic/signal/SignalStatus.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorParameterListener.java">juisynth/gui/listener/OscillatorParameterListener.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#juisynth.gui.GUI.java">juisynth/gui/GUI.java</a>
                 </td>
                 <td>
                   0
@@ -340,7 +186,371 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.filter.SpectrumFilter.java">juisynth/logic/filter/SpectrumFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.Waveform.java">juisynth/logic/Waveform.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.JuiSynth.java">juisynth/JuiSynth.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.PlayerMode.java">juisynth/gui/PlayerMode.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.player.Settings.java">juisynth/logic/player/Settings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OperatorParameterListener.java">juisynth/gui/listener/OperatorParameterListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.Note.java">juisynth/logic/Note.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.oscillator.OscillatorSettings.java">juisynth/logic/oscillator/OscillatorSettings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.EnvelopeGenerator.java">juisynth/logic/envelope/EnvelopeGenerator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.ADSRParameter.java">juisynth/gui/ADSRParameter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OperatorModeListener.java">juisynth/gui/listener/OperatorModeListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OscillatorOptionsPanel.java">juisynth/gui/OscillatorOptionsPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.ADSRSettings.java">juisynth/logic/envelope/ADSRSettings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.WaveformCalculator.java">juisynth/logic/WaveformCalculator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.Patch.java">juisynth/logic/Patch.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.KeyboardListener.java">juisynth/gui/listener/KeyboardListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.OperatorPanel.java">juisynth/gui/OperatorPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.filter.Filter.java">juisynth/logic/filter/Filter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.PlayerModeListener.java">juisynth/gui/listener/PlayerModeListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.SpectrumFilterListener.java">juisynth/gui/listener/SpectrumFilterListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.GUI.java">juisynth/gui/GUI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.ADSRParameterListener.java">juisynth/gui/listener/ADSRParameterListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.ADSRPanel.java">juisynth/gui/ADSRPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.envelope.EnvelopeSettings.java">juisynth/logic/envelope/EnvelopeSettings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.logic.Operator.java">juisynth/logic/Operator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorWaveformListener.java">juisynth/gui/listener/OscillatorWaveformListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#juisynth.gui.listener.OscillatorTuningListener.java">juisynth/gui/listener/OscillatorTuningListener.java</a>
                 </td>
                 <td>
                   0

@@ -1,0 +1,998 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+	border: 1px solid #dddddd;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-family: Consolas, Courier, monospace;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+
+.pop {outline:none; }
+.pop strong {line-height:30px;}
+.pop {text-decoration:none;}
+.pop span { z-index:10;display:none; padding:14px 20px; margin-top:-30px; margin-left:28px; width:800px; line-height:16px; word-wrap:break-word; }
+.pop:hover span{ display:inline; position:absolute; color:#111; border:1px solid #DCA; background:#fffAF0;}
+
+.pop span { border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+</style>
+
+</head>
+<body>
+
+
+<h1>WaveformCalculator.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_1'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_2'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this license header, choose License Headers in Project Properties.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_3'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this template file, choose Tools | Templates</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_4'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * and open the template in the editor.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_5'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_6'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package juisynth.logic;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_7'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_8'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Random;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_9'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_10'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_11'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Contains calculations relevant to waves.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_12'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @author juicyp</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_13'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_14'></a>
+<span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public class WaveformCalculator {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_15'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_16'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private static final Random NOISE_GENERATOR = new Random();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_17'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_18'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_19'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Calculates the y position of a wave based on the waveform and the phase.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_20'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param phase The phase of a wave.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_21'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param waveform Specified waveform.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_22'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return returns y position of a wave.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_23'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_24'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static double calculateWaveformY(double phase, Waveform waveform) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_25'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_26'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        double y;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_27'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_28'/>
+28
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_28'>1</a>
+<span>
+1. calculateWaveformY : Replaced double modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        phase %= 1;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_29'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_30'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        switch (waveform) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_31'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            default:</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_32'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            case SIN:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_33'/>
+33
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_33'>1</a>
+<span>
+1. calculateWaveformY : Replaced double multiplication with division &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                y = Math.sin(2.0 * Math.PI * phase);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_34'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                break;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_35'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_36'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            case SQU:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_37'>2</a>
+<span>
+1. calculateWaveformY : changed conditional boundary &rarr; KILLED<br/>
+2. calculateWaveformY : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                if (phase &#60; 0.5) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_38'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                    y = 1.0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_39'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                } else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_40'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                    y = -1.0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_41'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_42'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                break;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_43'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_44'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            case SAW:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_45'/>
+45
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_45'>3</a>
+<span>
+1. calculateWaveformY : Replaced double addition with subtraction &rarr; KILLED<br/>
+2. calculateWaveformY : Replaced double subtraction with addition &rarr; KILLED<br/>
+3. calculateWaveformY : Replaced double multiplication with division &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                y = 2.0 * (phase - Math.floor(phase + 0.5));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_46'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                break;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_47'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_48'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            case TRI:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_49'/>
+49
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_49'>5</a>
+<span>
+1. calculateWaveformY : Replaced double multiplication with division &rarr; KILLED<br/>
+2. calculateWaveformY : Replaced double addition with subtraction &rarr; KILLED<br/>
+3. calculateWaveformY : Replaced double modulus with multiplication &rarr; KILLED<br/>
+4. calculateWaveformY : Replaced double subtraction with addition &rarr; KILLED<br/>
+5. calculateWaveformY : Replaced double subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                y = Math.abs((4 * phase + 3) % 4 - 2) - 1;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_50'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                break;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_51'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_52'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            case NOI:</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_53'/>
+53
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_53'>2</a>
+<span>
+1. calculateWaveformY : Replaced double multiplication with division &rarr; NO_COVERAGE<br/>
+2. calculateWaveformY : Replaced double subtraction with addition &rarr; NO_COVERAGE<br/>
+
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                y = 2 * NOISE_GENERATOR.nextDouble() - 1;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_54'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_55'>1</a>
+<span>
+1. calculateWaveformY : replaced return of double value with -(x + 1) for juisynth/logic/WaveformCalculator::calculateWaveformY &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return y;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_56'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_57'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@33b4c775_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_58'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_28'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithOneAndSquare(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_33'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsOneWithQuarterPhase(juisynth.logic.filter.SpectrumFilterTest)</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithHalfAndSquare(juisynth.logic.WaveformCalculatorTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithZeroAndSquare(juisynth.logic.WaveformCalculatorTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_45'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeHalfWithThreeQuartersAndSaw(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeHalfWithThreeQuartersAndSaw(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeHalfWithThreeQuartersAndSaw(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_49'>49</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_49'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest)</span></span> Replaced double subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_53'>53</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_53'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>none</span></span> Replaced double multiplication with division &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>none</span></span> Replaced double subtraction with addition &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@33b4c775_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@33b4c775_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateWaveformY<br/><b>Killed by : </b>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithZeroAndSquare(juisynth.logic.WaveformCalculatorTest)</span></span> replaced return of double value with -(x + 1) for juisynth/logic/WaveformCalculator::calculateWaveformY &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsZeroWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.filter.SpectrumFilterTest) (7 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsNegativeOneWithQuarterPhaseInvert(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeTuningOneOctaveUpReturnsGenerateSampleTwiceTuningZero(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsOneWithQuarterPhase(juisynth.logic.filter.SpectrumFilterTest) (0 ms)</li><li>juisynth.logic.OperatorTest.generateSampleDoesNotModifyFrequencyWithFMDepthZero(juisynth.logic.OperatorTest) (12 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithQuarterAndTriangle(juisynth.logic.WaveformCalculatorTest) (1 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithZeroAndSquare(juisynth.logic.WaveformCalculatorTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsNegativeOneWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeTwiceTuningOneOctaveDownReturnsGenerateSampleTuningZero(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsNegativeHalfWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsZeroWithTwoSameOperatorsAddedOtherInverted(juisynth.logic.TwoOperatorTest) (1 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsZeroWithZeroAndSaw(juisynth.logic.WaveformCalculatorTest) (3 ms)</li><li>juisynth.logic.OperatorTest.generateSampleModifiesFrequencyWithFM(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeSyncTrueFullPhaseSetsCompletePeriodTrue(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsZeroWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsOneWithHalfPhaseInvert(juisynth.logic.OperatorTest) (9 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithThreeQuartersAndTriangle(juisynth.logic.WaveformCalculatorTest) (1 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithHalfAndSquare(juisynth.logic.WaveformCalculatorTest) (3 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsHalfWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsHalfWithTwoActiveOneSilentOperators(juisynth.logic.TwoOperatorTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsHalfWithHalfAmp(juisynth.logic.OperatorTest) (5 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsOneWithOneAndSquare(juisynth.logic.WaveformCalculatorTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleBypassOnFirstOperatorFetchesSecondOperatorSample(juisynth.logic.TwoOperatorTest) (3 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeHalfWithThreeQuartersAndSaw(juisynth.logic.WaveformCalculatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleDoesNotModifySampleWithAddDisabled(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsHalfWithQuarterAndSaw(juisynth.logic.WaveformCalculatorTest) (6 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsZeroWithZeroPhase(juisynth.logic.filter.SpectrumFilterTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeHalfPhaseSquareReturnsOneWithSyncAndCompletePeriodTrue(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeFixedOperatesWithConcertPitchFrequency(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsZeroWithHalfPhase(juisynth.logic.filter.SpectrumFilterTest) (1 ms)</li><li>juisynth.logic.player.PlayerTest.runningPlayerWritesBuffer(juisynth.logic.player.PlayerTest) (20 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsNegativeOneWithHalfAndSaw(juisynth.logic.WaveformCalculatorTest) (3 ms)</li><li>juisynth.logic.filter.SpectrumFilterTest.generateFilterReturnsZeroWithFullPhase(juisynth.logic.filter.SpectrumFilterTest) (4 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsHalvedAmplitudeWithAMQuarterPhase(juisynth.logic.TwoOperatorTest) (2 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsZeroWithOneAndTriangle(juisynth.logic.WaveformCalculatorTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsOneWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsZeroWithOneAndSaw(juisynth.logic.WaveformCalculatorTest) (3 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsZeroWithHalfAndTriangle(juisynth.logic.WaveformCalculatorTest) (7 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.WaveformCalculatorTest.calculateWaveformYReturnsZeroWithZeroAndTriangle(juisynth.logic.WaveformCalculatorTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleTwoOperatorAddSetsSignalStatusActiveOperatorCountToTwo(juisynth.logic.TwoOperatorTest) (3 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeHalfPhaseSquareReturnsNegativeOneWithSyncAndCompletePeriodFalse(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleBypassOnSecondOperatorFetchesFirstOperatorSample(juisynth.logic.TwoOperatorTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsNegativeOneWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsZeroWithZeroAmp(juisynth.logic.OperatorTest) (1 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.1.8
+
+</body>
+</html>

@@ -1,0 +1,1844 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+	border: 1px solid #dddddd;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-family: Consolas, Courier, monospace;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+
+.pop {outline:none; }
+.pop strong {line-height:30px;}
+.pop {text-decoration:none;}
+.pop span { z-index:10;display:none; padding:14px 20px; margin-top:-30px; margin-left:28px; width:800px; line-height:16px; word-wrap:break-word; }
+.pop:hover span{ display:inline; position:absolute; color:#111; border:1px solid #DCA; background:#fffAF0;}
+
+.pop span { border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+</style>
+
+</head>
+<body>
+
+
+<h1>SignalStatus.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_1'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_2'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this license header, choose License Headers in Project Properties.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_3'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this template file, choose Tools | Templates</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_4'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * and open the template in the editor.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_5'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_6'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package juisynth.logic.signal;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_7'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_8'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_9'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Contains information relevant to a sample in a signal path.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_10'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_11'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @author juicyp</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_12'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_13'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class SignalStatus {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_14'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_15'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private double frequency;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_16'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final double frequencyInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_17'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_18'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private double amplitude;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_19'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final double amplitudeInit = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_20'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_21'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean activeNote;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_22'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final boolean activeNoteInit = true;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_23'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_24'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean completePeriod;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_25'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final boolean completePeriodInit = false;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_26'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_27'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private int activeOperatorCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_28'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private final int activeOperatorCountInit = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_29'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_30'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_31'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructor for SignalStatus object sets sample rate, index of buffer and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_32'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * frequency of signal.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_33'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_34'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param frequency The frequency of the periodic waveform to be generated</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_35'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_36'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public SignalStatus(double frequency) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_37'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.frequencyInit = frequency;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_38'/>
+38
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_38'>1</a>
+<span>
+1. <init> : removed call to juisynth/logic/signal/SignalStatus::resetSignal &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        resetSignal();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_39'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_40'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_41'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public double getFrequency() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_42'/>
+42
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_42'>1</a>
+<span>
+1. getFrequency : replaced return of double value with -(x + 1) for juisynth/logic/signal/SignalStatus::getFrequency &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return frequency;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_43'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_44'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_45'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_46'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Sets non-negative frequency.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_47'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param frequency The frequency of the signal.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_48'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_49'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setFrequency(double frequency) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_50'/>
+50
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_50'>2</a>
+<span>
+1. setFrequency : changed conditional boundary &rarr; KILLED<br/>
+2. setFrequency : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (frequency &#60; 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_51'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            return;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_52'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_53'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.frequency = frequency;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_54'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_55'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_56'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public double getAmplitude() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_57'/>
+57
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_57'>1</a>
+<span>
+1. getAmplitude : replaced return of double value with -(x + 1) for juisynth/logic/signal/SignalStatus::getAmplitude &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return amplitude;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_58'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_59'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_60'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_61'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Sets amplitude between -1 and 1 inclusive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_62'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param amplitude The amplitude of the signal.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_63'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_64'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setAmplitude(double amplitude) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_65'/>
+65
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_65'>4</a>
+<span>
+1. setAmplitude : changed conditional boundary &rarr; KILLED<br/>
+2. setAmplitude : changed conditional boundary &rarr; KILLED<br/>
+3. setAmplitude : negated conditional &rarr; KILLED<br/>
+4. setAmplitude : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (amplitude &#60; -1 || amplitude &#62; 1) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_66'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            return;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_67'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_68'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.amplitude = amplitude;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_69'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_70'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_71'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_72'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns value of completePeriod field and sets to false.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_73'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_74'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return returns value of completePeriod field.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_75'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_76'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean getCompletePeriod() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_77'>1</a>
+<span>
+1. getCompletePeriod : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return completePeriod;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_78'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_79'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_80'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setCompletePeriod(boolean completePeriod) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_81'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.completePeriod = completePeriod;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_82'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_83'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_84'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int getActiveOperatorCount() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_85'/>
+85
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_85'>1</a>
+<span>
+1. getActiveOperatorCount : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return activeOperatorCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_86'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_87'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_88'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setActiveOperatorCount(int activeOperatorCount) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_89'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.activeOperatorCount = activeOperatorCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_90'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_91'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_92'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean getActiveNote() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_93'/>
+93
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_93'>1</a>
+<span>
+1. getActiveNote : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return activeNote;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_94'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_95'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_96'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setActiveNote(boolean activeNote) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_97'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.activeNote = activeNote;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_98'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_99'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_100'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_101'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Resets the state of the signal specified at instantiation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_102'/>
+102
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_102'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_103'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void resetSignal() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_104'/>
+104
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_104'>1</a>
+<span>
+1. resetSignal : removed call to juisynth/logic/signal/SignalStatus::resetFrequency &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        resetFrequency();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_105'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.amplitude = amplitudeInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_106'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.activeNote = activeNoteInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_107'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.completePeriod = completePeriodInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_108'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.activeOperatorCount = activeOperatorCountInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_109'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_110'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_111'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_112'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Resets the frequency of the signal specified at instantiation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_113'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_114'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void resetFrequency() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_115'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.frequency = frequencyInit;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_116'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1de6689c_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_117'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_38'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b><init><br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setFrequencyNegativeFails(juisynth.logic.signal.SignalStatusTest)</span></span> removed call to juisynth/logic/signal/SignalStatus::resetSignal &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_42'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getFrequency<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setFrequencyNegativeFails(juisynth.logic.signal.SignalStatusTest)</span></span> replaced return of double value with -(x + 1) for juisynth/logic/signal/SignalStatus::getFrequency &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_50'>50</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_50'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setFrequency<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setFrequencyZeroSets(juisynth.logic.signal.SignalStatusTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>setFrequency<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setFrequencyNegativeFails(juisynth.logic.signal.SignalStatusTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_57'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getAmplitude<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setAmplitudeLessThanNegativeOneFails(juisynth.logic.signal.SignalStatusTest)</span></span> replaced return of double value with -(x + 1) for juisynth/logic/signal/SignalStatus::getAmplitude &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_65'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setAmplitude<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setAmplitudeNegativeOneSets(juisynth.logic.signal.SignalStatusTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>setAmplitude<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setAmplitudeOneSets(juisynth.logic.signal.SignalStatusTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>setAmplitude<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setAmplitudeLessThanNegativeOneFails(juisynth.logic.signal.SignalStatusTest)</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>setAmplitude<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setAmplitudeNegativeOneSets(juisynth.logic.signal.SignalStatusTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getCompletePeriod<br/><b>Killed by : </b>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeHalfPhaseSquareReturnsOneWithSyncAndCompletePeriodTrue(juisynth.logic.oscillator.OscillatorTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_85'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getActiveOperatorCount<br/><b>Killed by : </b>juisynth.logic.OperatorTest.generateSampleSquareReturnsZeroWithZeroAmp(juisynth.logic.OperatorTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_93'>93</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_93'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getActiveNote<br/><b>Killed by : </b>juisynth.logic.TwoOperatorTest.generateSampleReturnsHalfWithTwoActiveOneSilentOperators(juisynth.logic.TwoOperatorTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1de6689c_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1de6689c_104'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>resetSignal<br/><b>Killed by : </b>juisynth.logic.signal.SignalStatusTest.setFrequencyNegativeFails(juisynth.logic.signal.SignalStatusTest)</span></span> removed call to juisynth/logic/signal/SignalStatus::resetFrequency &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsZeroWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setFrequencyNegativeFails(juisynth.logic.signal.SignalStatusTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeTuningOneOctaveUpReturnsGenerateSampleTwiceTuningZero(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsNegativeOneWithQuarterPhaseInvert(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleDoesNotModifySampleWithAddDisabled(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.OperatorTest.generateSampleDoesNotModifyFrequencyWithFMDepthZero(juisynth.logic.OperatorTest) (12 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setFrequencyZeroSets(juisynth.logic.signal.SignalStatusTest) (1 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setAmplitudeZeroSets(juisynth.logic.signal.SignalStatusTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeFixedOperatesWithConcertPitchFrequency(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeHalfPhaseSquareReturnsOneWithSyncAndCompletePeriodTrue(juisynth.logic.oscillator.OscillatorTest) (0 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setAmplitudeNegativeOneSets(juisynth.logic.signal.SignalStatusTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsNegativeOneWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (0 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setAmplitudeLargerThanOneFails(juisynth.logic.signal.SignalStatusTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsOneWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.player.PlayerTest.runningPlayerWritesBuffer(juisynth.logic.player.PlayerTest) (20 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeTwiceTuningOneOctaveDownReturnsGenerateSampleTuningZero(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsNegativeHalfWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsZeroWithTwoSameOperatorsAddedOtherInverted(juisynth.logic.TwoOperatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeSyncTrueFullPhaseSetsCompletePeriodTrue(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeTriangleReturnsZeroWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleModifiesFrequencyWithFM(juisynth.logic.OperatorTest) (2 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsOneWithHalfPhaseInvert(juisynth.logic.OperatorTest) (9 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setFrequencyPositiveSets(juisynth.logic.signal.SignalStatusTest) (0 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsHalvedAmplitudeWithAMQuarterPhase(juisynth.logic.TwoOperatorTest) (2 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setAmplitudeLessThanNegativeOneFails(juisynth.logic.signal.SignalStatusTest) (0 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSquareReturnsOneWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (2 ms)</li><li>juisynth.logic.signal.SignalStatusTest.setAmplitudeOneSets(juisynth.logic.signal.SignalStatusTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsHalfWithQuarterPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsZeroWithFullPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleTwoOperatorAddSetsSignalStatusActiveOperatorCountToTwo(juisynth.logic.TwoOperatorTest) (3 ms)</li><li>juisynth.logic.oscillator.OscillatorTest.generateWaveAmplitudeHalfPhaseSquareReturnsNegativeOneWithSyncAndCompletePeriodFalse(juisynth.logic.oscillator.OscillatorTest) (1 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleReturnsHalfWithTwoActiveOneSilentOperators(juisynth.logic.TwoOperatorTest) (1 ms)</li><li>juisynth.logic.signal.SignalStatusTest.constructorValuesSet(juisynth.logic.signal.SignalStatusTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsHalfWithHalfAmp(juisynth.logic.OperatorTest) (5 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleBypassOnSecondOperatorFetchesFirstOperatorSample(juisynth.logic.TwoOperatorTest) (0 ms)</li><li>juisynth.logic.TwoOperatorTest.generateSampleBypassOnFirstOperatorFetchesSecondOperatorSample(juisynth.logic.TwoOperatorTest) (3 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSawReturnsNegativeOneWithHalfPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleSquareReturnsZeroWithZeroAmp(juisynth.logic.OperatorTest) (1 ms)</li><li>juisynth.logic.OperatorTest.generateSampleDoesNotModifySampleWithBypass(juisynth.logic.OperatorTest) (1 ms)</li><li>juisynth.logic.oscillator.OscillatorPhaseTest.generateWaveAmplitudeSineReturnsNegativeOneWithThreeQuartersPhase(juisynth.logic.oscillator.OscillatorPhaseTest) (1 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.1.8
+
+</body>
+</html>
