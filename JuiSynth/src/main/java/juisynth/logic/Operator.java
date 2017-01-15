@@ -5,8 +5,10 @@
  */
 package juisynth.logic;
 
+import juisynth.logic.envelope.ADSR;
 import juisynth.logic.envelope.EnvelopeGenerator;
 import juisynth.logic.filter.Filter;
+import juisynth.logic.filter.SpectrumFilter;
 import juisynth.logic.oscillator.Oscillator;
 import juisynth.logic.signal.SignalSource;
 import juisynth.logic.signal.SignalStatus;
@@ -20,13 +22,13 @@ public class Operator implements SignalSource {
     private Oscillator oscillator;
     private EnvelopeGenerator eg;
     private Filter filter;
-    private SignalSource signalSource;
+    private SignalSource signalSource = null;
     private Patch patch;
     
-    public Operator(Oscillator oscillator, EnvelopeGenerator eg, Filter filter, SignalSource signalSource, Patch patch) {
-        this.oscillator = oscillator;
-        this.eg = eg;
-        this.filter = filter;
+    public Operator(Patch patch) {
+        this.oscillator = new Oscillator(patch.getOscillatorSettings());
+        this.eg = new ADSR(patch.getEnvelopeGeneratorSettings());
+        this.filter = new SpectrumFilter(patch.getFilterSettings());
         this.signalSource = signalSource;
         this.patch = patch;
     }
@@ -34,6 +36,48 @@ public class Operator implements SignalSource {
     @Override
     public void generateSample(SignalStatus signal) {
         
+        if (patch.isBypass()) {
+            if (signalSource != null) {
+                signalSource.generateSample(signal);
+            }
+            return;
+        }
+
+        double amplitude = oscillator.generateWaveAmplitude(signal);
+        amplitude *= patch.getAmp();
+        
+        if (patch.isInvert()) {
+            amplitude = -amplitude;
+        }
+        
+        amplitude = filter.generateFilter(oscillator.getPhase(), amplitude);
+        amplitude *= eg.generateEnvelope(signal.getActiveNote());
+
+        if (patch.isFm()) {
+            applyFM(amplitude, signal);
+        }
+
+        // Prevent self-AM modulation
+        if (patch.isAdd()) {
+            signal.setActiveOperatorCount(signal.getActiveOperatorCount() + 1);
+        }
+
+        if (signalSource != null) {
+            signalSource.generateSample(signal);
+        }
+
+        if (patch.isAm()) {
+            applyAM(amplitude, signal);
+        }
+
+        if (patch.isAdd()) {
+            if (signalSource != null) {
+                signal.setAmplitude(signal.getAmplitude() + amplitude / signal.getActiveOperatorCount());
+            } else {
+                // Active operator count will always be non zero
+                signal.setAmplitude(amplitude / signal.getActiveOperatorCount());
+            }
+        }
     }
 
     public Oscillator getOscillator() {
@@ -44,11 +88,11 @@ public class Operator implements SignalSource {
         this.oscillator = oscillator;
     }
 
-    public EnvelopeGenerator getEg() {
+    public EnvelopeGenerator getEG() {
         return eg;
     }
 
-    public void setEg(EnvelopeGenerator eg) {
+    public void setEG(EnvelopeGenerator eg) {
         this.eg = eg;
     }
 
@@ -74,5 +118,13 @@ public class Operator implements SignalSource {
 
     public void setPatch(Patch patch) {
         this.patch = patch;
+    }
+    
+    private void applyFM(double amplitude, SignalStatus signal) {
+        signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * patch.getFmDepth()));
+    }
+
+    private void applyAM(double amplitude, SignalStatus signal) {
+        signal.setAmplitude(signal.getAmplitude() * Math.pow(2, (amplitude - 1) * patch.getAmDepth()));
     }
 }

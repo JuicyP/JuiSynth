@@ -12,5 +12,7 @@ package juisynth.logic.filter;
  */
 public abstract class Filter {
     
+    protected FilterSettings settings;
+    
     public abstract double generateFilter(double phase, double amplitude);
 }

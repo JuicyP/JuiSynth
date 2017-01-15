@@ -6,17 +6,19 @@
 package juisynth.logic;
 
 import juisynth.logic.envelope.ADSRSettings;
+import juisynth.logic.filter.FilterSettings;
+import juisynth.logic.oscillator.OscillatorSettings;
 
 /**
  *
  * @author juicyp
  */
 public class Patch {
+    
+    private Waveform waveform = Waveform.SIN;
 
-    private int tuning = 0;
     private double amp = 1;
-    private boolean fixed = false;
-
+    
     private boolean bypass = false;
     private boolean add = false;
 
@@ -26,19 +28,18 @@ public class Patch {
     private boolean am = false;
     private double amDepth = 0.0;
 
-    private boolean sync = false;
     private boolean invert = false;
-    private boolean invertOnSync = false;
     
-    private double filterDepth = 0;
+    private FilterSettings fs = new FilterSettings();
     private ADSRSettings egs = new ADSRSettings();
-
-    public int getTuning() {
-        return tuning;
+    private OscillatorSettings oscs = new OscillatorSettings();
+    
+    public Waveform getWaveform() {
+        return waveform;
     }
 
-    public void setTuning(int tuning) {
-        this.tuning = tuning;
+    public void setWaveform(Waveform waveform) {
+        this.waveform = waveform;
     }
 
     public double getAmp() {
@@ -50,14 +51,6 @@ public class Patch {
             return;
         }
         this.amp = amp;
-    }
-
-    public boolean isFixed() {
-        return fixed;
-    }
-
-    public void setFixed(boolean fixed) {
-        this.fixed = fixed;
     }
 
     public boolean isBypass() {
@@ -114,14 +107,6 @@ public class Patch {
         this.amDepth = amDepth;
     }
 
-    public boolean isSync() {
-        return sync;
-    }
-
-    public void setSync(boolean sync) {
-        this.sync = sync;
-    }
-
     public boolean isInvert() {
         return invert;
     }
@@ -129,31 +114,28 @@ public class Patch {
     public void setInvert(boolean invert) {
         this.invert = invert;
     }
-
-    public boolean isInvertOnSync() {
-        return invertOnSync;
-    }
-
-    public void setInvertOnSync(boolean invertOnSync) {
-        this.invertOnSync = invertOnSync;
-    }
-
-    public double getFilterDepth() {
-        return filterDepth;
-    }
-
-    public void setFilterDepth(double filterDepth) {
-        if (filterDepth < 0 || filterDepth > 1) {
-            return;
-        }
-        this.filterDepth = filterDepth;
+    
+    public OscillatorSettings getOscillatorSettings() {
+        return oscs;
     }
     
-    public ADSRSettings getEgs() {
+    public void setOscillatorSettings(OscillatorSettings oscs) {
+        this.oscs = oscs;
+    }
+    
+    public ADSRSettings getEnvelopeGeneratorSettings() {
         return egs;
     }
 
-    public void setEgs(ADSRSettings egs) {
+    public void setEnvelopeGeneratorSettings(ADSRSettings egs) {
         this.egs = egs;
+    }
+    
+    public FilterSettings getFilterSettings() {
+        return fs;
+    }
+    
+    public void setFilterSettings(FilterSettings fs) {
+        this.fs = fs;
     }
 }

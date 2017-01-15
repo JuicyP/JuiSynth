@@ -12,6 +12,7 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import juisynth.gui.listener.ADSRParameterListener;
 import juisynth.logic.envelope.ADSR;
+import juisynth.logic.envelope.ADSRSettings;
 
 /**
  *
@@ -19,9 +20,9 @@ import juisynth.logic.envelope.ADSR;
  */
 public class ADSRPanel extends JPanel {
 
-    private ADSR adsr;
+    private ADSRSettings adsr;
 
-    public ADSRPanel(ADSR adsr) {
+    public ADSRPanel(ADSRSettings adsr) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.adsr = adsr;

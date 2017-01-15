@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import juisynth.gui.ADSRParameter;
 import juisynth.logic.envelope.ADSR;
+import juisynth.logic.envelope.ADSRSettings;
 
 /**
  *
@@ -17,11 +18,11 @@ import juisynth.logic.envelope.ADSR;
  */
 public class ADSRParameterListener implements ChangeListener {
     
-    private ADSR adsr;
+    private ADSRSettings adsr;
     private JSlider slider;
     private ADSRParameter adsrParameter;
     
-    public ADSRParameterListener(ADSR adsr, JSlider slider, ADSRParameter adsrParameter) {
+    public ADSRParameterListener(ADSRSettings adsr, JSlider slider, ADSRParameter adsrParameter) {
         this.adsr = adsr;
         this.slider = slider;
         this.adsrParameter = adsrParameter;

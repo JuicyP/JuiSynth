@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import javax.swing.*;
 import juisynth.gui.listener.KeyboardListener;
+import juisynth.logic.Operator;
+import juisynth.logic.Patch;
 
 /**
  * Main UI implementation of JuiSynth.
@@ -21,10 +23,10 @@ public class GUI implements Runnable {
     
     private JFrame frame;
     
-    private Oscillator oscillator1;
-    private Oscillator oscillator2;
-    private Oscillator oscillator3;
-    private Oscillator oscillator4;
+    private Operator op1;
+    private Operator op2;
+    private Operator op3;
+    private Operator op4;
            
     private Player player;
     
@@ -32,23 +34,23 @@ public class GUI implements Runnable {
 
     @Override
     public void run() {
-        oscillator1 = new Oscillator();
-        oscillator1.setAdd(true);
+        op1 = new Operator(new Patch());
+        op1.getPatch().setAdd(true);
         
-        oscillator2 = new Oscillator();
-        oscillator2.setBypass(true);
-        oscillator2.setSignalSource(oscillator1);
+        op2 = new Operator(new Patch());
+        op2.getPatch().setBypass(true);
+        op2.setSignalSource(op1);
         
-        oscillator3 = new Oscillator();
-        oscillator3.setBypass(true);
-        oscillator3.setSignalSource(oscillator2);
+        op3 = new Operator(new Patch());
+        op3.getPatch().setBypass(true);
+        op3.setSignalSource(op2);
         
-        oscillator4 = new Oscillator();
-        oscillator4.setBypass(true);
-        oscillator4.setSignalSource(oscillator3);
+        op4 = new Operator(new Patch());
+        op4.getPatch().setBypass(true);
+        op4.setSignalSource(op3);
         
         player = new Player();
-        player.setSignalSource(oscillator4);
+        player.setSignalSource(op4);
         
         keyboardListener = new KeyboardListener(player);
         
@@ -69,10 +71,10 @@ public class GUI implements Runnable {
         BoxLayout layout = new BoxLayout(container, BoxLayout.X_AXIS);
         container.setLayout(layout);
         
-        container.add(new OperatorPanel(oscillator1));
-        container.add(new OperatorPanel(oscillator2));       
-        container.add(new OperatorPanel(oscillator3));
-        container.add(new OperatorPanel(oscillator4));
+        container.add(new OperatorPanel(op1));
+        container.add(new OperatorPanel(op2));       
+        container.add(new OperatorPanel(op3));
+        container.add(new OperatorPanel(op4));
         container.add(new PlayerPanel(player));
     }
     

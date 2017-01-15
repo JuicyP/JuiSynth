@@ -8,26 +8,25 @@ package juisynth.gui.listener;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import juisynth.logic.filter.FilterSettings;
-import juisynth.logic.filter.SpectrumFilter;
+import juisynth.logic.oscillator.OscillatorSettings;
 
 /**
  *
  * @author juicyp
  */
-public class SpectrumFilterListener implements ChangeListener {
-    
-    private FilterSettings fs;
+public class OscillatorTuningListener implements ChangeListener {
+
+    private OscillatorSettings oscs;
     private JSlider slider;
     
-    public SpectrumFilterListener(FilterSettings fs, JSlider slider) {
-        this.fs = fs;
+    public OscillatorTuningListener(OscillatorSettings oscs, JSlider slider) {
+        this.oscs = oscs;
         this.slider = slider;
     }
-
+    
     @Override
     public void stateChanged(ChangeEvent ce) {
-        fs.setDepth(slider.getValue() / (double) 100);
+        oscs.setTuning(slider.getValue());
     }
     
 }

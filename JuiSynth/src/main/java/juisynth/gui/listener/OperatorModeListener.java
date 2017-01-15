@@ -5,22 +5,23 @@
  */
 package juisynth.gui.listener;
 
-import juisynth.gui.OscillatorMode;
+import juisynth.gui.OperatorMode;
 import juisynth.logic.oscillator.Oscillator;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import juisynth.logic.Patch;
 
 /**
  *
  * @author juicyp
  */
-public class OscillatorModeListener implements ItemListener {
+public class OperatorModeListener implements ItemListener {
     
-    private Oscillator oscillator;
-    private OscillatorMode oscillatorMode;
+    private Patch patch;
+    private OperatorMode oscillatorMode;
     
-    public OscillatorModeListener(Oscillator oscillator, OscillatorMode oscillatorMode) {
-        this.oscillator = oscillator;
+    public OperatorModeListener(Patch patch, OperatorMode oscillatorMode) {
+        this.patch = patch;
         this.oscillatorMode = oscillatorMode;
     }
 
@@ -30,28 +31,25 @@ public class OscillatorModeListener implements ItemListener {
         
         switch (oscillatorMode) {
             case FIXED:
-                oscillator.setFixed(value);
+                patch.getOscillatorSettings().setFixed(value);
                 break;
             case BYPASS:
-                oscillator.setBypass(value);
+                patch.setBypass(value);
                 break;
             case ADD:
-                oscillator.setAdd(value);
+                patch.setAdd(value);
                 break;
             case FM:
-                oscillator.setFm(value);
+                patch.setFm(value);
                 break;
             case AM:
-                oscillator.setAm(value);
+                patch.setAm(value);
                 break;
             case SYNC:
-                oscillator.setSync(value);
+                patch.getOscillatorSettings().setSync(value);
                 break;
             case INVERT:
-                oscillator.setInvert(value);
-                break;
-            case INVERT_ON_SYNC:
-                oscillator.setInvertOnSync(value);
+                patch.setInvert(value);
                 break;
             default:
                 break;

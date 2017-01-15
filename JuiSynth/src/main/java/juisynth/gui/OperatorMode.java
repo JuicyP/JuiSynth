@@ -9,6 +9,6 @@ package juisynth.gui;
  *
  * @author juicyp
  */
-public enum OscillatorParameter {
-    AMP, FM, AM, TUNING
+public enum OperatorMode {
+    FIXED, BYPASS, ADD, FM, AM, SYNC, INVERT
 }
