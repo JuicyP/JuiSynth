@@ -23,7 +23,7 @@ Syntetisaattori tukee myös amplitudimodulaatiota, joskin tämä ei ole yhtä yl
 
 
 ## Luokkakaavio
-![Luokkakaavio](luokkakaavio.png)
+![Luokkakaavio](luokkakaavio.jpg)
 - Player luokalla on oliomuuttujana SignalSource-interfacen toteuttava olio.
 Kun Player käynnistetään, se avaa uuden SwingWorker säikeen joka pyytää SignalSourcen toteuttavalta oliota generoimaan amplitudin luotuun SignalStatus-olioon, joka kirjoitetaan puskuroituna Javan tarjoaman Sound APIn SourceDataLine-olioon.
 - SignalStatus olio pitää sisällään tietoa signaalille ominaisesta tiedosta signaalipolussa, kuten amplitudista, kirjoitettavasta taajuudesta, ja aallon vaiheesta.
@@ -41,8 +41,8 @@ Kun Player käynnistetään, se avaa uuden SwingWorker säikeen joka pyytää Si
 
 ### Yksi-operaattorisen monosyntetisaattorin ajo
 
-![Sekvenssikaavio1](sekvenssikaavio1.png)
+![Sekvenssikaavio1](sekvenssikaavio1.jpg)
 
 ### Patch-olion lataaminen Operaattorille
 
-![Sekvenssikaavio2](sekvenssikaavio2.png)
+![Sekvenssikaavio2](sekvenssikaavio2.jpg)
