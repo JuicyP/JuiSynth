@@ -5,10 +5,7 @@
  */
 package juisynth.logic.filter;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,37 +16,40 @@ import static org.junit.Assert.*;
 public class SpectrumFilterTest {
     
     private SpectrumFilter sf;
+    private FilterSettings sfs;
     
     public SpectrumFilterTest() {
     }
     
     @Before
     public void setUp() {
-        sf = new SpectrumFilter();
+        sfs = new FilterSettings();
+        sf = new SpectrumFilter(sfs);
+        sfs.setDepth(1);
     }
     
     @Test
     public void generateFilterReturnsZeroWithZeroPhase() {
-        assertEquals(0, sf.generateFilter(0), 0.05);
+        assertEquals(0, sf.generateFilter(0, 1), 0.05);
     }
     
     @Test
     public void generateFilterReturnsOneWithQuarterPhase() {
-        assertEquals(1, sf.generateFilter(0.25), 0.05);
+        assertEquals(1, sf.generateFilter(0.25, 1), 0.05);
     }
     
     @Test
     public void generateFilterReturnsZeroWithHalfPhase() {
-        assertEquals(0, sf.generateFilter(0.5), 0.05);
+        assertEquals(0, sf.generateFilter(0.5, 1), 0.05);
     }
     
     @Test
     public void generateFilterReturnsNegativeOneWithThreeQuartersPhase() {
-        assertEquals(-1, sf.generateFilter(0.75), 0.05);
+        assertEquals(-1, sf.generateFilter(0.75, 1), 0.05);
     }
     
     @Test
     public void generateFilterReturnsZeroWithFullPhase() {
-        assertEquals(0, sf.generateFilter(1), 0.05);
+        assertEquals(0, sf.generateFilter(1, 1), 0.05);
     }
 }

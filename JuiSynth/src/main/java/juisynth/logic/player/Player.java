@@ -88,6 +88,7 @@ public class Player {
      * @see stopPlayer
      */
     public void startPlayer() {
+        activeNote = true;
         if (signalSource != null && worker == null) {
             worker = new SwingWorker() {
 

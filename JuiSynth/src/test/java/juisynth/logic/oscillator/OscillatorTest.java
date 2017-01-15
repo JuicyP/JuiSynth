@@ -17,225 +17,100 @@ import static org.junit.Assert.*;
  * @author juicyp
  */
 public class OscillatorTest {
-
+    
+    private OscillatorSettings os;
     private Oscillator o;
     private int sampleRate = Settings.SAMPLE_RATE;
     private double frequency = Settings.SAMPLE_RATE / 4;
-
+    
     public OscillatorTest() {
     }
-
+    
     @Before
     public void setUp() {
-        o = new Oscillator();
-        o.setAdd(true);
+        os = new OscillatorSettings();
+        o = new Oscillator(os);
     }
-
+    
+    
     @Test
-    public void setAmpZeroSets() {
-        o.setAmp(0);
-        assertEquals(0, o.getAmp(), 0.1);
-    }
-
-    @Test
-    public void setAmpOneSets() {
-        o.setAmp(0);
-        o.setAmp(1);
-        assertEquals(1, o.getAmp(), 0.1);
-    }
-
-    @Test
-    public void setAmpNegativeFails() {
-        o.setAmp(-0.1);
-        assertEquals(1, o.getAmp(), 0.1);
-    }
-
-    @Test
-    public void setAmpLargerThanOneFails() {
-        o.setAmp(1.1);
-        assertEquals(1, o.getAmp(), 0.05);
-    }
-
-    @Test
-    public void setFmDepthOneSets() {
-        o.setFmDepth(1);
-        assertEquals(1, o.getFmDepth(), 0.1);
-    }
-
-    @Test
-    public void setFmDepthNegativeOneSets() {
-        o.setFmDepth(-1);
-        assertEquals(-1, o.getFmDepth(), 0.1);
-    }
-
-    @Test
-    public void setFmDepthGreaterThanOneFails() {
-        o.setFmDepth(1.1);
-        assertEquals(0, o.getFmDepth(), 0.05);
-    }
-
-    @Test
-    public void setFmDepthLessThanNegativeOneFails() {
-        o.setFmDepth(-1.1);
-        assertEquals(0, o.getFmDepth(), 0.05);
-    }
-
-    @Test
-    public void setAmDepthOneSets() {
-        o.setAmDepth(1);
-        assertEquals(1, o.getAmDepth(), 0.1);
-    }
-
-    @Test
-    public void setAmDepthNegativeOneSets() {
-        o.setAmDepth(-1);
-        assertEquals(-1, o.getAmDepth(), 0.1);
-    }
-
-    @Test
-    public void setAmDepthGreaterThanOneFails() {
-        o.setAmDepth(1.1);
-        assertEquals(0, o.getAmDepth(), 0.05);
-    }
-
-    @Test
-    public void setAmDepthLessThanNegativeOneFails() {
-        o.setAmDepth(-1.1);
-        assertEquals(0, o.getAmDepth(), 0.05);
-    }
-
-    @Test
-    public void generateSampleDoesNotModifySampleWithBypass() {
-        o.setWaveform(Waveform.SQU);
-        o.setBypass(true);
+    public void generateWaveAmplitudeTuningOneOctaveUpReturnsGenerateSampleTwiceTuningZero() {
+        os.setTuning(1200);
         SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(0, s.getAmplitude(), 0.1);
-    }
-
-    @Test
-    public void generateSampleModifiesFrequencyWithFM() {
-        o.setWaveform(Waveform.SQU);
-        o.setFm(true);
-        o.setFmDepth(1);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(frequency * 2, s.getFrequency(), 0.1);
-    }
-
-    @Test
-    public void generateSampleDoesNotModifyFrequencyWithFMDepthZero() {
-        o.setWaveform(Waveform.SQU);
-        o.setFm(true);
-        o.setFmDepth(0);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(frequency, s.getFrequency(), 0.1);
-    }
-
-    @Test
-    public void generateSampleTuningOneOctaveUpReturnsGenerateSampleTwiceTuningZero() {
-        o.setTuning(1200);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
+        o.generateWaveAmplitude(s);
         double oAmplitude = s.getAmplitude();
-        Oscillator o2 = new Oscillator();
-        o2.setAdd(true);
+        OscillatorSettings os2 = new OscillatorSettings();
+        Oscillator o2 = new Oscillator(os2);
         s.resetSignal();
-        o2.generateSample(s);
-        o2.generateSample(s);
+        o2.generateWaveAmplitude(s);
+        o2.generateWaveAmplitude(s);
         assertEquals(s.getAmplitude(), oAmplitude, 0.1);
     }
 
     @Test
-    public void generateSampleTwiceTuningOneOctaveDownReturnsGenerateSampleTuningZero() {
-        o.setTuning(-1200);
+    public void generateWaveAmplitudeTwiceTuningOneOctaveDownReturnsGenerateSampleTuningZero() {
+        os.setTuning(-1200);
         SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
+        o.generateWaveAmplitude(s);
         s.resetSignal();
-        o.generateSample(s);
+        o.generateWaveAmplitude(s);
         double oAmplitude = s.getAmplitude();
-        Oscillator o2 = new Oscillator();
-        o2.setAdd(true);
+        OscillatorSettings os2 = new OscillatorSettings();
+        Oscillator o2 = new Oscillator(os2);
         s.resetSignal();
-        o2.generateSample(s);
+        o2.generateWaveAmplitude(s);
         assertEquals(s.getAmplitude(), oAmplitude, 0.1);
     }
-
+    
     @Test
-    public void generateSampleSquareReturnsZeroWithZeroAmp() {
-        o.setAmp(0);
-        o.setWaveform(Waveform.SQU);
+    public void generateWaveAmplitudeFixedOperatesWithConcertPitchFrequency() {
+        os.setFixed(true);
         SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(0, s.getAmplitude(), 0.1);
-    }
-
-    @Test
-    public void generateSampleSquareReturnsHalfWithHalfAmp() {
-        o.setAmp(0.5);
-        o.setWaveform(Waveform.SQU);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(0.5, s.getAmplitude(), 0.1);
-    }
-
-    @Test
-    public void generateSampleFixedOperatesWithConcertPitchFrequency() {
-        o.setFixed(true);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
+        o.generateWaveAmplitude(s);
         double fixedAmplitude = s.getAmplitude();
-        o.setFixed(false);
+        o = new Oscillator(os);
+        os.setFixed(false);
         s.setFrequency(440);
-        o.generateSample(s);
+        o.generateWaveAmplitude(s);
         double concertPitchAmplitude = s.getAmplitude();
         assertEquals(concertPitchAmplitude, fixedAmplitude, 0.1);
     }
-
+    
     @Test
-    public void generateSampleDoesNotModifySampleWithAddDisabled() {
-        o.setAdd(false);
-        o.setWaveform(Waveform.SQU);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(0, s.getAmplitude(), 0.1);
-
-    }
-
-    @Test
-    public void generateSampleSquareReturnsNegativeOneWithQuarterPhaseInvert() {
-        o.setInvert(true);
-        o.setWaveform(Waveform.SQU);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        assertEquals(-1, s.getAmplitude(), 0.1);
-    }
-
-    @Test
-    public void generateSampleSquareReturnsOneWithHalfPhaseInvert() {
-        o.setInvert(true);
-        o.setWaveform(Waveform.SQU);
-        SignalStatus s = new SignalStatus(frequency);
-        o.generateSample(s);
-        s.resetSignal();
-        o.generateSample(s);
-        assertEquals(1, s.getAmplitude(), 0.1);
-    }
-
-    @Test
-    public void generateSampleReturnsZeroWithSyncAndCompletePeriodTrue() {
-        o.setSync(true);
+    public void generateWaveAmplitudeHalfPhaseSquareReturnsOneWithSyncAndCompletePeriodTrue() {
+        os.setSync(true);
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         s.setCompletePeriod(true);
-        assertEquals(0, s.getAmplitude(), 0.1);
+        o.generateWaveAmplitude(s);
+        s = new SignalStatus(frequency);
+        s.setCompletePeriod(true);
+        double amplitude = o.generateWaveAmplitude(s);
+        assertEquals(1, amplitude, 0.1);
     }
 
     @Test
-    public void generateSampleReturnsOneWithSyncAndCompletePeriodFalse() {
-        o.setSync(true);
+    public void generateWaveAmplitudeHalfPhaseSquareReturnsNegativeOneWithSyncAndCompletePeriodFalse() {
+        os.setSync(true);
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         s.setCompletePeriod(false);
-        assertEquals(0, s.getAmplitude(), 0.1);
+        o.generateWaveAmplitude(s);
+        s = new SignalStatus(frequency);
+        s.setCompletePeriod(false);
+        double amplitude = o.generateWaveAmplitude(s);
+        assertEquals(-1, amplitude, 0.1);
+    }
+    
+    @Test
+    public void generateWaveAmplitudeSyncTrueFullPhaseSetsCompletePeriodTrue() {
+        os.setSync(true);
+        SignalStatus s = new SignalStatus(frequency);
+        for (int i = 0; i < 4; i++) {
+            s = new SignalStatus(frequency);
+            s.setCompletePeriod(false);
+            o.generateWaveAmplitude(s);
+        }
+        assertEquals(true, s.getCompletePeriod());
     }
 }

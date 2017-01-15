@@ -18,189 +18,205 @@ import static org.junit.Assert.*;
  */
 public class OscillatorPhaseTest {
 
+    private OscillatorSettings os;
     private Oscillator o;
     private int sampleRate = Settings.SAMPLE_RATE;
     private double frequency = Settings.SAMPLE_RATE / 4;
 
     public OscillatorPhaseTest() {
-
     }
 
     @Before
     public void setUp() {
-        o = new Oscillator();
-        o.setAdd(true);
+        this.os = new OscillatorSettings();
+        this.o = new Oscillator(os);
     }
 
     @Test
-    public void generateSampleSineReturnsOneWithQuarterPhase() {
+    public void generateWaveAmplitudeSineReturnsOneWithQuarterPhase() {
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 1; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(1, s.getAmplitude(), 0.1);
+        assertEquals(1, s.getAmplitude(), 0.05);
+        assertEquals(0.25, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSineReturnsZeroWithHalfPhase() {
+    public void generateWaveAmplitudeSineReturnsZeroWithHalfPhase() {
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 2; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.05);
+        assertEquals(0.5, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSineReturnsNegativeOneWithThreeQuartersPhase() {
+    public void generateWaveAmplitudeSineReturnsNegativeOneWithThreeQuartersPhase() {
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 3; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-1, s.getAmplitude(), 0.1);
+        assertEquals(-1, s.getAmplitude(), 0.05);
+        assertEquals(0.75, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSineReturnsZeroWithFullPhase() {
+    public void generateWaveAmplitudeSineReturnsZeroWithFullPhase() {
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 4; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.05);
+        assertEquals(0, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSquareReturnsOneWithQuarterPhase() {
-        o.setWaveform(Waveform.SQU);
+    public void generateWaveAmplitudeSquareReturnsOneWithQuarterPhase() {
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 1; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(1, s.getAmplitude(), 0.1);
+        assertEquals(1, s.getAmplitude(), 0.05);
+        assertEquals(0.25, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSquareReturnsNegativeOneWithHalfPhase() {
-        o.setWaveform(Waveform.SQU);
+    public void generateWaveAmplitudeSquareReturnsNegativeOneWithHalfPhase() {
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 2; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-1, s.getAmplitude(), 0.1);
+        assertEquals(-1, s.getAmplitude(), 0.05);
+        assertEquals(0.5, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSquareReturnsNegativeOneWithThreeQuartersPhase() {
-        o.setWaveform(Waveform.SQU);
+    public void generateWaveAmplitudeSquareReturnsNegativeOneWithThreeQuartersPhase() {
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 3; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-1, s.getAmplitude(), 0.1);
+        assertEquals(-1, s.getAmplitude(), 0.05);
+        assertEquals(0.75, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSquareReturnsOneWithFullPhase() {
-        o.setWaveform(Waveform.SQU);
+    public void generateWaveAmplitudeSquareReturnsOneWithFullPhase() {
+        os.setWaveform(Waveform.SQU);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 4; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(1, s.getAmplitude(), 0.1);
+        assertEquals(1, s.getAmplitude(), 0.05);
+        assertEquals(0, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSawReturnsHalfWithQuarterPhase() {
-        o.setWaveform(Waveform.SAW);
+    public void generateWaveAmplitudeSawReturnsHalfWithQuarterPhase() {
+        os.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 1; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0.5, s.getAmplitude(), 0.1);
+        assertEquals(0.5, s.getAmplitude(), 0.05);
+        assertEquals(0.25, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSawReturnsNegativeOneWithHalfPhase() {
-        o.setWaveform(Waveform.SAW);
+    public void generateWaveAmplitudeSawReturnsNegativeOneWithHalfPhase() {
+        os.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 2; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-1, s.getAmplitude(), 0.1);
+        assertEquals(-1, s.getAmplitude(), 0.05);
+        assertEquals(0.5, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSawReturnsNegativeHalfWithThreeQuartersPhase() {
-        o.setWaveform(Waveform.SAW);
+    public void generateWaveAmplitudeSawReturnsNegativeHalfWithThreeQuartersPhase() {
+        os.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 3; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-0.5, s.getAmplitude(), 0.1);
+        assertEquals(-0.5, s.getAmplitude(), 0.05);
+        assertEquals(0.75, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleSawReturnsZeroWithFullPhase() {
-        o.setWaveform(Waveform.SAW);
+    public void generateWaveAmplitudeSawReturnsZeroWithFullPhase() {
+        os.setWaveform(Waveform.SAW);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 4; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.05);
+        assertEquals(0, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleTriangleReturnsOneWithQuarterPhase() {
-        o.setWaveform(Waveform.TRI);
+    public void generateWaveAmplitudeTriangleReturnsOneWithQuarterPhase() {
+        os.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 1; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(1, s.getAmplitude(), 0.1);
+        assertEquals(1, s.getAmplitude(), 0.05);
+        assertEquals(0.25, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleTriangleReturnsZeroWithHalfPhase() {
-        o.setWaveform(Waveform.TRI);
+    public void generateWaveAmplitudeTriangleReturnsZeroWithHalfPhase() {
+        os.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 2; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.05);
+        assertEquals(0.5, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleTriangleReturnsNegativeOneWithThreeQuartersPhase() {
-        o.setWaveform(Waveform.TRI);
+    public void generateWaveAmplitudeTriangleReturnsNegativeOneWithThreeQuartersPhase() {
+        os.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 3; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(-1, s.getAmplitude(), 0.1);
+        assertEquals(-1, s.getAmplitude(), 0.05);
+        assertEquals(0.75, o.getPhase(), 0.05);
     }
 
     @Test
-    public void generateSampleTriangleReturnsZeroWithFullPhase() {
-        o.setWaveform(Waveform.TRI);
+    public void generateWaveAmplitudeTriangleReturnsZeroWithFullPhase() {
+        os.setWaveform(Waveform.TRI);
         SignalStatus s = new SignalStatus(frequency);
         for (int i = 0; i < 4; i++) {
             s.resetSignal();
-            o.generateSample(s);
+            s.setAmplitude(o.generateWaveAmplitude(s));
         }
-        assertEquals(0, s.getAmplitude(), 0.1);
+        assertEquals(0, s.getAmplitude(), 0.05);
+        assertEquals(0, o.getPhase(), 0.05);
     }
 }

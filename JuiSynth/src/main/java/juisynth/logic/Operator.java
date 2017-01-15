@@ -18,24 +18,20 @@ import juisynth.logic.signal.SignalStatus;
  * @author juicyp
  */
 public class Operator implements SignalSource {
-    
+
     private Oscillator oscillator;
     private EnvelopeGenerator eg;
     private Filter filter;
     private SignalSource signalSource = null;
     private Patch patch;
-    
+
     public Operator(Patch patch) {
-        this.oscillator = new Oscillator(patch.getOscillatorSettings());
-        this.eg = new ADSR(patch.getEnvelopeGeneratorSettings());
-        this.filter = new SpectrumFilter(patch.getFilterSettings());
-        this.signalSource = signalSource;
-        this.patch = patch;
+        loadPatch(patch);
     }
 
     @Override
     public void generateSample(SignalStatus signal) {
-        
+
         if (patch.isBypass()) {
             if (signalSource != null) {
                 signalSource.generateSample(signal);
@@ -45,11 +41,11 @@ public class Operator implements SignalSource {
 
         double amplitude = oscillator.generateWaveAmplitude(signal);
         amplitude *= patch.getAmp();
-        
+
         if (patch.isInvert()) {
             amplitude = -amplitude;
         }
-        
+
         amplitude = filter.generateFilter(oscillator.getPhase(), amplitude);
         amplitude *= eg.generateEnvelope(signal.getActiveNote());
 
@@ -116,10 +112,13 @@ public class Operator implements SignalSource {
         return patch;
     }
 
-    public void setPatch(Patch patch) {
+    public void loadPatch(Patch patch) {
         this.patch = patch;
+        this.oscillator = new Oscillator(patch.getOscillatorSettings());
+        this.eg = new ADSR(patch.getEnvelopeGeneratorSettings());
+        this.filter = new SpectrumFilter(patch.getFilterSettings());
     }
-    
+
     private void applyFM(double amplitude, SignalStatus signal) {
         signal.setFrequency(signal.getFrequency() * Math.pow(2, amplitude * patch.getFmDepth()));
     }

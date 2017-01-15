@@ -9,6 +9,8 @@ import juisynth.logic.oscillator.Oscillator;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import juisynth.logic.Operator;
+import juisynth.logic.Patch;
 import juisynth.logic.signal.SignalStatus;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +24,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
     
     private Player p;
-    private Oscillator o;
+    private Operator o;
     private double ampDefaultValue;
     private SourceDataLineStub a;
     
@@ -33,8 +35,8 @@ public class PlayerTest {
     public void setUp() {
         a = new SourceDataLineStub();
         p = new Player();
-        o = new Oscillator();
-        o.setAdd(true);
+        o = new Operator(new Patch());
+        o.getPatch().setAdd(true);
         ampDefaultValue = p.getAmp();
     }
     
@@ -74,8 +76,8 @@ public class PlayerTest {
         method.invoke(p, new Object[0]);
         
         int index = 0;
-        o = new Oscillator();
-        o.setAdd(true);
+        o = new Operator(new Patch());
+        o.getPatch().setAdd(true);
         
         byte[] sampleBuffer = new byte[Settings.BUFFER_SIZE];
         for (int i = 0; i < Settings.SAMPLES_PER_BUFFER; i++) {

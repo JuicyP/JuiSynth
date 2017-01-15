@@ -14,9 +14,7 @@ import juisynth.logic.oscillator.OscillatorSettings;
  * @author juicyp
  */
 public class Patch {
-    
-    private Waveform waveform = Waveform.SIN;
-
+   
     private double amp = 1;
     
     private boolean bypass = false;
@@ -30,18 +28,16 @@ public class Patch {
 
     private boolean invert = false;
     
-    private FilterSettings fs = new FilterSettings();
-    private ADSRSettings egs = new ADSRSettings();
-    private OscillatorSettings oscs = new OscillatorSettings();
+    private FilterSettings fs;
+    private ADSRSettings egs;
+    private OscillatorSettings oscs;
+
+    public Patch() {
+        this.fs = new FilterSettings();
+        this.egs = new ADSRSettings();
+        this.oscs = new OscillatorSettings();
+    }
     
-    public Waveform getWaveform() {
-        return waveform;
-    }
-
-    public void setWaveform(Waveform waveform) {
-        this.waveform = waveform;
-    }
-
     public double getAmp() {
         return amp;
     }

@@ -31,10 +31,6 @@ public class Oscillator {
         return phase;
     }
     
-    public void setPhase(double phase) {
-        this.phase = phase;
-    }
-    
     public double generateWaveAmplitude(SignalStatus signal) {
 
         double frequency = signal.getFrequency();
