@@ -13,77 +13,37 @@ import juisynth.logic.player.Settings;
  */
 public class ADSR extends EnvelopeGenerator {
 
-    // Instantiating fields at declaration here as well for uniformity
-    private int attack = 0;
-    private int decay = 0;
-    private double sustain = 1;
-    private int release = 0;
-
     private double noteOffLevel = 0;
     private int sampleTimer = -1;
     private int noteOffSample = -1;
 
-    public ADSR() {
-    }
-    
-    public int getAttack() {
-        return attack;
+    public ADSR(ADSRSettings egs) {
+        this.egs = egs;
     }
 
-    public void setAttack(int attack) {
-        if (attack < 0) {
+    @Override
+    public void loadEnvelopeGeneratorSettings(EnvelopeSettings egs) {
+        if (!(egs instanceof ADSRSettings)) {
             return;
         }
-        this.attack = attack;
-    }
-    
-    public int getDecay() {
-        return decay;
-    }
-
-    public void setDecay(int decay) {
-        if (decay < 0) {
-            return;
-        }
-        this.decay = decay;
-    }
-    
-    public double getSustain() {
-        return sustain;
-    }
-
-    public void setSustain(double sustain) {
-        if (sustain < 0 || sustain > 1) {
-            return;
-        }
-        this.sustain = sustain;
-    }
-    
-    public int getRelease() {
-        return release;
-    }
-
-    public void setRelease(int release) {
-        if (release < 0) {
-            return;
-        }
-        this.release = release;
+        this.egs = egs;
     }
 
     @Override
     public double generateEnvelope(boolean activeNote) {
+        ADSRSettings ags = (ADSRSettings) egs;
         sampleTimer++;
         int elapsedTime = (int) (sampleTimer / (double) Settings.SAMPLE_RATE * 1000);
         double amplitude = 0;
-        
+
         if (activeNote) {
             noteOffSample = -1;
-            if (attack > elapsedTime) {
-                amplitude = elapsedTime / (double) attack;
-            } else if (attack + decay > elapsedTime) {
-                amplitude = 1 - (1 - sustain) * ((elapsedTime - attack) / (double) decay);
+            if (ags.getAttack() > elapsedTime) {
+                amplitude = elapsedTime / (double) ags.getAttack();
+            } else if (ags.getAttack() + ags.getDecay() > elapsedTime) {
+                amplitude = 1 - (1 - ags.getSustain()) * ((elapsedTime - ags.getAttack()) / (double) ags.getDecay());
             } else {
-                amplitude = sustain;
+                amplitude = ags.getSustain();
             }
             noteOffLevel = amplitude;
             return amplitude;
@@ -95,8 +55,8 @@ public class ADSR extends EnvelopeGenerator {
 
         int noteOffTime = (int) (noteOffSample / (double) Settings.SAMPLE_RATE * 1000);
         // Time elapsed after noteOff isn't longer than release
-        if (release > elapsedTime - noteOffTime) {
-            return amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) release);
+        if (ags.getRelease() > elapsedTime - noteOffTime) {
+            return amplitude = noteOffLevel - noteOffLevel * ((elapsedTime - noteOffTime) / (double) ags.getRelease());
         }
 
         sampleTimer = -1;

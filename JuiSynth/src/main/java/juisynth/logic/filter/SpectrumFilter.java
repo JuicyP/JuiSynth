@@ -14,12 +14,24 @@ import juisynth.logic.WaveformCalculator;
  */
 public class SpectrumFilter extends Filter {
     
+    private double depth;
+
+    public double getDepth() {
+        return depth;
+    }
+
+    public void setDepth(double depth) {
+        if (depth < 0 || depth > 1) {
+            return;
+        }
+        this.depth = depth;
+    }
+    
     public SpectrumFilter() {
     }
 
     @Override
-    public double generateFilter(double phase) {
-        return WaveformCalculator.calculateWaveformY(phase, Waveform.SIN);
+    public double generateFilter(double phase, double amplitude) {
+        return (1 - depth) * amplitude + depth * WaveformCalculator.calculateWaveformY(phase, Waveform.SIN);
     }
-    
 }

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juisynth.logic.filter;
-
+package juisynth.logic.envelope;
 
 /**
  *
  * @author juicyp
  */
-public abstract class Filter {
+public abstract class EnvelopeSettings {
     
-    public abstract double generateFilter(double phase, double amplitude);
 }

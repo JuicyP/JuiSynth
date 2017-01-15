@@ -46,7 +46,6 @@ public class Oscillator implements SignalSource {
     private boolean invert = false;
     private boolean invertOnSync = false;
     
-    private double filterDepth = 0;
     private Filter filter;
     private EnvelopeGenerator envelopeGenerator;
     
@@ -56,17 +55,6 @@ public class Oscillator implements SignalSource {
     
     public void setFilter(Filter filter) {
         this.filter = filter;
-    }
-    
-    public double getFilterDepth() {
-        return filterDepth;
-    }
-    
-    public void setFilterDepth(double filterDepth) {
-        if (filterDepth < 0 || filterDepth > 1) {
-            return;
-        }
-        this.filterDepth = filterDepth;
     }
     
     public EnvelopeGenerator getEnvelopeGenerator() {
@@ -285,7 +273,7 @@ public class Oscillator implements SignalSource {
         double y = WaveformCalculator.calculateWaveformY(phase, waveform);
         
         if (filter != null) {
-            y = (1 - filterDepth) * y + filterDepth * filter.generateFilter(phase);
+            y = filter.generateFilter(phase, y);
         }
         
         if (envelopeGenerator != null) {

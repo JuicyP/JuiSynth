@@ -11,5 +11,15 @@ package juisynth.logic.envelope;
  */
 public abstract class EnvelopeGenerator {
     
+    protected EnvelopeSettings egs;
+
+    public EnvelopeSettings getEnvelopeGeneratorSettings() {
+        return egs;
+    }
+
+    public void loadEnvelopeGeneratorSettings(EnvelopeSettings egs) {
+        this.egs = egs;
+    }
+    
     public abstract double generateEnvelope(boolean activeNote);
 }
