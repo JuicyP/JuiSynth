@@ -11,13 +11,23 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import juisynth.logic.Patch;
 
-
+/**
+ * Defines a listener for the parameters as defined by the implementation of Operator.
+ * @author juicyp
+ */
 public class OperatorParameterListener implements ChangeListener {
     
     private Patch patch;
     private JSlider slider;
     private OperatorParameter operatorParameter;
 
+    /**
+     * Constructor for the listener, supplying the slider, parameter enumerator and the
+     * Patch component to be connected to.
+     * @param patch The Patch object.
+     * @param slider The slider relating to a parameter.
+     * @param operatorParameter The parameter.
+     */
     public OperatorParameterListener(Patch patch, JSlider slider, OperatorParameter operatorParameter) {
         this.patch = patch;
         this.slider = slider;

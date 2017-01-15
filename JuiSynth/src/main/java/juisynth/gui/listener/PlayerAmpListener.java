@@ -10,11 +10,21 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Defines a listener for the amp parameter as defined by the implementation of Player.
+ * @author juicyp
+ */
 public class PlayerAmpListener implements ChangeListener {
 
     private Player player;
     private JSlider slider;
 
+     /**
+     * Constructor for the listener, supplying the slider and the
+     * Player component to be connected to.
+     * @param player The Player object to be set as field.
+     * @param slider The slider to be set as field.
+     */
     public PlayerAmpListener(Player player, JSlider slider) {
         this.player = player;
         this.slider = slider;

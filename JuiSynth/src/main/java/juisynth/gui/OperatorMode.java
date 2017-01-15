@@ -5,6 +5,10 @@
  */
 package juisynth.gui;
 
+/**
+ * Enumerator for the boolean parameters modified by GUI elements relating to Operator.
+ * @author juicyp
+ */
 public enum OperatorMode {
     FIXED, BYPASS, ADD, FM, AM, SYNC, INVERT
 }

@@ -15,10 +15,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+/**
+ * PlayerPanel is a class extending JPanel containing the GUI elements relevant to an
+ * Player.
+ * @author juicyp
+ */
 public class PlayerPanel extends JPanel {
     
     private Player player;
     
+    /**
+     * Constructor for PlayerPanel, instantiates all the GUI components in the panel.
+     * @param player The Player object to connect to the GUI elements.
+     */
     public PlayerPanel(Player player) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

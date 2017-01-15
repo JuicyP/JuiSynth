@@ -11,6 +11,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import juisynth.logic.Patch;
 
+/**
+ * OscillatorOptionsPanel is a class extending JPanel containing the GUI elements relevant to an
+ * Oscillator.
+ * @author juicyp
+ */
 public class OscillatorOptionsPanel extends JPanel {
     
     private Patch patch;

@@ -18,10 +18,19 @@ import juisynth.gui.listener.OscillatorTuningListener;
 import juisynth.gui.listener.SpectrumFilterListener;
 import juisynth.logic.Operator;
 
+/**
+ * OperatorPanel is a class extending JPanel containing the GUI elements relevant to an
+ * Operator.
+ * @author juicyp
+ */
 public class OperatorPanel extends JPanel {
     
     private Operator operator;
     
+    /**
+     * Constructor for OperatorPanel, instantiates all the GUI components in the panel.
+     * @param operator The Operator object to connect to the GUI elements.
+     */
     public OperatorPanel(Operator operator) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

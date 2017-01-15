@@ -11,14 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import juisynth.gui.listener.ADSRParameterListener;
-import juisynth.logic.envelope.ADSR;
 import juisynth.logic.envelope.ADSRSettings;
 
-
+/**
+ * ADSRPanel is a class extending JPanel containing the GUI elements relevant to an
+ * ADSR envelope.
+ * @author juicyp
+ */
 public class ADSRPanel extends JPanel {
 
     private ADSRSettings adsr;
 
+    /**
+     * Constructor for ADSRPanel, instantiates all the GUI components in the panel.
+     * @param adsr The ADSRSettings object to connect to the GUI elements.
+     */
     public ADSRPanel(ADSRSettings adsr) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

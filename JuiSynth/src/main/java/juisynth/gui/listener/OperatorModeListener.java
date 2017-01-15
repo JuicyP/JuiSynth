@@ -10,12 +10,21 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import juisynth.logic.Patch;
 
-
+/**
+ * Defines a listener for the boolean parameters as defined by the implementation of Operator.
+ * @author juicyp
+ */
 public class OperatorModeListener implements ItemListener {
     
     private Patch patch;
     private OperatorMode oscillatorMode;
     
+    /**
+     * Constructor for the listener, supplying parameter enumerator and the
+     * Patch component to be connected to.
+     * @param patch The Patch object to be set as field.
+     * @param oscillatorMode The OscillatorMode enumerator to be set as field.
+     */
     public OperatorModeListener(Patch patch, OperatorMode oscillatorMode) {
         this.patch = patch;
         this.oscillatorMode = oscillatorMode;

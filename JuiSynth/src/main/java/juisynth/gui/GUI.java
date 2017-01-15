@@ -6,7 +6,6 @@
 package juisynth.gui;
 
 import juisynth.logic.player.Player;
-import juisynth.logic.oscillator.Oscillator;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
@@ -15,7 +14,10 @@ import juisynth.gui.listener.KeyboardListener;
 import juisynth.logic.Operator;
 import juisynth.logic.Patch;
 
-
+/**
+ * The main class of the GUI, instantiating the panels and listeners contained in the frame.
+ * @author juicyp
+ */
 public class GUI implements Runnable {
     
     private JFrame frame;

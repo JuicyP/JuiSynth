@@ -11,13 +11,23 @@ import javax.swing.event.ChangeListener;
 import juisynth.gui.ADSRParameter;
 import juisynth.logic.envelope.ADSRSettings;
 
-
+/**
+ * Defines a listener for the parameters as defined by the implementation of ADSR.
+ * @author juicyp
+ */
 public class ADSRParameterListener implements ChangeListener {
     
     private ADSRSettings adsr;
     private JSlider slider;
     private ADSRParameter adsrParameter;
     
+    /**
+     * Constructor for the listener, supplying the slider, parameter enumerator and the
+     * ADSRSettings component to be connected to.
+     * @param adsr The ADSRSettings object.
+     * @param slider The slider relating to a parameter.
+     * @param adsrParameter The parameter.
+     */
     public ADSRParameterListener(ADSRSettings adsr, JSlider slider, ADSRParameter adsrParameter) {
         this.adsr = adsr;
         this.slider = slider;

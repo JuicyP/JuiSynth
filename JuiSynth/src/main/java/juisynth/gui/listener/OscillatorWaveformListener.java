@@ -11,12 +11,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import juisynth.logic.oscillator.OscillatorSettings;
 
-
+/**
+ * Defines a listener for the waveform parameter as defined by the implementation of Oscillator.
+ * @author juicyp
+ */
 public class OscillatorWaveformListener implements ActionListener {
 
     private OscillatorSettings oscs;
     private JComboBox comboBox;
 
+    /**
+     * Constructor for the listener, supplying the JComboBox and the
+     * OscillatorSettings component to be connected to.
+     * @param oscs The OscillatorSettings object to be set as field.
+     * @param comboBox The JComboBox object to be set as field.
+     */
     public OscillatorWaveformListener(OscillatorSettings oscs, JComboBox comboBox) {
         this.oscs = oscs;
         this.comboBox = comboBox;

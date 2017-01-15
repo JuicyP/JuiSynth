@@ -10,16 +10,20 @@ import juisynth.logic.player.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Defines a listener for the methods as defined by the implementation of Player.
+ * @author juicyp
+ */
 public class PlayerModeListener implements ActionListener {
 
     private Player player;
     private PlayerMode playerMode;
 
     /**
-     * Sets value of player field.
-     *
-     * @param player
+     * Constructor for the listener, supplying parameter enumerator and the
+     * Player component to be connected to.
+     * @param player The Player object to be set as field.
+     * @param playerMode The PlayerMode enumerator to be set as field.
      */
     public PlayerModeListener(Player player, PlayerMode playerMode) {
         this.player = player;

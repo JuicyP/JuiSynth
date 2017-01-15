@@ -5,6 +5,10 @@
  */
 package juisynth.gui;
 
+/**
+ * Enumerator for the methods triggered by GUI elements relating to Player.
+ * @author juicyp
+ */
 public enum PlayerMode {
-    START, STOP, PLAY
+    START, STOP
 }

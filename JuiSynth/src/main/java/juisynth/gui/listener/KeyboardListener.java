@@ -10,17 +10,25 @@ import java.awt.event.KeyEvent;
 import juisynth.logic.Note;
 import juisynth.logic.player.Player;
 
-
+/**
+ * Implements a KeyEventDispatcher listening to the key strokes.
+ * Sends note information to the Player.
+ * @author juicyp
+ */
 public class KeyboardListener implements KeyEventDispatcher {
 
     private Player player;
 
+    /**
+     * The constructor for the KeyboardListener, sets the Player field.
+     * @param player The player to be sent note information to.
+     */
     public KeyboardListener(Player player) {
         this.player = player;
     }
 
     // Here there be monsters
-    public void keyTyped(KeyEvent ke) {
+    private void keyTyped(KeyEvent ke) {
         Note note;
         char key = ke.getKeyChar();
         switch (key) {
@@ -92,11 +100,11 @@ public class KeyboardListener implements KeyEventDispatcher {
          player.setActiveNote(true);
     }
 
-    public void keyPressed(KeyEvent ke) {
+    private void keyPressed(KeyEvent ke) {
         player.setActiveNote(true);
     }
 
-    public void keyReleased(KeyEvent ke) {
+    private void keyReleased(KeyEvent ke) {
         player.setActiveNote(false);
     }
 
