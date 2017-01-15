@@ -16,8 +16,8 @@ public class WaveformCalculator {
     private static final Random NOISE_GENERATOR = new Random();
 
     /**
-     * Calculates the y position of a wave based on the waveform and the position x.
-     * @param phase The x position of a wave.
+     * Calculates the y position of a wave based on the waveform and the phase.
+     * @param phase The phase of a wave.
      * @param waveform Specified waveform.
      * @return returns y position of a wave.
      */

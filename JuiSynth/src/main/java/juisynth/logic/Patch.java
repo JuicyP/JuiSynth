@@ -10,7 +10,8 @@ import juisynth.logic.filter.FilterSettings;
 import juisynth.logic.oscillator.OscillatorSettings;
 
 /**
- *
+ * Patch contains the settings for the implementation of a synthesizer component,
+ * specified as containing an oscillator, a spectrum filter and an ADSR envelope.
  * @author juicyp
  */
 public class Patch {
@@ -32,6 +33,9 @@ public class Patch {
     private ADSRSettings egs;
     private OscillatorSettings oscs;
 
+    /**
+     * Constructor for patch. Instantiates new settings.
+     */
     public Patch() {
         this.fs = new FilterSettings();
         this.egs = new ADSRSettings();
@@ -42,6 +46,10 @@ public class Patch {
         return amp;
     }
 
+    /**
+     * Sets amplifier value for the patch. The value must be between 0 and 1 inclusive.
+     * @param amp Value for amplifier.
+     */
     public void setAmp(double amp) {
         if (amp < 0 || amp > 1) {
             return;
@@ -77,6 +85,10 @@ public class Patch {
         return fmDepth;
     }
 
+    /**
+     * Sets the depth of FM to be applied. Value must be between -1 and 1 inclusive.
+     * @param fmDepth Depth of applied FM.
+     */
     public void setFmDepth(double fmDepth) {
         if (fmDepth < -1 || fmDepth > 1) {
             return;
@@ -96,6 +108,10 @@ public class Patch {
         return amDepth;
     }
 
+    /**
+     * Sets the depth of AM to be applied. Value must be between -1 and 1 inclusive.
+     * @param amDepth Depth of applied AM.
+     */
     public void setAmDepth(double amDepth) {
         if (amDepth < -1 || amDepth > 1) {
             return;

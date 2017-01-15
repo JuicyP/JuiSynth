@@ -10,10 +10,6 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-/**
- *
- * @author juicyp
- */
 public class PlayerAmpListener implements ChangeListener {
 
     private Player player;

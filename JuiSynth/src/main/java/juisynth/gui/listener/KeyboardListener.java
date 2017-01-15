@@ -10,10 +10,7 @@ import java.awt.event.KeyEvent;
 import juisynth.logic.Note;
 import juisynth.logic.player.Player;
 
-/**
- *
- * @author juicyp
- */
+
 public class KeyboardListener implements KeyEventDispatcher {
 
     private Player player;

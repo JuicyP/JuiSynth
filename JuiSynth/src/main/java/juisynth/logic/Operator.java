@@ -14,7 +14,8 @@ import juisynth.logic.signal.SignalSource;
 import juisynth.logic.signal.SignalStatus;
 
 /**
- *
+ * Operator defines the implementation of a synthesizer component, consisting of
+ * an oscillator, a spectrum filter and an ADSR envelope.
  * @author juicyp
  */
 public class Operator implements SignalSource {
@@ -25,6 +26,11 @@ public class Operator implements SignalSource {
     private SignalSource signalSource = null;
     private Patch patch;
 
+    /**
+     * Constructor for Operator.
+     * @param patch The settings of the operator
+     * @see juisynth.logic.Operator#loadPatch(juisynth.logic.Patch)
+     */
     public Operator(Patch patch) {
         loadPatch(patch);
     }
@@ -112,6 +118,11 @@ public class Operator implements SignalSource {
         return patch;
     }
 
+    /**
+     * Loads the settings for oscillator, spectrum filter and ADSR envelope contained
+     * in the provided Patch-object into the fields of this particular instance of Operator.
+     * @param patch A patch containing the settings for an operator.
+     */
     public void loadPatch(Patch patch) {
         this.patch = patch;
         this.oscillator = new Oscillator(patch.getOscillatorSettings());

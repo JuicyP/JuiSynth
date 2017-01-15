@@ -5,29 +5,22 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <suppress files="JuiSynth.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="OscillatorTest.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="TwoOperatorTest.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="WaveformCalculatorTest.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="PlayerTest.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="SourceDataLineStub.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="SignalStatusTest.java" checks="[a-zA-Z0-9]*"/>
-    
     <suppress files="ADSRPanel.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="ADSRParameter.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="GUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OperatorPanel.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="OscillatorMode.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="OperatorMode.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorOptionsPanel.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="OscillatorParameter.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="OperatorParameter.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerMode.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerPanel.java" checks="[a-zA-Z0-9]*"/>
     
     <suppress files="ADSRParameterListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="KeyboardListener.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="OscillatorModeListener.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="OscillatorParameterListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="OperatorModeListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="OperatorParameterListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="OscillatorWaveformListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="OscillatorTuningListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerAmpListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="PlayerModeListener.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="SpectrumFilterListener.java" checks="[a-zA-Z0-9]*"/>

@@ -5,10 +5,6 @@
  */
 package juisynth.gui;
 
-/**
- *
- * @author juicyp
- */
 public enum ADSRParameter {
     ATTACK, DECAY, SUSTAIN, RELEASE
 }

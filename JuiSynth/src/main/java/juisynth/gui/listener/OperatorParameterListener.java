@@ -11,10 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import juisynth.logic.Patch;
 
-/**
- *
- * @author juicyp
- */
+
 public class OperatorParameterListener implements ChangeListener {
     
     private Patch patch;

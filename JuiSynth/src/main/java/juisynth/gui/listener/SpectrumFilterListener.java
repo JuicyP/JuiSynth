@@ -9,12 +9,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import juisynth.logic.filter.FilterSettings;
-import juisynth.logic.filter.SpectrumFilter;
 
-/**
- *
- * @author juicyp
- */
 public class SpectrumFilterListener implements ChangeListener {
     
     private FilterSettings fs;

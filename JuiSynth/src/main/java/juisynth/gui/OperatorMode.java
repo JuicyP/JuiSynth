@@ -5,10 +5,6 @@
  */
 package juisynth.gui;
 
-/**
- *
- * @author juicyp
- */
 public enum OperatorMode {
     FIXED, BYPASS, ADD, FM, AM, SYNC, INVERT
 }

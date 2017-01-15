@@ -9,11 +9,16 @@ import juisynth.logic.Waveform;
 import juisynth.logic.WaveformCalculator;
 
 /**
- *
+ * A naive implementation of a filter, attenuating the harmonics of a signal,
+ * strengthening the fundamental frequency.
  * @author juicyp
  */
 public class SpectrumFilter extends Filter {
     
+    /**
+     * Sets the given FilterSettings object into the field containing object of said type.
+     * @param settings FilterSettings object containing information relevant to filters.
+     */
     public SpectrumFilter(FilterSettings settings) {
         this.settings = settings;
     }

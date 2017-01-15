@@ -10,10 +10,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import juisynth.logic.oscillator.OscillatorSettings;
 
-/**
- *
- * @author juicyp
- */
 public class OscillatorTuningListener implements ChangeListener {
 
     private OscillatorSettings oscs;

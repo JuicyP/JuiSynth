@@ -7,7 +7,6 @@ package juisynth.gui;
 
 import juisynth.gui.listener.OscillatorWaveformListener;
 import juisynth.gui.listener.OperatorParameterListener;
-import juisynth.logic.oscillator.Oscillator;
 import juisynth.logic.Waveform;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -18,13 +17,7 @@ import javax.swing.SwingConstants;
 import juisynth.gui.listener.OscillatorTuningListener;
 import juisynth.gui.listener.SpectrumFilterListener;
 import juisynth.logic.Operator;
-import juisynth.logic.envelope.ADSR;
-import juisynth.logic.filter.SpectrumFilter;
 
-/**
- *
- * @author juicyp
- */
 public class OperatorPanel extends JPanel {
     
     private Operator operator;
@@ -32,8 +25,6 @@ public class OperatorPanel extends JPanel {
     public OperatorPanel(Operator operator) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        // TODO: Instantiate new oscillator instead of passing after refactoring
-        // Operator/Oscillator
         this.operator = operator;
         instantiateComponents();
     }

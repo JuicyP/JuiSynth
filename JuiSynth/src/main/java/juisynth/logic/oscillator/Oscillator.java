@@ -8,14 +8,10 @@ package juisynth.logic.oscillator;
 import juisynth.logic.WaveformCalculator;
 import juisynth.logic.player.Settings;
 import juisynth.logic.signal.SignalStatus;
-import juisynth.logic.signal.SignalSource;
 
 /**
- * Receives a SignalStatus-object along a signal path consisting of
- * SignalSources and modifies it based on it's state. Oscillator implements
- * SignalSource.
- *
- * @see SignalSource SignalStatus
+ * Oscillator defines an oscillating component, producing a signal based on it's phase
+ * and a given SignalStatus object.
  * @author juicyp
  */
 public class Oscillator {
@@ -23,6 +19,10 @@ public class Oscillator {
     private OscillatorSettings oscs;
     private double phase = 0;
     
+    /**
+     * Sets the given OscillatorSettings object into the field containing object of said type.
+     * @param oscs OscillatorSettings object containing information relevant to oscillators.
+     */
     public Oscillator(OscillatorSettings oscs) {
         this.oscs = oscs;
     }
@@ -31,6 +31,12 @@ public class Oscillator {
         return phase;
     }
     
+    /**
+     * Generates an amplitude based on the phase of the oscillator, it's settings and
+     * a given SignalStatus-object.
+     * @param signal SignalStatus-object containing the information relevant for oscillators.
+     * @return amplitude of the generated signal.
+     */
     public double generateWaveAmplitude(SignalStatus signal) {
 
         double frequency = signal.getFrequency();

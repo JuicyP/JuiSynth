@@ -6,7 +6,8 @@
 package juisynth.logic.envelope;
 
 /**
- *
+ * EnvelopeSettings defines settings relevant to a specific implementation of an
+ * EnvelopeGenerator.
  * @author juicyp
  */
 public abstract class EnvelopeSettings {

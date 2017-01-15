@@ -6,16 +6,11 @@
 package juisynth.gui;
 
 import juisynth.gui.listener.OperatorModeListener;
-import juisynth.logic.oscillator.Oscillator;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import juisynth.logic.Patch;
 
-/**
- *
- * @author juicyp
- */
 public class OscillatorOptionsPanel extends JPanel {
     
     private Patch patch;

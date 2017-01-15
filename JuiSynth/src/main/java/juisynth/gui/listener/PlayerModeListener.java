@@ -10,12 +10,7 @@ import juisynth.logic.player.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Listens to button and starts or stops player, depending on the
- * given playerMode parameter.
- *
- * @author juicyp
- */
+
 public class PlayerModeListener implements ActionListener {
 
     private Player player;

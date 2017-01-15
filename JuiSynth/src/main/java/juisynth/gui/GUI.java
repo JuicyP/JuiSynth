@@ -15,10 +15,7 @@ import juisynth.gui.listener.KeyboardListener;
 import juisynth.logic.Operator;
 import juisynth.logic.Patch;
 
-/**
- * Main UI implementation of JuiSynth.
- * @author juicyp
- */
+
 public class GUI implements Runnable {
     
     private JFrame frame;

@@ -8,7 +8,8 @@ package juisynth.logic.envelope;
 import juisynth.logic.player.Settings;
 
 /**
- *
+ * ADSR is an implementation of EnvelopeGenerator, providing an attack, decay,
+ * sustain and release phases.
  * @author juicyp
  */
 public class ADSR extends EnvelopeGenerator {
@@ -17,6 +18,10 @@ public class ADSR extends EnvelopeGenerator {
     private int sampleTimer = -1;
     private int noteOffSample = -1;
 
+    /**
+     * Constructor for ADSR, takes an ADSRSettings object as parameter.
+     * @param egs An ADSRSettings object containing the settings relevant to the ADSR.
+     */
     public ADSR(ADSRSettings egs) {
         this.egs = egs;
     }

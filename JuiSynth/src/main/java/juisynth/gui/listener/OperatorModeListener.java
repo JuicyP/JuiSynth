@@ -6,15 +6,11 @@
 package juisynth.gui.listener;
 
 import juisynth.gui.OperatorMode;
-import juisynth.logic.oscillator.Oscillator;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import juisynth.logic.Patch;
 
-/**
- *
- * @author juicyp
- */
+
 public class OperatorModeListener implements ItemListener {
     
     private Patch patch;

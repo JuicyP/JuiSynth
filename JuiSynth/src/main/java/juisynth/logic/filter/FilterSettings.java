@@ -6,7 +6,7 @@
 package juisynth.logic.filter;
 
 /**
- *
+ * Contains settings relevant to an implementation of a filter.
  * @author juicyp
  */
 public class FilterSettings {
@@ -17,6 +17,11 @@ public class FilterSettings {
         return depth;
     }
 
+    /**
+     * Sets the depth of the applied filter to the signal.
+     * Value must be between 0 and 1 inclusive.
+     * @param depth The depth of the filter to be applied.
+     */
     public void setDepth(double depth) {
         if (depth < 0 || depth > 1) {
             return;

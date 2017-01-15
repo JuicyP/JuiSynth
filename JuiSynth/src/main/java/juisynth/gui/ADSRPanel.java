@@ -14,10 +14,7 @@ import juisynth.gui.listener.ADSRParameterListener;
 import juisynth.logic.envelope.ADSR;
 import juisynth.logic.envelope.ADSRSettings;
 
-/**
- *
- * @author juicyp
- */
+
 public class ADSRPanel extends JPanel {
 
     private ADSRSettings adsr;

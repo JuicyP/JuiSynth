@@ -15,7 +15,7 @@ public interface SignalSource {
 
     /**
      * Interface for a method that takes in a SignalStatus object.
-     * @param signal 
+     * @param signal A SignalStatus-object containing information relevant to the signal's state.
      */
     public void generateSample(SignalStatus signal);
 

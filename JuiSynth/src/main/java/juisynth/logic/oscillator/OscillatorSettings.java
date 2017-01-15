@@ -8,7 +8,7 @@ package juisynth.logic.oscillator;
 import juisynth.logic.Waveform;
 
 /**
- *
+ * Contains settings relevant to an oscillator.
  * @author juicyp
  */
 public class OscillatorSettings {
@@ -17,10 +17,7 @@ public class OscillatorSettings {
     private boolean fixed = false;
     private boolean sync = false;
     private Waveform waveform = Waveform.SIN;
-    
-    public OscillatorSettings() {
-    }
-    
+
     public int getTuning() {
         return tuning;
     }

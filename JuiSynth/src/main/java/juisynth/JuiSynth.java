@@ -14,13 +14,9 @@ import javax.swing.SwingUtilities;
  */
 public class JuiSynth {
 
-    // BEWARE! Software is LOUD
-    // Prototype modeled after Dr. Dobb's synth articles 
-    // http://www.drdobbs.com/jvm/creating-music-components-in-java/229700113?pgno=1
-    // Testing
     /**
-     * main method, does not take arguments.
-     * @param args 
+     * Main method does not take arguments.
+     * @param args Not to be supplied.
      */
     public static void main(String[] args) {
         

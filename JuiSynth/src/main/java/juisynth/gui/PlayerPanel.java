@@ -15,10 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-/**
- *
- * @author juicyp
- */
 public class PlayerPanel extends JPanel {
     
     private Player player;

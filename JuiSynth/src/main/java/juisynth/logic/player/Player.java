@@ -16,9 +16,10 @@ import javax.sound.sampled.SourceDataLine;
 import javax.swing.SwingWorker;
 
 /**
+ * Player is a synthesizer implementation specific class instantiating SignalStatus-objects
+ * to be fed information from the signal path consisting of operators.
  * Starts a thread and writes sample data fetched from SignalSource into
- * SourceDataLine.
- *
+ * SourceDataLine at a given amplitude and frequency.
  * @author juicyp
  */
 public class Player {
@@ -37,7 +38,7 @@ public class Player {
 
     /**
      * Constructor for Player sets format according to values specified in
-     * fields.
+     * Settings-class.
      */
     public Player() {
         // The constuctor of AudioFormat takes the sample rate, sample resolution in bits,
@@ -52,6 +53,11 @@ public class Player {
         return amp;
     }
 
+    /**
+     * Sets the depth of the amplifier applied to the signal before writing it into
+     * the buffer. Value must be between 0 and 1 inclusive.
+     * @param amp Depth of amplification to be applied.
+     */
     public void setAmp(double amp) {
         if (amp < 0 || amp > 1) {
             return;
@@ -63,6 +69,10 @@ public class Player {
         return frequency;
     }
 
+    /**
+     * Sets the non negative frequency of the oscillated signal to be generated.
+     * @param frequency The frequency of the generated signal.
+     */
     public void setFrequency(double frequency) {
         if (frequency < 0) {
             return;

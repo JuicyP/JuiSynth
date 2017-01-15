@@ -5,10 +5,6 @@
  */
 package juisynth.gui;
 
-/**
- *
- * @author juicyp
- */
 public enum OperatorParameter {
     AMP, FM, AM
 }

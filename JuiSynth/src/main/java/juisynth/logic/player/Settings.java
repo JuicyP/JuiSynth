@@ -6,7 +6,7 @@
 package juisynth.logic.player;
 
 /**
- *
+ * Contains information relevant to the synthesizer system.
  * @author juicyp
  */
 public final class Settings {

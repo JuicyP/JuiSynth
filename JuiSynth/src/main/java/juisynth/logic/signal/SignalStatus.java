@@ -15,7 +15,6 @@ public class SignalStatus {
     private double frequency;
     private final double frequencyInit;
     
-    //TODO: Remove amplitude
     private double amplitude;
     private final double amplitudeInit = 0;
 
@@ -45,8 +44,7 @@ public class SignalStatus {
 
     /**
      * Sets non-negative frequency.
-     *
-     * @param frequency
+     * @param frequency The frequency of the signal.
      */
     public void setFrequency(double frequency) {
         if (frequency < 0) {
@@ -61,8 +59,7 @@ public class SignalStatus {
 
     /**
      * Sets amplitude between -1 and 1 inclusive.
-     *
-     * @param amplitude
+     * @param amplitude The amplitude of the signal.
      */
     public void setAmplitude(double amplitude) {
         if (amplitude < -1 || amplitude > 1) {
@@ -100,6 +97,9 @@ public class SignalStatus {
         this.activeNote = activeNote;
     }
 
+    /**
+     * Resets the state of the signal specified at instantiation.
+     */
     public void resetSignal() {
         resetFrequency();
         this.amplitude = amplitudeInit;
@@ -108,6 +108,9 @@ public class SignalStatus {
         this.activeOperatorCount = activeOperatorCountInit;
     }
     
+    /**
+     * Resets the frequency of the signal specified at instantiation.
+     */
     public void resetFrequency() {
         this.frequency = frequencyInit;
     }
